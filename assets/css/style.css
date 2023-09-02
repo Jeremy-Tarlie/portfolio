@@ -1,0 +1,474 @@
+body {
+    background-color: #122227;
+    background-image: linear-gradient( 15px 20px, gold 15px, transparent 0px);
+    background-size: 100px 48px;
+    background-position: 0 0;
+    animation: infinite;
+    overflow-y: hidden;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+h1#title {
+    position: absolute;
+    text-align: start;
+    left: 5%;
+    top: 30%;
+    margin: auto;
+    font-size: 500%;
+    width: 10%;
+    z-index: 1;
+}
+
+h1 {
+    color: #fff;
+    width: 40%;
+}
+
+.menu-ul {
+    display: flex;
+    list-style-type: none;
+    font-weight: bolder;
+    justify-content: end;
+    margin-right: 10px;
+    background-color: #091316;
+    width: 100%;
+    position: fixed;
+    top: -15px;
+    left: -15px;
+    padding: 6px 15px 5px 8px;
+    z-index: 2;
+}
+
+.menu-li a,
+.menu-li {
+    color: #fff;
+    margin: auto 10px;
+    padding: 10px;
+    border-radius: 150px;
+}
+
+.menu-li a:hover {
+    background-color: rgba(122, 171, 214, 0.5);
+}
+
+#triangle_haut {
+    width: 0px;
+    position: absolute;
+    height: 0px;
+    border-style: solid;
+    border-width: 0 500px 500px 0px;
+    border-color: transparent transparent rgba(21 121 114) transparent;
+    transform: rotate(180deg);
+    top: 0px;
+    right: 80%;
+}
+
+#triangle_bas {
+    width: 0px;
+    position: absolute;
+    height: 0px;
+    border-style: solid;
+    border-width: 0 500px 500px 0px;
+    border-color: transparent transparent rgba(21 121 114) transparent;
+    transform: rotate(-90deg);
+    bottom: 0px;
+    right: 80%;
+}
+
+nav {
+    display: flex;
+    flex-direction: column;
+}
+
+.progress-container {
+    position: fixed;
+    width: 100%;
+    height: 8px;
+    background: #ccc;
+    top: 50px;
+    z-index: 1;
+}
+
+.progress-bar {
+    height: 8px;
+    background: #0473aa;
+    width: 0%;
+}
+
+main {
+    margin-top: 48px;
+    position: absolute;
+}
+
+::-webkit-scrollbar {
+    display: none;
+}
+
+.one {
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+}
+
+.two {
+    background: rgb(9, 19, 22);
+}
+
+.three {
+    background-color: #091316;
+}
+
+.four {
+    background-color: #091316;
+}
+
+.five {
+    background: rgba(0, 0, 0);
+}
+
+@media screen and (min-width:780px) {
+    .slide {
+        width: 100%;
+        
+        z-index: 0;
+    }
+}
+
+#container {
+    display: flex;
+    width: 500%;
+    height: 715px;
+    opacity: 1;
+}
+
+#title_Presentation {
+    /* position: absolute;
+    top: 50px; */
+    margin: 25px auto 15px;
+    height: 36px;
+    width: 100%;
+    text-align: center;
+    display: none;
+}
+
+#title_Site {
+    margin: 0 auto;
+    text-align: center;
+    display: none;
+}
+
+p {
+    color: #fff;
+    text-align: center;
+    width: 90%;
+    margin: 16px auto;
+}
+
+#description_presentation,
+#description_site {
+    width: 50%;
+    margin: 20px auto;
+    display: none;
+}
+
+#parcour_scolaire,
+#site1, #site3 {
+    border-radius: 10px 100px / 120px;
+    margin-left: 15%;
+    margin-top: 30px;
+    animation: rotation 4s linear;
+}
+
+#site2,
+#parcour_pro {
+    border-radius: 100px 10px / 120px;
+    margin-left: auto;
+    margin-right: 15%;
+    animation: unrotation 4s linear;
+}
+
+.site,
+.parcour {
+    width: 35%;
+    background-color: #13535b;
+    padding: 10px;
+    margin-top: 15px;
+    display: none;
+}
+
+.black {
+    background: black;
+    opacity: 0;
+}
+
+.img-group {
+    width: 50%;
+    height: 50%;
+    margin: 50px auto;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+img {
+    width: 150px;
+    margin: auto 20px;
+}
+
+#title_competence,
+#title_contact,
+#description_competence,
+#title_parcour {
+    margin: 35px auto 20px;
+    text-align: center;
+}
+
+#title_competence,
+#title_parcour,
+#description_competence,
+#description_parcour {
+    display: none;
+}
+
+#img-html,
+#img-php,
+#img-node,
+#img-bootstrap,
+#img-mysql,
+#img-symfony,
+#img-vue,
+#img-react {
+    display: none;
+}
+
+#title_parcour_scolaire,
+#title_parcour_pro {
+    margin: auto;
+    text-align: center;
+}
+
+footer {
+    position: absolute;
+    width: 500%;
+    height: 100px;
+    bottom: -5px;
+    overflow: hidden;
+    display: flex;
+}
+
+footer svg:nth-child(1) {
+    height: 0;
+}
+
+#message-submit {
+    width: 55%;
+    font-size: small;
+    text-aling: center;
+}
+
+.error {
+    color: #ff6b6b;
+}
+
+.success {
+    color: rgb(103, 252, 103)
+}
+
+#prev {
+    margin-top: 10px;
+    position: fixed;
+    /* top: 50%; */
+    padding: 20% 20px 50%;
+    font-size: 50px;
+    z-index: 1;
+}
+
+#next {
+    margin-top: 10px;
+    position: fixed;
+    /* top: 50%; */
+    right: 0;
+    padding: 20% 20px 50%;
+    font-size: 50px;
+    z-index: 1;
+}
+
+#next:hover,
+#prev:hover {
+    background-color: rgba(39, 33, 64, 0.6);
+}
+
+@keyframes rotation {
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+@keyframes unrotation {
+    100% {
+        transform: rotate(-360deg);
+    }
+}
+
+@media screen and (max-width: 769px) {
+    body {
+        overflow-x: hidden;
+        overflow-y: visible;
+    }
+    nav {
+        display: none;
+    }
+    #container {
+        flex-direction: column;
+        width: 100%;
+        height: 500%;
+        margin-top: 0;
+    }
+    footer {
+        display: none;
+    }
+    #title_Presentation,
+    #title_Site,
+    #description_presentation,
+    #description_site,
+    .site,
+    .parcour,
+    #img-html,
+    #img-php,
+    #img-node,
+    #img-bootstrap,
+    #img-mysql,
+    #img-symfony,
+    #img-vue,
+    #img-react,
+    #title_competence,
+    #title_parcour,
+    #description_competence,
+    #description_parcour,
+    #prev,
+    #next {
+        display: block;
+    }
+    .slide {
+        height: 100%;
+        padding-bottom: 100px;
+    }
+    
+    .one{
+        height:13%;
+    }
+    #site1,
+    #site2,
+    #site3,
+    #parcour_scolaire,
+    #parcour_pro {
+        margin: 30px auto;
+        width: 75%;
+    }
+    #prev,
+    #next {
+        display: none;
+    }
+    .one {
+        display: flex;
+        background-color: #122227;
+    }
+    h1#title {
+        position: static;
+        font-size: 200%;
+        width: 100%;
+        text-align: center;
+        margin: 200px 20px;
+        height: 200px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    p {
+        width: 80%;
+        margin: inherit;
+    }
+    #description_presentation {
+        margin-bottom: 100px;
+    }
+    #description_parcour {
+        margin: auto;
+    }
+    #title_competence {
+        width: 100%;
+    }
+    #contact-form {
+        text-align: center;
+    }
+    img {
+        margin: 25px auto;
+    }
+    #triangle_haut {
+        width: 0px;
+        position: absolute;
+        height: 0px;
+        border-style: solid;
+        border-width: 0 250px 200px 0px;
+        border-color: transparent transparent rgba(21 121 114) transparent;
+        transform: rotate(0deg);
+        top: 500px;
+        left: 0;
+    }
+    #triangle_bas {
+        width: 0px;
+        position: absolute;
+        height: 0px;
+        border-style: solid;
+        border-width: 0 200px 250px 0px;
+        border-color: transparent transparent rgba(21 121 114) transparent;
+        transform: rotate(-90deg);
+        top: 475px;
+        right: 25px;
+    }
+    .two,
+    .three,
+    .four,
+    .five {
+        z-index: 1;
+    }
+    .two {
+        background: rgb(9, 19, 22);
+        background: linear-gradient(0deg, rgba(9, 19, 22, 1) 71%, rgba(21, 121, 114, 1) 100%);
+    }
+    .five {
+        background: rgba(0, 0, 0);
+        background: linear-gradient(0deg, rgba(0, 0, 0, 1) 71%, rgba(9, 19, 22, 1) 87%);
+    }
+    #title_parcour_pro {
+        width: 80%;
+    }
+}
+
+@media (max-width: 769px) and (min-width: 600px) {
+    #triangle_haut {
+        width: 0px;
+        position: absolute;
+        height: 0px;
+        border-style: solid;
+        border-width: 0 450px 400px 0px;
+        border-color: transparent transparent rgba(21 121 114) transparent;
+        transform: rotate(0deg);
+        top: 635px;
+        left: 0;
+    }
+    #triangle_bas {
+        width: 0px;
+        position: absolute;
+        height: 0px;
+        border-style: solid;
+        border-width: 0 400px 450px 0px;
+        border-color: transparent transparent rgba(21 121 114) transparent;
+        transform: rotate(-90deg);
+        top: 610px;
+        right: 25px;
+    }
+}
