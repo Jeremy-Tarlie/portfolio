@@ -47,6 +47,6 @@ jobs:
           password: ${{ secrets.SERVER_PASSWORD }}
           script: |
             docker pull ${{ secrets.DOCKER_USERNAME }}/${{ secrets.DOCKER_APP }}:latest
-            docker stop mon-projet-php || true
-            docker rm mon-projet-php || true
-            docker run -d -p 80:80 --name mon-projet-php ${{ secrets.DOCKER_USERNAME }}/${{ secrets.DOCKER_APP }}:latest
+            docker stop ${{ secrets.DOCKER_APP }} || true
+            docker rm ${{ secrets.DOCKER_APP }} || true
+            docker run -d -p 80:80 --name ${{ secrets.DOCKER_APP }} ${{ secrets.DOCKER_USERNAME }}/${{ secrets.DOCKER_APP }}:latest
