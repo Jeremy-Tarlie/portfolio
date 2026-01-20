@@ -1,0 +1,14 @@
+# Robots.txt - Portfolio Jérémy Tarlié
+# https://tarlie.fr
+
+User-agent: *
+Allow: /
+
+# Disallow admin/private directories
+Disallow: /assets/php/
+
+# Sitemap location
+Sitemap: https://tarlie.fr/sitemap.xml
+
+# Crawl-delay (optional, for polite crawlers)
+Crawl-delay: 1

@@ -1,0 +1,125 @@
+/* Preloader */
+.preloader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--color-bg-dark);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 99999;
+    transition: opacity 0.8s var(--ease-out-expo), visibility 0.8s;
+}
+
+.preloader-content {
+    text-align: center;
+    position: relative;
+    z-index: 2;
+}
+
+.preloader-logo {
+    display: flex;
+    justify-content: center;
+    gap: var(--space-sm);
+    margin-bottom: var(--space-xl);
+}
+
+.logo-letter {
+    font-family: var(--font-heading);
+    font-size: 5rem;
+    font-weight: 900;
+    color: var(--neon-cyan);
+    text-shadow: var(--glow-cyan);
+    animation: logoFloat 2s ease-in-out infinite;
+}
+
+.logo-letter:nth-child(2) {
+    animation-delay: 0.2s;
+    color: var(--neon-pink);
+    text-shadow: var(--glow-pink);
+}
+
+@keyframes logoFloat {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+}
+
+.preloader-text {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: var(--space-xs);
+    margin-bottom: var(--space-lg);
+}
+
+.loading-text {
+    font-family: var(--font-heading);
+    font-size: 0.9rem;
+    letter-spacing: 0.3em;
+    color: var(--text-secondary);
+}
+
+.loading-dots span {
+    animation: dotBlink 1.5s infinite;
+    opacity: 0;
+}
+
+.loading-dots span:nth-child(2) { animation-delay: 0.3s; }
+.loading-dots span:nth-child(3) { animation-delay: 0.6s; }
+
+@keyframes dotBlink {
+    0%, 100% { opacity: 0; }
+    50% { opacity: 1; }
+}
+
+.preloader-bar {
+    width: 200px;
+    height: 3px;
+    background: var(--color-bg-tertiary);
+    border-radius: var(--radius-full);
+    overflow: hidden;
+    margin: 0 auto var(--space-md);
+}
+
+.preloader-progress {
+    width: 0%;
+    height: 100%;
+    background: var(--gradient-neon);
+    border-radius: var(--radius-full);
+    animation: loadProgress 2s var(--ease-out-expo) forwards;
+}
+
+@keyframes loadProgress {
+    0% { width: 0%; }
+    100% { width: 100%; }
+}
+
+.preloader-percentage {
+    font-family: var(--font-heading);
+    font-size: 1.2rem;
+    color: var(--neon-cyan);
+}
+
+.preloader-glitch {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: repeating-linear-gradient(
+        0deg,
+        transparent 0px,
+        transparent 2px,
+        rgba(0, 240, 255, 0.03) 2px,
+        rgba(0, 240, 255, 0.03) 4px
+    );
+    pointer-events: none;
+    animation: scanlineMove 0.1s linear infinite;
+}
+
+@keyframes scanlineMove {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(4px); }
+}

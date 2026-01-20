@@ -1,0 +1,1459 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- SEO Meta Tags -->
+    <title>Jérémy Tarlié | Développeur Full Stack - Portfolio 2026</title>
+    <meta name="description" content="Portfolio de Jérémy Tarlié, développeur Full Stack passionné. Spécialisé en React, Node.js, Next.js et PHP. Découvrez mes projets et compétences en développement web.">
+    <meta name="keywords" content="développeur full stack, développeur web, React, Node.js, Next.js, PHP, JavaScript, portfolio, Jérémy Tarlié, France">
+    <meta name="author" content="Jérémy Tarlié">
+    <meta name="robots" content="index, follow">
+    <meta name="language" content="French">
+    <meta name="revisit-after" content="7 days">
+    <link rel="canonical" href="https://tarlie.fr/">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://tarlie.fr/">
+    <meta property="og:title" content="Jérémy Tarlié | Développeur Full Stack">
+    <meta property="og:description" content="Portfolio de Jérémy Tarlié, développeur Full Stack passionné. Spécialisé en React, Node.js, Next.js et PHP. Découvrez mes projets et compétences.">
+    <meta property="og:image" content="https://tarlie.fr/assets/img/og-image.png">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:locale" content="fr_FR">
+    <meta property="og:site_name" content="Portfolio Jérémy Tarlié">
+    
+    <!-- Twitter Cards -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://tarlie.fr/">
+    <meta name="twitter:title" content="Jérémy Tarlié | Développeur Full Stack">
+    <meta name="twitter:description" content="Portfolio de Jérémy Tarlié, développeur Full Stack passionné. Spécialisé en React, Node.js, Next.js et PHP.">
+    <meta name="twitter:image" content="https://tarlie.fr/assets/img/og-image.png">
+    
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="assets/img/favicon-16x16.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/img/avatar.webp">
+    <link rel="manifest" href="site.webmanifest">
+    <meta name="theme-color" content="#0a0a0f">
+    <meta name="msapplication-TileColor" content="#00f0ff">
+    
+    <!-- Preconnect for performance -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    
+    <!-- DNS Prefetch -->
+    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="assets/css/main.css">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@300;400;500;600;700&family=Bebas+Neue&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    
+    <!-- Structured Data / JSON-LD -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Jérémy Tarlié",
+        "url": "https://tarlie.fr",
+        "image": "https://tarlie.fr/assets/img/avatar.webp",
+        "jobTitle": "Développeur Full Stack",
+        "worksFor": {
+            "@type": "Organization",
+            "name": "Freelance"
+        },
+        "sameAs": [
+            "https://github.com/Jeremy-Tarlie",
+            "https://www.linkedin.com/in/jeremy-tarlie/"
+        ],
+        "knowsAbout": ["React", "Node.js", "Next.js", "PHP", "JavaScript", "TypeScript", "Docker"],
+        "email": "contact@tarlie.fr",
+        "address": {
+            "@type": "PostalAddress",
+            "addressCountry": "FR"
+        }
+    }
+    </script>
+</head>
+
+<body>
+    <!-- Preloader -->
+    <div class="preloader">
+        <div class="preloader-content">
+            <div class="preloader-logo">
+                <span class="logo-letter">J</span>
+                <span class="logo-letter">T</span>
+            </div>
+            <div class="preloader-text">
+                <span class="loading-text">INITIALISATION</span>
+                <span class="loading-dots">
+                    <span>.</span><span>.</span><span>.</span>
+                </span>
+            </div>
+            <div class="preloader-bar">
+                <div class="preloader-progress"></div>
+            </div>
+            <div class="preloader-percentage">0%</div>
+        </div>
+        <div class="preloader-glitch"></div>
+    </div>
+
+    <!-- Cursor effects -->
+    <div class="cursor"></div>
+    <div class="cursor-follower"></div>
+
+    <!-- Noise overlay -->
+    <div class="noise-overlay"></div>
+
+    <!-- Scan line effect -->
+    <div class="scanlines"></div>
+
+    <!-- Particle canvas -->
+    <canvas id="particles"></canvas>
+
+    <!-- Grid background -->
+    <div class="grid-bg"></div>
+
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="nav-logo">
+            <span class="logo-text glitch" data-text="JT">JT</span>
+            <span class="logo-dot"></span>
+        </div>
+
+        <div class="nav-links">
+            <a href="#home" class="nav-link active" data-section="home">
+                <span class="nav-link-number">01</span>
+                <span class="nav-link-text">Accueil</span>
+                <span class="nav-link-line"></span>
+            </a>
+            <a href="#about" class="nav-link" data-section="about">
+                <span class="nav-link-number">02</span>
+                <span class="nav-link-text">À propos</span>
+                <span class="nav-link-line"></span>
+            </a>
+            <a href="#projects" class="nav-link" data-section="projects">
+                <span class="nav-link-number">03</span>
+                <span class="nav-link-text">Projets</span>
+                <span class="nav-link-line"></span>
+            </a>
+            <a href="#skills" class="nav-link" data-section="skills">
+                <span class="nav-link-number">04</span>
+                <span class="nav-link-text">Skills</span>
+                <span class="nav-link-line"></span>
+            </a>
+            <a href="#contact" class="nav-link" data-section="contact">
+                <span class="nav-link-number">05</span>
+                <span class="nav-link-text">Contact</span>
+                <span class="nav-link-line"></span>
+            </a>
+        </div>
+
+        <div class="nav-actions">
+            <button class="sound-toggle" aria-label="Toggle sound">
+                <span class="sound-icon">🔇</span>
+            </button>
+            <a href="assets/file/CV_TARLIE_JEREMY.pdf" class="nav-cta magnetic" target="_blank">
+                <span class="cta-text">Télécharger CV</span>
+                <span class="cta-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                        <polyline points="7 10 12 15 17 10" />
+                        <line x1="12" y1="15" x2="12" y2="3" />
+                    </svg>
+                </span>
+            </a>
+        </div>
+
+        <!-- Mobile menu toggle -->
+        <button class="menu-toggle" aria-label="Menu">
+            <span class="menu-line"></span>
+            <span class="menu-line"></span>
+            <span class="menu-line"></span>
+        </button>
+    </nav>
+
+    <!-- Mobile menu -->
+    <div class="mobile-menu">
+        <div class="mobile-menu-content">
+            <a href="#home" class="mobile-link">
+                <span class="mobile-link-number">01</span>
+                <span class="mobile-link-text">Accueil</span>
+            </a>
+            <a href="#about" class="mobile-link">
+                <span class="mobile-link-number">02</span>
+                <span class="mobile-link-text">À propos</span>
+            </a>
+            <a href="#projects" class="mobile-link">
+                <span class="mobile-link-number">03</span>
+                <span class="mobile-link-text">Projets</span>
+            </a>
+            <a href="#skills" class="mobile-link">
+                <span class="mobile-link-number">04</span>
+                <span class="mobile-link-text">Skills</span>
+            </a>
+            <a href="#contact" class="mobile-link">
+                <span class="mobile-link-number">05</span>
+                <span class="mobile-link-text">Contact</span>
+            </a>
+        </div>
+        <div class="mobile-menu-footer">
+            <p>© 2026 Jérémy Tarlié</p>
+        </div>
+    </div>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-bg-effects">
+            <div class="hero-gradient"></div>
+            <div class="hero-glow glow-1"></div>
+            <div class="hero-glow glow-2"></div>
+            <div class="hero-glow glow-3"></div>
+        </div>
+
+        <div class="hero-content">
+            <div class="hero-badge reveal-up">
+                <span class="badge-dot"></span>
+                <span class="badge-text">Disponible pour de nouveaux projets</span>
+                <span class="badge-pulse"></span>
+            </div>
+
+            <div class="hero-title-wrapper">
+                <h1 class="hero-title">
+                    <span class="hero-line hero-line-1">
+                        <span class="hero-text-wrapper">
+                            <span class="hero-text" data-text="JÉRÉMY">JÉRÉMY</span>
+                        </span>
+                    </span>
+                    <span class="hero-line hero-line-2">
+                        <span class="hero-text-wrapper">
+                            <span class="hero-text-outline" data-text="TARLIÉ">TARLIÉ</span>
+                        </span>
+                    </span>
+                </h1>
+                <div class="title-decoration">
+                    <span class="deco-bracket">[</span>
+                    <span class="deco-text">DEV_2026</span>
+                    <span class="deco-bracket">]</span>
+                </div>
+            </div>
+
+            <div class="hero-role reveal-up" style="--delay: 0.4s">
+                <div class="role-line"></div>
+                <div class="role-content">
+                    <span class="role-label">SPÉCIALITÉ</span>
+                    <span class="role-text">
+                        <span class="typewriter"
+                            data-texts='["FULLSTACK DEVELOPER", "WEB ARTISAN", "CODE ENTHUSIAST", "DIGITAL CREATOR"]'></span>
+                        <span class="typewriter-cursor">|</span>
+                    </span>
+                </div>
+                <div class="role-line"></div>
+            </div>
+
+            <p class="hero-description reveal-up" style="--delay: 0.6s">
+                Je transforme vos idées en <span class="text-gradient">expériences digitales</span> uniques.
+                <br>
+                <span class="highlight-box">Code propre</span> •
+                <span class="highlight-box">Design audacieux</span> •
+                <span class="highlight-box">Innovation constante</span>
+            </p>
+
+            <div class="hero-cta reveal-up" style="--delay: 0.8s">
+                <a href="#projects" class="btn btn-primary magnetic">
+                    <span class="btn-bg"></span>
+                    <span class="btn-text">Découvrir mes projets</span>
+                    <span class="btn-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="5" y1="12" x2="19" y2="12" />
+                            <polyline points="12 5 19 12 12 19" />
+                        </svg>
+                    </span>
+                </a>
+                <a href="#contact" class="btn btn-secondary magnetic">
+                    <span class="btn-border"></span>
+                    <span class="btn-text">Me contacter</span>
+                </a>
+            </div>
+
+            <div class="hero-social reveal-up" style="--delay: 1s">
+                <a href="https://github.com/Jeremy-Tarlie" class="social-link magnetic" aria-label="GitHub">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path
+                            d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+                    </svg>
+                </a>
+                <a href="https://www.linkedin.com/in/jeremy-tarlie/" class="social-link magnetic" aria-label="LinkedIn">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path
+                            d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+                    </svg>
+                </a>
+                <a href="mailto:contact@tarlie.fr" class="social-link magnetic" aria-label="Email">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+                        <polyline points="22,6 12,13 2,6" />
+                    </svg>
+                </a>
+            </div>
+        </div>
+
+        <div class="hero-visual">
+            <div class="visual-container">
+                <div class="code-window">
+                    <div class="code-header">
+                        <div class="code-dots">
+                            <span class="dot red"></span>
+                            <span class="dot yellow"></span>
+                            <span class="dot green"></span>
+                        </div>
+                        <span class="code-title">~/developer.config.js</span>
+                        <div class="code-actions">
+                            <span>−</span>
+                            <span>□</span>
+                        </div>
+                    </div>
+                    <div class="code-body">
+                        <div class="code-line-numbers">
+                            <span>1</span><span>2</span><span>3</span><span>4</span><span>5</span>
+                            <span>6</span><span>7</span><span>8</span><span>9</span><span>10</span>
+                            <span>11</span><span>12</span><span>13</span><span>14</span><span>15</span>
+                        </div>
+                        <pre class="code-content"><code><span class="code-comment">// Configuration du développeur</span>
+<span class="code-keyword">const</span> <span class="code-variable">developer</span> = {
+  <span class="code-property">name</span>: <span class="code-string">"Jérémy Tarlié"</span>,
+  <span class="code-property">title</span>: <span class="code-string">"Full Stack Developer"</span>,
+  <span class="code-property">location</span>: <span class="code-string">"France 🇫🇷"</span>,
+  <span class="code-property">experience</span>: <span class="code-number">2</span>,
+  <span class="code-property">available</span>: <span class="code-boolean">true</span>,
+  
+  <span class="code-property">skills</span>: [
+    <span class="code-string">"React"</span>, <span class="code-string">"Node.js"</span>, <span class="code-string">"Next.js"</span>
+  ],
+  
+  <span class="code-function">contact</span>: () <span class="code-keyword">=></span> {
+    <span class="code-keyword">return</span> <span class="code-string">"contact@tarlie.fr"</span>;
+  }
+};</code></pre>
+                    </div>
+                    <div class="code-footer">
+                        <span class="code-status">
+                            <span class="status-dot"></span>
+                            Ready
+                        </span>
+                        <span class="code-info">JavaScript • UTF-8</span>
+                    </div>
+                </div>
+
+                <!-- Floating tech badges -->
+                <div class="floating-badges">
+                    <div class="badge-float badge-1">
+                        <span class="badge-icon">⚛️</span>
+                        <span class="badge-label">React</span>
+                    </div>
+                    <div class="badge-float badge-2">
+                        <span class="badge-icon">💚</span>
+                        <span class="badge-label">Node.js</span>
+                    </div>
+                    <div class="badge-float badge-3">
+                        <span class="badge-icon">▲</span>
+                        <span class="badge-label">Next.js</span>
+                    </div>
+                    <div class="badge-float badge-4">
+                        <span class="badge-icon">🐳</span>
+                        <span class="badge-label">Docker</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Orbit elements -->
+            <div class="orbit-container">
+                <div class="orbit orbit-1">
+                    <div class="orbit-dot"></div>
+                </div>
+                <div class="orbit orbit-2">
+                    <div class="orbit-dot"></div>
+                </div>
+                <div class="orbit orbit-3">
+                    <div class="orbit-dot"></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="scroll-indicator">
+            <div class="scroll-mouse">
+                <div class="scroll-wheel"></div>
+            </div>
+            <span class="scroll-text">SCROLL DOWN</span>
+            <div class="scroll-arrows">
+                <span class="scroll-arrow"></span>
+                <span class="scroll-arrow"></span>
+            </div>
+        </div>
+
+        <!-- Corner decorations -->
+        <div class="corner-deco top-left">
+            <span></span><span></span>
+        </div>
+        <div class="corner-deco top-right">
+            <span></span><span></span>
+        </div>
+        <div class="corner-deco bottom-left">
+            <span></span><span></span>
+        </div>
+        <div class="corner-deco bottom-right">
+            <span></span><span></span>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="section-header">
+            <div class="section-tag">
+                <span class="tag-line"></span>
+                <span class="tag-text">QUI SUIS-JE</span>
+            </div>
+            <div class="section-title-wrapper">
+                <span class="section-number">01</span>
+                <h2 class="section-title glitch-hover" data-text="À PROPOS">À PROPOS</h2>
+            </div>
+            <div class="section-line"></div>
+        </div>
+
+        <div class="about-content">
+            <div class="about-image reveal-left">
+                <div class="image-wrapper">
+                    <div class="image-frame">
+                        <div class="image-inner">
+                            <img src="assets/img/avatar.webp" alt="Avatar" class="avatar-image">
+                        </div>
+                        <div class="image-glitch-overlay"></div>
+                        <div class="image-scanline"></div>
+                    </div>
+
+                    <!-- Corner brackets -->
+                    <div class="bracket top-left"></div>
+                    <div class="bracket top-right"></div>
+                    <div class="bracket bottom-left"></div>
+                    <div class="bracket bottom-right"></div>
+                </div>
+
+                <div class="about-stats">
+                    <div class="stat-card">
+                        <div class="stat-icon">⚡</div>
+                        <div class="stat-content">
+                            <span class="stat-number counter" data-target="2" data-suffix="+">0</span>
+                            <span class="stat-label">Années d'expérience</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">🚀</div>
+                        <div class="stat-content">
+                            <span class="stat-number counter" data-target="15" data-suffix="+">0</span>
+                            <span class="stat-label">Projets réalisés</span>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-icon">💯</div>
+                        <div class="stat-content">
+                            <span class="stat-number counter" data-target="100" data-suffix="%">0</span>
+                            <span class="stat-label">Passion & Dévouement</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="about-text reveal-right">
+                <div class="terminal-window interactive-terminal" id="aboutTerminal">
+                    <div class="terminal-header">
+                        <div class="terminal-buttons">
+                            <span class="term-btn close" data-action="clear"></span>
+                            <span class="term-btn minimize"></span>
+                            <span class="term-btn maximize" data-action="fullscreen"></span>
+                        </div>
+                        <span class="terminal-title">jeremy@portfolio:<span id="terminalPath">~/about</span></span>
+                        <div class="terminal-status">
+                            <span class="status-indicator"></span>
+                        </div>
+                    </div>
+                    <div class="terminal-body" id="terminalOutput">
+                        <!-- Initial commands will be rendered by JS -->
+                    </div>
+                    <div class="terminal-input-wrapper">
+                        <span class="terminal-prompt">➜</span>
+                        <span class="terminal-path" id="inputPath">~/about</span>
+                        <input type="text" class="terminal-input" id="terminalInput"
+                            placeholder="Tapez 'help' pour voir les commandes..." autocomplete="off" spellcheck="false">
+                    </div>
+                </div>
+
+                <div class="about-tags">
+                    <span class="about-tag">#Créatif</span>
+                    <span class="about-tag">#Passionné</span>
+                    <span class="about-tag">#Rigoureux</span>
+                    <span class="about-tag">#Innovant</span>
+                    <span class="about-tag">#Collaboratif</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="projects">
+        <div class="section-header">
+            <div class="section-tag">
+                <span class="tag-line"></span>
+                <span class="tag-text">MES RÉALISATIONS</span>
+            </div>
+            <div class="section-title-wrapper">
+                <span class="section-number">02</span>
+                <h2 class="section-title glitch-hover" data-text="PROJETS">PROJETS</h2>
+            </div>
+            <div class="section-line"></div>
+        </div>
+
+        <div class="projects-filter">
+            <button class="filter-btn active" data-filter="all">Tous</button>
+            <button class="filter-btn" data-filter="web">Web</button>
+            <button class="filter-btn" data-filter="app">Applications</button>
+            <button class="filter-btn" data-filter="tool">Outils</button>
+        </div>
+
+        <div class="projects-grid">
+            <!-- Project 1 - Featured -->
+            <article class="project-card featured" data-category="web">
+                <div class="project-image">
+                    <div class="project-bg">
+                        <span class="project-emoji">
+                            <img src="assets/img/portfolio.png" alt="Portfolio" loading="lazy" decoding="async">
+                        </span>
+                    </div>
+                    <a href="#" class="project-overlay">
+                        <div class="overlay-content">
+                            <span class="overlay-label">VOIR LE PROJET</span>
+                            <div class="overlay-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <line x1="7" y1="17" x2="17" y2="7" />
+                                    <polyline points="7 7 17 7 17 17" />
+                                </svg>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="project-content">
+                    <div class="project-meta">
+                        <span class="project-category">Site Web</span>
+                        <span class="project-year">2026</span>
+                    </div>
+                    <h3 class="project-title">Portfolio</h3>
+                    <p class="project-description">Mon portfolio personnel présentant mes compétences et projets avec un
+                        design cyberpunk unique.</p>
+                    <div class="project-tech">
+                        <span class="tech-tag">HTML5</span>
+                        <span class="tech-tag">CSS3</span>
+                        <span class="tech-tag">JavaScript</span>
+                        <span class="tech-tag">Docker</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="#" class="project-link">
+                            <span>Live Demo</span>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                                <polyline points="15 3 21 3 21 9" />
+                                <line x1="10" y1="14" x2="21" y2="3" />
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+                <div class="project-number">01</div>
+                <div class="project-glow"></div>
+            </article>
+
+            <!-- Project 2 -->
+            <article class="project-card" data-category="web">
+                <div class="project-image">
+                    <div class="project-bg">
+                        <span class="project-emoji">
+                            <img src="assets/img/codepath.png" alt="Codepath" loading="lazy" decoding="async">
+                        </span>
+                    </div>
+                    <a href="https://codepath.fr" class="project-overlay" target="_blank">
+                        <div class="overlay-content">
+                            <span class="overlay-label">VOIR LE PROJET</span>
+                            <div class="overlay-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <line x1="7" y1="17" x2="17" y2="7" />
+                                    <polyline points="7 7 17 7 17 17" />
+                                </svg>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="project-content">
+                    <div class="project-meta">
+                        <span class="project-category">Site Web</span>
+                        <span class="project-year">2025</span>
+                    </div>
+                    <h3 class="project-title">Codepath</h3>
+                    <p class="project-description">Entreprise de développement web proposant des devis personnalisés et
+                        des templates prêts à l'emploi.</p>
+                    <div class="project-tech">
+                        <span class="tech-tag">HTML</span>
+                        <span class="tech-tag">CSS</span>
+                        <span class="tech-tag">JS</span>
+                        <span class="tech-tag">PHP</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://codepath.fr" class="project-link" target="_blank">
+                            <span>Live Demo</span>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                                <polyline points="15 3 21 3 21 9" />
+                                <line x1="10" y1="14" x2="21" y2="3" />
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+                <div class="project-number">02</div>
+                <div class="project-glow"></div>
+            </article>
+
+            <!-- Project 3 -->
+            <article class="project-card" data-category="app tool">
+                <div class="project-image">
+                    <div class="project-bg">
+                        <span class="project-emoji">
+                            <img src="assets/img/codepass.png" alt="Codepass" loading="lazy" decoding="async">
+                        </span>
+                    </div>
+                    <a href="#" class="project-overlay">
+                        <div class="overlay-content">
+                            <span class="overlay-label">EN SAVOIR PLUS</span>
+                            <div class="overlay-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <line x1="7" y1="17" x2="17" y2="7" />
+                                    <polyline points="7 7 17 7 17 17" />
+                                </svg>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="project-content">
+                    <div class="project-meta">
+                        <span class="project-category">Application</span>
+                        <span class="project-year">2025</span>
+                    </div>
+                    <h3 class="project-title">Codepass</h3>
+                    <p class="project-description">Gestionnaire de mots de passe sécurisé avec chiffrement AES-256 et
+                        synchronisation multi-appareils.</p>
+                    <div class="project-tech">
+                        <span class="tech-tag">React.js</span>
+                        <span class="tech-tag">Node.js</span>
+                        <span class="tech-tag">MongoDB</span>
+                        <span class="tech-tag">JWT</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="#" class="project-link">
+                            <span>En savoir plus</span>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10" />
+                                <line x1="12" y1="16" x2="12" y2="12" />
+                                <line x1="12" y1="8" x2="12.01" y2="8" />
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+                <div class="project-number">03</div>
+                <div class="project-glow"></div>
+            </article>
+
+            <!-- Project 4 -->
+            <article class="project-card" data-category="app tool">
+                <div class="project-image">
+                    <div class="project-bg">
+                        <span class="project-emoji">
+                            <img src="assets/img/mydiscordbot.png" alt="MyDiscordBot" loading="lazy" decoding="async">
+                        </span>
+                    </div>
+                    <a href="https://mydiscordbot.com" class="project-overlay" target="_blank">
+                        <div class="overlay-content">
+                            <span class="overlay-label">VOIR LE PROJET</span>
+                            <div class="overlay-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <line x1="7" y1="17" x2="17" y2="7" />
+                                    <polyline points="7 7 17 7 17 17" />
+                                </svg>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="project-content">
+                    <div class="project-meta">
+                        <span class="project-category">Bot / SaaS</span>
+                        <span class="project-year">2024</span>
+                    </div>
+                    <h3 class="project-title">MyDiscordBot</h3>
+                    <p class="project-description">Plateforme de création et gestion de bots Discord personnalisés pour
+                        les communautés.</p>
+                    <div class="project-tech">
+                        <span class="tech-tag">Node.js</span>
+                        <span class="tech-tag">Discord.js</span>
+                        <span class="tech-tag">Next.js</span>
+                        <span class="tech-tag">Prisma</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="https://mydiscordbot.com" class="project-link" target="_blank">
+                            <span>Live Demo</span>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
+                                <polyline points="15 3 21 3 21 9" />
+                                <line x1="10" y1="14" x2="21" y2="3" />
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+                <div class="project-number">04</div>
+                <div class="project-glow"></div>
+            </article>
+
+            <!-- Project 5 -->
+            <article class="project-card" data-category="app tool">
+                <div class="project-image">
+                    <div class="project-bg">
+                        <span class="project-emoji">
+                            <img src="assets/img/cotapro.png" alt="CotaPro" loading="lazy" decoding="async">
+                        </span>
+                    </div>
+                    <a href="#" class="project-overlay">
+                        <div class="overlay-content">
+                            <span class="overlay-label">EN SAVOIR PLUS</span>
+                            <div class="overlay-icon">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <line x1="7" y1="17" x2="17" y2="7" />
+                                    <polyline points="7 7 17 7 17 17" />
+                                </svg>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+                <div class="project-content">
+                    <div class="project-meta">
+                        <span class="project-category">Application Desktop</span>
+                        <span class="project-year">2024</span>
+                    </div>
+                    <h3 class="project-title">CotaPro</h3>
+                    <p class="project-description">Application desktop de gestion et de suivi de cotations
+                        professionnelles.</p>
+                    <div class="project-tech">
+                        <span class="tech-tag">Electron.js</span>
+                        <span class="tech-tag">SQLite</span>
+                        <span class="tech-tag">Next.js</span>
+                        <span class="tech-tag">Tailwind</span>
+                    </div>
+                    <div class="project-links">
+                        <a href="#" class="project-link">
+                            <span>En savoir plus</span>
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10" />
+                                <line x1="12" y1="16" x2="12" y2="12" />
+                                <line x1="12" y1="8" x2="12.01" y2="8" />
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+                <div class="project-number">05</div>
+                <div class="project-glow"></div>
+            </article>
+        </div>
+
+        <div class="projects-cta">
+            <a href="#" class="btn btn-outline magnetic">
+                <span class="btn-text">Voir plus de projets</span>
+                <span class="btn-icon">→</span>
+            </a>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="skills">
+        <div class="section-header">
+            <div class="section-tag">
+                <span class="tag-line"></span>
+                <span class="tag-text">CE QUE JE MAÎTRISE</span>
+            </div>
+            <div class="section-title-wrapper">
+                <span class="section-number">03</span>
+                <h2 class="section-title glitch-hover" data-text="COMPÉTENCES">COMPÉTENCES</h2>
+            </div>
+            <div class="section-line"></div>
+        </div>
+
+        <div class="skills-layout">
+            <div class="skills-showcase">
+                <!-- Skill Category 1 -->
+                <div class="skill-category reveal-up">
+                    <div class="category-header">
+                        <div class="category-icon">
+                            <span>⚡</span>
+                        </div>
+                        <div class="category-info">
+                            <h3 class="category-title">Frontend</h3>
+                            <p class="category-desc">Interfaces modernes & réactives</p>
+                        </div>
+                    </div>
+                    <div class="skill-grid">
+                        <div class="skill-card" data-skill="html">
+                            <div class="skill-icon-wrapper">
+                                <span class="skill-emoji">🌐</span>
+                                <div class="skill-glow"></div>
+                            </div>
+                            <span class="skill-name">HTML5 / CSS3</span>
+                            <span class="skill-level-text expert">Expert</span>
+                        </div>
+                        <div class="skill-card" data-skill="js">
+                            <div class="skill-icon-wrapper">
+                                <span class="skill-emoji">⚡</span>
+                                <div class="skill-glow"></div>
+                            </div>
+                            <span class="skill-name">JavaScript</span>
+                            <span class="skill-level-text expert">Expert</span>
+                        </div>
+                        <div class="skill-card" data-skill="react">
+                            <div class="skill-icon-wrapper">
+                                <span class="skill-emoji">⚛️</span>
+                                <div class="skill-glow"></div>
+                            </div>
+                            <span class="skill-name">React / React Native</span>
+                            <span class="skill-level-text advanced">Avancé</span>
+                        </div>
+                        <div class="skill-card" data-skill="next">
+                            <div class="skill-icon-wrapper">
+                                <span class="skill-emoji">▲</span>
+                                <div class="skill-glow"></div>
+                            </div>
+                            <span class="skill-name">Next.js</span>
+                            <span class="skill-level-text advanced">Avancé</span>
+                        </div>
+                        <div class="skill-card" data-skill="tailwind">
+                            <div class="skill-icon-wrapper">
+                                <span class="skill-emoji">🎨</span>
+                                <div class="skill-glow"></div>
+                            </div>
+                            <span class="skill-name">Tailwind CSS</span>
+                            <span class="skill-level-text expert">Expert</span>
+                        </div>
+                        <div class="skill-card" data-skill="bootstrap">
+                            <div class="skill-icon-wrapper">
+                                <span class="skill-emoji">🅱️</span>
+                                <div class="skill-glow"></div>
+                            </div>
+                            <span class="skill-name">Bootstrap</span>
+                            <span class="skill-level-text advanced">Avancé</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Skill Category 2 -->
+                <div class="skill-category reveal-up" style="--delay: 0.2s">
+                    <div class="category-header">
+                        <div class="category-icon">
+                            <span>🔧</span>
+                        </div>
+                        <div class="category-info">
+                            <h3 class="category-title">Backend</h3>
+                            <p class="category-desc">Serveurs robustes & APIs</p>
+                        </div>
+                    </div>
+                    <div class="skill-grid">
+                        <div class="skill-card" data-skill="node">
+                            <div class="skill-icon-wrapper">
+                                <span class="skill-emoji">💚</span>
+                                <div class="skill-glow"></div>
+                            </div>
+                            <span class="skill-name">Node.js</span>
+                            <span class="skill-level-text expert">Expert</span>
+                        </div>
+                        <div class="skill-card" data-skill="express">
+                            <div class="skill-icon-wrapper">
+                                <span class="skill-emoji">🚂</span>
+                                <div class="skill-glow"></div>
+                            </div>
+                            <span class="skill-name">Express</span>
+                            <span class="skill-level-text expert">Expert</span>
+                        </div>
+                        <div class="skill-card" data-skill="php">
+                            <div class="skill-icon-wrapper">
+                                <span class="skill-emoji">🐘</span>
+                                <div class="skill-glow"></div>
+                            </div>
+                            <span class="skill-name">PHP</span>
+                            <span class="skill-level-text confirmed">Confirmé</span>
+                        </div>
+                        <div class="skill-card" data-skill="symfony">
+                            <div class="skill-icon-wrapper">
+                                <span class="skill-emoji">🎵</span>
+                                <div class="skill-glow"></div>
+                            </div>
+                            <span class="skill-name">Symfony</span>
+                            <span class="skill-level-text confirmed">Confirmé</span>
+                        </div>
+                        <div class="skill-card" data-skill="mysql">
+                            <div class="skill-icon-wrapper">
+                                <span class="skill-emoji">🗄️</span>
+                                <div class="skill-glow"></div>
+                            </div>
+                            <span class="skill-name">MySQL</span>
+                            <span class="skill-level-text expert">Expert</span>
+                        </div>
+                        <div class="skill-card" data-skill="prisma">
+                            <div class="skill-icon-wrapper">
+                                <span class="skill-emoji">◈</span>
+                                <div class="skill-glow"></div>
+                            </div>
+                            <span class="skill-name">Prisma</span>
+                            <span class="skill-level-text expert">Expert</span>
+                        </div>
+                        <div class="skill-card" data-skill="python">
+                            <div class="skill-icon-wrapper">
+                                <span class="skill-emoji">🐍</span>
+                                <div class="skill-glow"></div>
+                            </div>
+                            <span class="skill-name">Python</span>
+                            <span class="skill-level-text advanced">Avancé</span>
+                        </div>
+                        <div class="skill-card" data-skill="fastapi">
+                            <div class="skill-icon-wrapper">
+                                <span class="skill-emoji">⚡</span>
+                                <div class="skill-glow"></div>
+                            </div>
+                            <span class="skill-name">FastAPI</span>
+                            <span class="skill-level-text confirmed">Confirmé</span>
+                        </div>
+                        <div class="skill-card" data-skill="mongodb">
+                            <div class="skill-icon-wrapper">
+                                <span class="skill-emoji">🍃</span>
+                                <div class="skill-glow"></div>
+                            </div>
+                            <span class="skill-name">MongoDB</span>
+                            <span class="skill-level-text advanced">Avancé</span>
+                        </div>
+                        <div class="skill-card" data-skill="postgresql">
+                            <div class="skill-icon-wrapper">
+                                <span class="skill-emoji">🐘</span>
+                                <div class="skill-glow"></div>
+                            </div>
+                            <span class="skill-name">PostgreSQL</span>
+                            <span class="skill-level-text expert">Expert</span>
+                        </div>
+                        <div class="skill-card" data-skill="sqlite">
+                            <div class="skill-icon-wrapper">
+                                <span class="skill-emoji">📁</span>
+                                <div class="skill-glow"></div>
+                            </div>
+                            <span class="skill-name">SQLite</span>
+                            <span class="skill-level-text confirmed">Confirmé</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Skill Category 3 -->
+                <div class="skill-category reveal-up" style="--delay: 0.4s">
+                    <div class="category-header">
+                        <div class="category-icon">
+                            <span>🛠️</span>
+                        </div>
+                        <div class="category-info">
+                            <h3 class="category-title">DevOps & Outils</h3>
+                            <p class="category-desc">Déploiement & Productivité</p>
+                        </div>
+                    </div>
+                    <div class="skill-grid">
+                        <div class="skill-card" data-skill="docker">
+                            <div class="skill-icon-wrapper">
+                                <span class="skill-emoji">🐳</span>
+                                <div class="skill-glow"></div>
+                            </div>
+                            <span class="skill-name">Docker</span>
+                            <span class="skill-level-text expert">Expert</span>
+                        </div>
+                        <div class="skill-card" data-skill="git">
+                            <div class="skill-icon-wrapper">
+                                <span class="skill-emoji">📦</span>
+                                <div class="skill-glow"></div>
+                            </div>
+                            <span class="skill-name">Git / GitHub</span>
+                            <span class="skill-level-text expert">Expert</span>
+                        </div>
+                        <div class="skill-card" data-skill="electron">
+                            <div class="skill-icon-wrapper">
+                                <span class="skill-emoji">💻</span>
+                                <div class="skill-glow"></div>
+                            </div>
+                            <span class="skill-name">Electron.js</span>
+                            <span class="skill-level-text advanced">Avancé</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Skill Category 4 -->
+                <div class="skill-category reveal-up" style="--delay: 0.6s">
+                    <div class="category-header">
+                        <div class="category-icon">
+                            <span>🤖</span>
+                        </div>
+                        <div class="category-info">
+                            <h3 class="category-title">Data Science / IA</h3>
+                            <p class="category-desc">Analyse de données & Machine Learning</p>
+                        </div>
+                    </div>
+                    <div class="skill-grid">
+                        <div class="skill-card" data-skill="pandas">
+                            <div class="skill-icon-wrapper">
+                                <span class="skill-emoji">🐼</span>
+                                <div class="skill-glow"></div>
+                            </div>
+                            <span class="skill-name">Pandas</span>
+                            <span class="skill-level-text advanced">Avancé</span>
+                        </div>
+                        <div class="skill-card" data-skill="matplotlib">
+                            <div class="skill-icon-wrapper">
+                                <span class="skill-emoji">📊</span>
+                                <div class="skill-glow"></div>
+                            </div>
+                            <span class="skill-name">Matplotlib</span>
+                            <span class="skill-level-text confirmed">Confirmé</span>
+                        </div>
+                        <div class="skill-card" data-skill="seaborn">
+                            <div class="skill-icon-wrapper">
+                                <span class="skill-emoji">📈</span>
+                                <div class="skill-glow"></div>
+                            </div>
+                            <span class="skill-name">Seaborn</span>
+                            <span class="skill-level-text confirmed">Confirmé</span>
+                        </div>
+                        <div class="skill-card" data-skill="numpy">
+                            <div class="skill-icon-wrapper">
+                                <span class="skill-emoji">🔢</span>
+                                <div class="skill-glow"></div>
+                            </div>
+                            <span class="skill-name">NumPy</span>
+                            <span class="skill-level-text advanced">Avancé</span>
+                        </div>
+                        <div class="skill-card" data-skill="tensorflow">
+                            <div class="skill-icon-wrapper">
+                                <span class="skill-emoji">🧠</span>
+                                <div class="skill-glow"></div>
+                            </div>
+                            <span class="skill-name">TensorFlow</span>
+                            <span class="skill-level-text confirmed">Confirmé</span>
+                        </div>
+                        <div class="skill-card" data-skill="openai">
+                            <div class="skill-icon-wrapper">
+                                <span class="skill-emoji">✨</span>
+                                <div class="skill-glow"></div>
+                            </div>
+                            <span class="skill-name">OpenAI API</span>
+                            <span class="skill-level-text advanced">Avancé</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="section-header">
+            <div class="section-tag">
+                <span class="tag-line"></span>
+                <span class="tag-text">TRAVAILLONS ENSEMBLE</span>
+            </div>
+            <div class="section-title-wrapper">
+                <span class="section-number">04</span>
+                <h2 class="section-title glitch-hover" data-text="CONTACT">CONTACT</h2>
+            </div>
+            <div class="section-line"></div>
+        </div>
+
+        <div class="contact-layout">
+            <div class="contact-info reveal-left">
+                <div class="contact-intro">
+                    <h3 class="contact-headline">
+                        <span class="headline-line">Vous avez un</span>
+                        <span class="headline-line highlight-line">projet en tête ?</span>
+                    </h3>
+                    <p class="contact-text">
+                        Je suis toujours enthousiaste à l'idée de collaborer sur de nouveaux projets excitants.
+                        Que vous ayez une idée précise ou juste une ébauche, discutons-en !
+                    </p>
+                </div>
+
+                <div class="contact-cards">
+                    <a href="mailto:contact@tarlie.fr" class="contact-card magnetic">
+                        <div class="card-icon">
+                            <span>📧</span>
+                        </div>
+                        <div class="card-content">
+                            <span class="card-label">Email</span>
+                            <span class="card-value">contact@tarlie.fr</span>
+                        </div>
+                        <div class="card-arrow">→</div>
+                    </a>
+                    <a href="https://www.linkedin.com/in/jeremy-tarlie/" class="contact-card magnetic" target="_blank">
+                        <div class="card-icon">
+                            <span>💼</span>
+                        </div>
+                        <div class="card-content">
+                            <span class="card-label">LinkedIn</span>
+                            <span class="card-value">Jérémy Tarlié</span>
+                        </div>
+                        <div class="card-arrow">→</div>
+                    </a>
+                    <a href="https://github.com/Jeremy-Tarlie" class="contact-card magnetic" target="_blank">
+                        <div class="card-icon">
+                            <span>🐙</span>
+                        </div>
+                        <div class="card-content">
+                            <span class="card-label">GitHub</span>
+                            <span class="card-value">@Jeremy-Tarlie</span>
+                        </div>
+                        <div class="card-arrow">→</div>
+                    </a>
+                </div>
+
+                <div class="contact-availability">
+                    <div class="availability-dot"></div>
+                    <span>Actuellement disponible pour de nouveaux projets</span>
+                </div>
+            </div>
+
+            <div class="contact-form-wrapper reveal-right">
+                <form class="contact-form" id="contactForm">
+                    <div class="form-header">
+                        <span class="form-title">Envoyez-moi un message</span>
+                        <span class="form-subtitle">Je vous répondrai dans les 24h</span>
+                    </div>
+
+                    <!-- CSRF Token -->
+                    <input type="hidden" name="csrf_token" id="csrf_token" value="">
+                    <!-- Timestamp anti-bot -->
+                    <input type="hidden" name="_timestamp" id="_timestamp" value="">
+                    
+                    <!-- Honeypot anti-spam (caché) -->
+                    <div style="position: absolute; left: -9999px;" aria-hidden="true">
+                        <input type="text" name="website" tabindex="-1" autocomplete="off">
+                    </div>
+
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label for="name" class="form-label">
+                                <span class="label-text">Nom</span>
+                                <span class="label-required">*</span>
+                            </label>
+                            <div class="input-wrapper">
+                                <input type="text" id="name" name="name" class="form-input" placeholder="Votre nom"
+                                    required>
+                                <span class="input-focus-line"></span>
+                                <span class="input-icon">👤</span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email" class="form-label">
+                                <span class="label-text">Email</span>
+                                <span class="label-required">*</span>
+                            </label>
+                            <div class="input-wrapper">
+                                <input type="email" id="email" name="email" class="form-input"
+                                    placeholder="votre@email.com" required>
+                                <span class="input-focus-line"></span>
+                                <span class="input-icon">✉️</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="subject" class="form-label">
+                            <span class="label-text">Sujet</span>
+                        </label>
+                        <div class="input-wrapper">
+                            <select id="subject" name="subject" class="form-input form-select">
+                                <option value="">Sélectionnez un sujet</option>
+                                <option value="project">Nouveau projet</option>
+                                <option value="collaboration">Collaboration</option>
+                                <option value="job">Opportunité d'emploi</option>
+                                <option value="other">Autre</option>
+                            </select>
+                            <span class="input-focus-line"></span>
+                            <span class="input-icon">📋</span>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="message" class="form-label">
+                            <span class="label-text">Message</span>
+                            <span class="label-required">*</span>
+                        </label>
+                        <div class="input-wrapper">
+                            <textarea id="message" name="message" class="form-input form-textarea"
+                                placeholder="Parlez-moi de votre projet..." rows="5" required></textarea>
+                            <span class="input-focus-line"></span>
+                        </div>
+                        <span class="char-count"><span id="charCount">0</span>/500</span>
+                    </div>
+
+                    <button type="submit" class="btn btn-submit magnetic">
+                        <span class="btn-bg"></span>
+                        <span class="btn-text">
+                            <span class="text-default">Envoyer le message</span>
+                            <span class="text-loading">Envoi en cours...</span>
+                            <span class="text-success">Message envoyé ! ✓</span>
+                        </span>
+                        <span class="btn-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <line x1="22" y1="2" x2="11" y2="13" />
+                                <polygon points="22 2 15 22 11 13 2 9 22 2" />
+                            </svg>
+                        </span>
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <!-- Footer Background Effects -->
+        <div class="footer-bg-effects">
+            <div class="footer-grid"></div>
+            <div class="footer-glow footer-glow-1"></div>
+            <div class="footer-glow footer-glow-2"></div>
+        </div>
+
+        <!-- Footer CTA Section -->
+        <div class="footer-cta-section">
+            <div class="footer-cta-content">
+                <span class="footer-cta-tag">
+                    <span class="tag-dot"></span>
+                    PRÊT À COLLABORER ?
+                </span>
+                <h2 class="footer-cta-title">
+                    <span class="cta-line">Transformons vos</span>
+                    <span class="cta-line cta-highlight">idées en réalité</span>
+                </h2>
+                <p class="footer-cta-text">
+                    Un projet en tête ? Discutons-en autour d'un café virtuel ☕
+                </p>
+                <div class="footer-cta-buttons">
+                    <a href="#contact" class="btn btn-primary magnetic">
+                        <span class="btn-bg"></span>
+                        <span class="btn-text">Démarrer un projet</span>
+                        <span class="btn-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <line x1="5" y1="12" x2="19" y2="12" />
+                                <polyline points="12 5 19 12 12 19" />
+                            </svg>
+                        </span>
+                    </a>
+                    <a href="assets/file/CV_TARLIE_JEREMY.pdf" class="btn btn-outline magnetic footer-cv-btn"
+                        target="_blank">
+                        <span class="btn-text">Télécharger CV</span>
+                        <span class="btn-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+                                <polyline points="7 10 12 15 17 10" />
+                                <line x1="12" y1="15" x2="12" y2="3" />
+                            </svg>
+                        </span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Decorative Terminal -->
+            <div class="footer-terminal">
+                <div class="terminal-dots">
+                    <span></span><span></span><span></span>
+                </div>
+                <div class="terminal-content">
+                    <code>
+                        <span class="t-prompt">$</span> <span class="t-cmd">status</span><br>
+                        <span class="t-output">✓ Disponible pour freelance</span><br>
+                        <span class="t-output">✓ Réponse sous 24h</span><br>
+                        <span class="t-prompt">$</span> <span class="t-cursor">_</span>
+                    </code>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-content">
+            <div class="footer-main">
+                <!-- Brand Column -->
+                <div class="footer-brand">
+                    <div class="footer-logo-wrapper">
+                        <span class="footer-logo glitch" data-text="JT">JT</span>
+                        <span class="footer-logo-dot"></span>
+                    </div>
+                    <p class="footer-tagline">
+                        Développeur Full Stack passionné par la création d'expériences digitales uniques et
+                        performantes.
+                    </p>
+                    <div class="footer-social">
+                        <a href="https://github.com/Jeremy-Tarlie" class="footer-social-link magnetic"
+                            aria-label="GitHub" target="_blank">
+                            <svg viewBox="0 0 24 24" fill="currentColor">
+                                <path
+                                    d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+                            </svg>
+                        </a>
+                        <a href="https://www.linkedin.com/in/jeremy-tarlie/" class="footer-social-link magnetic"
+                            aria-label="LinkedIn" target="_blank">
+                            <svg viewBox="0 0 24 24" fill="currentColor">
+                                <path
+                                    d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+                            </svg>
+                        </a>
+                        <a href="mailto:contact@tarlie.fr" class="footer-social-link magnetic" aria-label="Email">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+                                <polyline points="22,6 12,13 2,6" />
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Navigation Column -->
+                <div class="footer-col">
+                    <h4 class="footer-col-title">
+                        <span class="col-title-icon">📍</span>
+                        Navigation
+                    </h4>
+                    <nav class="footer-nav">
+                        <a href="#home" class="footer-link">
+                            <span class="link-arrow">→</span>
+                            <span>Accueil</span>
+                        </a>
+                        <a href="#about" class="footer-link">
+                            <span class="link-arrow">→</span>
+                            <span>À propos</span>
+                        </a>
+                        <a href="#projects" class="footer-link">
+                            <span class="link-arrow">→</span>
+                            <span>Projets</span>
+                        </a>
+                        <a href="#skills" class="footer-link">
+                            <span class="link-arrow">→</span>
+                            <span>Compétences</span>
+                        </a>
+                        <a href="#contact" class="footer-link">
+                            <span class="link-arrow">→</span>
+                            <span>Contact</span>
+                        </a>
+                    </nav>
+                </div>
+
+                <!-- Services Column -->
+                <div class="footer-col">
+                    <h4 class="footer-col-title">
+                        <span class="col-title-icon">⚡</span>
+                        Services
+                    </h4>
+                    <nav class="footer-nav">
+                        <a href="#contact" class="footer-link">
+                            <span class="link-arrow">→</span>
+                            <span>Sites Web</span>
+                        </a>
+                        <a href="#contact" class="footer-link">
+                            <span class="link-arrow">→</span>
+                            <span>Applications</span>
+                        </a>
+                        <a href="#contact" class="footer-link">
+                            <span class="link-arrow">→</span>
+                            <span>E-commerce</span>
+                        </a>
+                        <a href="#contact" class="footer-link">
+                            <span class="link-arrow">→</span>
+                            <span>APIs & Backend</span>
+                        </a>
+                    </nav>
+                </div>
+
+                <!-- Contact Column -->
+                <div class="footer-col">
+                    <h4 class="footer-col-title">
+                        <span class="col-title-icon">💬</span>
+                        Contact
+                    </h4>
+                    <div class="footer-contact-info">
+                        <a href="mailto:contact@tarlie.fr" class="footer-contact-item">
+                            <span class="contact-icon">📧</span>
+                            <span>contact@tarlie.fr</span>
+                        </a>
+                        <div class="footer-contact-item">
+                            <span class="contact-icon">📍</span>
+                            <span>France</span>
+                        </div>
+                        <div class="footer-availability">
+                            <span class="availability-indicator"></span>
+                            <span>Disponible pour freelance</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Footer Bottom -->
+            <div class="footer-bottom">
+                <div class="footer-line">
+                    <span class="line-glow"></span>
+                </div>
+                <div class="footer-bottom-content">
+                    <p class="footer-copyright">
+                        <span class="copyright-symbol">©</span>
+                        <span class="copyright-year">2026</span>
+                        <span class="copyright-name">Jérémy Tarlié</span>
+                        <span class="copyright-dot">•</span>
+                        <span class="copyright-text">Tous droits réservés</span>
+                    </p>
+                    <p class="footer-made">
+                        Crafted with <span class="heart">❤️</span>
+                        <span class="made-separator">&</span>
+                        <span class="coffee">☕</span>
+                        <span class="made-text">in France</span>
+                    </p>
+                    <div class="footer-tech-stack">
+                        <span class="tech-item">HTML</span>
+                        <span class="tech-item">CSS</span>
+                        <span class="tech-item">JS</span>
+                        <span class="tech-item">PHP</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Back to top -->
+        <button class="back-to-top magnetic" aria-label="Retour en haut">
+            <span class="back-to-top-progress"></span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="12" y1="19" x2="12" y2="5" />
+                <polyline points="5 12 12 5 19 12" />
+            </svg>
+        </button>
+    </footer>
+
+    <!-- JavaScript Modules -->
+    <script src="assets/js/utils.js"></script>
+    <script src="assets/js/cursor.js"></script>
+    <script src="assets/js/particles.js"></script>
+    <script src="assets/js/navigation.js"></script>
+    <script src="assets/js/animations.js"></script>
+    <script src="assets/js/components.js"></script>
+    <script src="assets/js/audio.js"></script>
+    <script src="assets/js/terminal.js"></script>
+    <script src="assets/js/projects.js"></script>
+    <script src="assets/js/easter-eggs.js"></script>
+    <script src="assets/js/main.js"></script>
+</body>
+
+</html>
