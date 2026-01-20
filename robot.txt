@@ -1,0 +1,8 @@
+User-agent: Googlebot
+
+
+User-agent: *
+Allow: /
+Disallow: /robot.txt
+
+Sitemap: http://www.tarlie.fr/
