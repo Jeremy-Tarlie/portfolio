@@ -40,6 +40,10 @@
 
 /* Large Tablets & Small Desktops (max: 1200px) */
 @media (max-width: 1200px) {
+    #home {
+        padding-bottom: 10rem !important;
+    }
+
     /* Hero */
     .hero {
         flex-direction: column;
@@ -96,6 +100,14 @@
     .section-header::before {
         left: 50%;
         transform: translateX(-50%);
+    }
+
+    .scroll-indicator {
+        bottom: 1rem !important;
+    }
+
+    .title-decoration {
+        justify-content: center;
     }
 }
 

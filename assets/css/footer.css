@@ -389,6 +389,9 @@
 
 .contact-icon {
     font-size: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .footer-availability {

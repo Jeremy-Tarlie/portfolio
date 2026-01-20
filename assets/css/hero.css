@@ -472,6 +472,7 @@
 
 .badge-icon {
     font-size: 1rem;
+    padding-top: 5px;
 }
 
 .badge-label {
