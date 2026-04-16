@@ -86,6 +86,20 @@ Fonctionnalités :
                 tech: ['Electron.js', 'SQLite', 'Next.js', 'Tailwind CSS'],
                 images: ['assets/img/cotapro.png'],
                 links: {}
+            }, 
+            'faciltime': {
+                title: 'FacilTime',
+                category: 'Site Web',
+                year: '2026',
+                description: `FacilTime est un outil métier interne spécialement conçu pour le secteur médico-social, de type "cahier de transmission". Ce site web permet aux équipes d’enregistrer et de suivre au quotidien toutes les informations relatives à l’accompagnement d’une personne (observations, activités, repas, durée, etc.).
+
+L’application propose des écrans de consultation détaillés, des statistiques, ainsi qu’un module d’administration, afin de faciliter le suivi opérationnel par les aidants ou les équipes de coordination. Il ne s’agit pas d’un site vitrine public, mais bien d’une solution interne axée sur la gestion et le partage d’informations essentielles au sein d’un établissement ou d’un service.`,
+                tech: ['HTML', 'CSS', 'JavaScript', 'PHP'],
+                images: ['assets/img/cotapro.png'],
+                links: {
+                    demo: 'https://faciltime.com'
+                }
+           
             }
         };
 
