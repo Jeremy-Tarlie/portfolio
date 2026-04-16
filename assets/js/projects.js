@@ -95,7 +95,7 @@ Fonctionnalités :
 
 L’application propose des écrans de consultation détaillés, des statistiques, ainsi qu’un module d’administration, afin de faciliter le suivi opérationnel par les aidants ou les équipes de coordination. Il ne s’agit pas d’un site vitrine public, mais bien d’une solution interne axée sur la gestion et le partage d’informations essentielles au sein d’un établissement ou d’un service.`,
                 tech: ['HTML', 'CSS', 'JavaScript', 'PHP'],
-                images: ['assets/img/cotapro.png'],
+                images: ['assets/img/faciltime.png'],
                 links: {
                     demo: 'https://faciltime.com'
                 }
