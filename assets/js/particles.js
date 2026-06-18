@@ -4,6 +4,10 @@ function initParticles() {
     
     const ctx = canvas.getContext('2d');
     let particles = [];
+    let animationId = null;
+    let isPaused = false;
+    
+    let perfTier = 'high';
     
     // Resize canvas
     function resizeCanvas() {
@@ -14,8 +18,11 @@ function initParticles() {
     resizeCanvas();
     window.addEventListener('resize', resizeCanvas);
     
+    let particleIdCounter = 0;
+    
     class Particle {
         constructor() {
+            this.id = particleIdCounter++;
             this.reset();
         }
         
@@ -57,30 +64,64 @@ function initParticles() {
         }
     }
     
-    // Create particles
-    const particleCount = Math.min(100, Math.floor(canvas.width * canvas.height / 15000));
-    for (let i = 0; i < particleCount; i++) {
-        particles.push(new Particle());
+    function createParticles() {
+        particles = [];
+        const maxCount = perfTier === 'low' ? 35 : perfTier === 'medium' ? 65 : 100;
+        const particleCount = Math.min(maxCount, Math.floor(canvas.width * canvas.height / 15000));
+        for (let i = 0; i < particleCount; i++) {
+            particles.push(new Particle());
+        }
     }
     
-    // Connect nearby particles
     function connectParticles() {
         const maxDistance = 150;
+        const cellSize = maxDistance;
+        const grid = new Map();
         
-        for (let i = 0; i < particles.length; i++) {
-            for (let j = i + 1; j < particles.length; j++) {
-                const dx = particles[i].x - particles[j].x;
-                const dy = particles[i].y - particles[j].y;
-                const distance = Math.sqrt(dx * dx + dy * dy);
-                
-                if (distance < maxDistance) {
-                    const opacity = (1 - distance / maxDistance) * 0.2;
-                    ctx.beginPath();
-                    ctx.strokeStyle = `rgba(0, 240, 255, ${opacity})`;
-                    ctx.lineWidth = 0.5;
-                    ctx.moveTo(particles[i].x, particles[i].y);
-                    ctx.lineTo(particles[j].x, particles[j].y);
-                    ctx.stroke();
+        function cellKey(cx, cy) {
+            return cx + ',' + cy;
+        }
+        
+        for (const p of particles) {
+            const cx = Math.floor(p.x / cellSize);
+            const cy = Math.floor(p.y / cellSize);
+            const key = cellKey(cx, cy);
+            if (!grid.has(key)) grid.set(key, []);
+            grid.get(key).push(p);
+        }
+        
+        const checked = new Set();
+        
+        for (const p of particles) {
+            const cx = Math.floor(p.x / cellSize);
+            const cy = Math.floor(p.y / cellSize);
+            
+            for (let ox = -1; ox <= 1; ox++) {
+                for (let oy = -1; oy <= 1; oy++) {
+                    const neighbors = grid.get(cellKey(cx + ox, cy + oy));
+                    if (!neighbors) continue;
+                    
+                    for (const other of neighbors) {
+                        if (other === p) continue;
+                        
+                        const pairKey = p.id < other.id ? p.id + '-' + other.id : other.id + '-' + p.id;
+                        if (checked.has(pairKey)) continue;
+                        checked.add(pairKey);
+                        
+                        const dx = p.x - other.x;
+                        const dy = p.y - other.y;
+                        const distance = Math.sqrt(dx * dx + dy * dy);
+                        
+                        if (distance < maxDistance) {
+                            const opacity = (1 - distance / maxDistance) * 0.2;
+                            ctx.beginPath();
+                            ctx.strokeStyle = `rgba(0, 240, 255, ${opacity})`;
+                            ctx.lineWidth = 0.5;
+                            ctx.moveTo(p.x, p.y);
+                            ctx.lineTo(other.x, other.y);
+                            ctx.stroke();
+                        }
+                    }
                 }
             }
         }
@@ -88,6 +129,8 @@ function initParticles() {
     
     // Animation loop
     function animate() {
+        if (isPaused) return;
+        
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         
         particles.forEach(particle => {
@@ -95,21 +138,36 @@ function initParticles() {
             particle.draw();
         });
         
-        connectParticles();
+        if (perfTier !== 'low') {
+            connectParticles();
+        }
         
         animationId = requestAnimationFrame(animate);
     }
     
-    animate();
+    function startAnimation() {
+        if (animationId) cancelAnimationFrame(animationId);
+        animate();
+    }
     
-    // Mouse interaction
+    document.addEventListener('visibilitychange', () => {
+        isPaused = document.hidden;
+        if (!isPaused) {
+            startAnimation();
+        }
+    });
+    
     let mouse = { x: null, y: null };
+    let lastMouseUpdate = 0;
     
     canvas.addEventListener('mousemove', (e) => {
-        mouse.x = e.x;
-        mouse.y = e.y;
+        const now = performance.now();
+        if (now - lastMouseUpdate < 16) return;
+        lastMouseUpdate = now;
         
-        // Push particles away from mouse
+        mouse.x = e.clientX;
+        mouse.y = e.clientY;
+        
         particles.forEach(particle => {
             const dx = particle.x - mouse.x;
             const dy = particle.y - mouse.y;
@@ -122,4 +180,15 @@ function initParticles() {
             }
         });
     });
+    
+    if (typeof onPerfTierReady === 'function') {
+        onPerfTierReady((tier) => {
+            perfTier = tier;
+            createParticles();
+            startAnimation();
+        });
+    } else {
+        createParticles();
+        startAnimation();
+    }
 }

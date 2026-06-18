@@ -36,6 +36,8 @@
     border-radius: 50%;
     filter: blur(100px);
     opacity: 0.3;
+    will-change: transform, opacity;
+    transform: translateZ(0);
 }
 
 .glow-1 {
@@ -55,7 +57,7 @@
 .glow-3 {
     top: 50%;
     left: 50%;
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%) translateZ(0);
     background: var(--neon-purple);
     width: 400px;
     height: 400px;
@@ -70,6 +72,18 @@
 @keyframes glowPulse {
     0%, 100% { opacity: 0.1; transform: translate(-50%, -50%) scale(1); }
     50% { opacity: 0.3; transform: translate(-50%, -50%) scale(1.2); }
+}
+
+body.low-perf .hero-glow {
+    animation: none !important;
+    filter: blur(40px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .hero-glow {
+        animation: none !important;
+        filter: blur(40px);
+    }
 }
 
 /* Hero Content */

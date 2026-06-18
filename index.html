@@ -53,7 +53,24 @@
     <link rel="dns-prefetch" href="https://fonts.googleapis.com">
 
     <!-- Styles -->
-    <link rel="stylesheet" href="assets/css/main.css">
+    <!-- CSS chargé en parallèle (remplace l'ancienne chaîne @import de main.css, qui était bloquante et sérielle) -->
+    <link rel="stylesheet" href="assets/css/variables.css">
+    <link rel="stylesheet" href="assets/css/base.css">
+    <link rel="stylesheet" href="assets/css/preloader.css">
+    <link rel="stylesheet" href="assets/css/cursor.css">
+    <link rel="stylesheet" href="assets/css/backgrounds.css">
+    <link rel="stylesheet" href="assets/css/navigation.css">
+    <link rel="stylesheet" href="assets/css/components.css">
+    <link rel="stylesheet" href="assets/css/hero.css">
+    <link rel="stylesheet" href="assets/css/sections.css">
+    <link rel="stylesheet" href="assets/css/about.css">
+    <link rel="stylesheet" href="assets/css/projects.css">
+    <link rel="stylesheet" href="assets/css/skills.css">
+    <link rel="stylesheet" href="assets/css/contact.css">
+    <link rel="stylesheet" href="assets/css/footer.css">
+    <link rel="stylesheet" href="assets/css/easter-eggs.css">
+    <link rel="stylesheet" href="assets/css/projects-modal.css">
+    <link rel="stylesheet" href="assets/css/responsive.css">
     <link
         href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@300;400;500;600;700&family=Bebas+Neue&family=Space+Mono:wght@400;700&display=swap"
         rel="stylesheet">
@@ -2125,18 +2142,18 @@
         </button>
     </footer>
 
-    <!-- JavaScript Modules -->
-    <script src="assets/js/utils.js"></script>
-    <script src="assets/js/cursor.js"></script>
-    <script src="assets/js/particles.js"></script>
-    <script src="assets/js/navigation.js"></script>
-    <script src="assets/js/animations.js"></script>
-    <script src="assets/js/components.js"></script>
-    <script src="assets/js/audio.js"></script>
-    <script src="assets/js/terminal.js"></script>
-    <script src="assets/js/projects.js"></script>
-    <script src="assets/js/easter-eggs.js"></script>
-    <script src="assets/js/main.js"></script>
+    <!-- JavaScript Modules (defer : téléchargement parallèle, exécution dans l'ordre après le parsing) -->
+    <script defer src="assets/js/utils.js"></script>
+    <script defer src="assets/js/cursor.js"></script>
+    <script defer src="assets/js/particles.js"></script>
+    <script defer src="assets/js/navigation.js"></script>
+    <script defer src="assets/js/animations.js"></script>
+    <script defer src="assets/js/components.js"></script>
+    <script defer src="assets/js/audio.js"></script>
+    <script defer src="assets/js/terminal.js"></script>
+    <script defer src="assets/js/projects.js"></script>
+    <script defer src="assets/js/easter-eggs.js"></script>
+    <script defer src="assets/js/main.js"></script>
 </body>
 
 </html>
