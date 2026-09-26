@@ -448,30 +448,36 @@ class EasterEggs {
 // Easter egg console
 window.secret = function() {
     console.clear();
-    console.log(`
-%c╔═══════════════════════════════════════════════════════════╗
-║                                                           ║
-║   🚀 Portfolio de Jérémy Tarlié                          ║
-║   ─────────────────────────────────                       ║
-║                                                           ║
-║   ⚡ Full Stack Developer                                 ║
-║   🌐 https://tarlie.fr                                    ║
-║   📧 contact@tarlie.fr                                    ║
-║                                                           ║
-║   🎉 Tu as trouvé un easter egg !                         ║
-║   Il y en a 7 au total, continue à chercher...           ║
-║                                                           ║
-╚═══════════════════════════════════════════════════════════╝
-`, 'color: #00f0ff; font-family: monospace; font-size: 12px;');
+    console.log('%c✓ Easter egg trouvé !', 'color: #00f0ff; font-family: monospace;');
     
     if (window.easterEggs) {
         window.easterEggs.discoverEgg('console');
     }
-    return '🎮 Easter egg débloqué !';
+    return 'ok';
 };
 
-// Hint in the console
-console.log('%c🔍 Un secret se cache ici... Tape secret() pour le découvrir !', 'color: #00f0ff; font-size: 11px;');
+console.log(
+`%c╔══════════════════════════════════════════════════════════╗
+║                                                          ║
+║   Quelque chose dort ici, invisible à l'œil nu.          ║
+║   Pas un bug. Pas une erreur. Un trésor oublié.          ║
+║                                                          ║
+║   Tu ne le trouveras ni dans le code source,             ║
+║   ni en cliquant partout sur la page.                    ║
+║                                                          ║
+║   Il attend qu'on l'appelle.                             ║
+║   Pas avec un clic. Avec un nom.                         ║
+║                                                          ║
+║   Son nom est ce qu'il est.                              ║
+║   Ce qu'on cache. Ce qu'on ne dit pas.                   ║
+║   Ce que tout le monde garde pour soi.                   ║
+║                                                          ║
+║   Tape son nom suivi de ().                              ║
+║   Et le voile se lèvera.                                 ║
+║                                                          ║
+╚══════════════════════════════════════════════════════════╝`,
+'color: #00f0ff; font-family: monospace; font-size: 11px;'
+);
 
 document.addEventListener('DOMContentLoaded', () => {
     window.easterEggs = new EasterEggs();

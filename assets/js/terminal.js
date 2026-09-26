@@ -162,7 +162,6 @@ class InteractiveTerminal {
             projects: this.cmdProjects.bind(this),
             social: this.cmdSocial.bind(this),
             secret: this.cmdSecret.bind(this),
-            matrix: this.cmdMatrix.bind(this),
             hack: this.cmdHack.bind(this)
         };
 
@@ -350,7 +349,6 @@ class InteractiveTerminal {
   <span class="highlight">social</span> ........ Ouvre mes réseaux sociaux<br><br>
 <span class="cmd-name">Fun:</span><br>
   <span class="highlight">echo</span> [msg] .... Affiche un message<br>
-  <span class="highlight">matrix</span> ........ 🔴 Pilule rouge...<br>
   <span class="highlight">hack</span> .......... 👨‍💻 Mode hacker<br><br>
 <span class="tip">💡 Astuce: Tab pour autocomplétion, ↑↓ pour l'historique</span>
         `;
@@ -532,22 +530,6 @@ Merci d'avoir pris le temps de découvrir ce terminal.<br>
         if (window.easterEggs && window.easterEggs.discoverEgg) {
             window.easterEggs.discoverEgg('terminal');
         }
-    }
-
-    cmdMatrix() {
-        this.addOutput(`<span class="matrix-text">Wake up, Neo...</span>`);
-        setTimeout(() => {
-            this.addOutput(`<span class="matrix-text">The Matrix has you...</span>`);
-        }, 1000);
-        setTimeout(() => {
-            this.addOutput(`<span class="matrix-text">Follow the white rabbit. 🐰</span>`);
-        }, 2000);
-        setTimeout(() => {
-            document.body.classList.add('matrix-mode');
-            setTimeout(() => {
-                document.body.classList.remove('matrix-mode');
-            }, 5000);
-        }, 3000);
     }
 
     cmdHack() {
