@@ -134,9 +134,9 @@ if (!empty($errors)) {
 }
 
 $subjects = [
-    'project' => 'Nouveau projet',
+    'job' => 'Opportunité CDI',
+    'freelance' => 'Mission freelance',
     'collaboration' => 'Collaboration',
-    'job' => 'Opportunité d\'emploi',
     'other' => 'Autre'
 ];
 $subject_text = $subjects[$subject] ?? 'Contact';

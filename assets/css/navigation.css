@@ -14,9 +14,20 @@
 
 .nav.scrolled {
     padding: var(--space-md) var(--space-3xl);
-    background: rgba(5, 5, 8, 0.9);
-    backdrop-filter: blur(20px);
+    background: rgba(5, 5, 8, 0.92);
     border-bottom: 1px solid rgba(0, 240, 255, 0.1);
+}
+
+/* backdrop-filter uniquement si GPU OK — très cher en software rendering */
+@supports (backdrop-filter: blur(1px)) {
+    .high-perf .nav.scrolled {
+        background: rgba(5, 5, 8, 0.75);
+        backdrop-filter: blur(16px);
+    }
+}
+
+.low-perf .logo-dot {
+    animation: none;
 }
 
 .nav-logo {

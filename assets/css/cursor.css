@@ -1,4 +1,9 @@
-/* Custom Cursor */
+/* Custom Cursor — actif sur tous les tiers desktop */
+.cursor,
+.cursor-follower {
+    display: none;
+}
+
 .cursor {
     position: fixed;
     width: 8px;
@@ -7,9 +12,9 @@
     border-radius: 50%;
     pointer-events: none;
     z-index: 999999;
-    mix-blend-mode: difference;
     transition: background 0.3s ease;
-    will-change: transform;
+    top: 0;
+    left: 0;
 }
 
 .cursor-follower {
@@ -21,6 +26,27 @@
     pointer-events: none;
     z-index: 999998;
     transition: border-color 0.3s ease;
+    top: 0;
+    left: 0;
+}
+
+/* Afficher dès qu'un tier est connu (low / medium / high) */
+.low-perf .cursor,
+.medium-perf .cursor,
+.high-perf .cursor,
+.low-perf .cursor-follower,
+.medium-perf .cursor-follower,
+.high-perf .cursor-follower {
+    display: block;
+}
+
+/* mix-blend + will-change uniquement en high (coûteux sans GPU) */
+.high-perf .cursor {
+    mix-blend-mode: difference;
+    will-change: transform;
+}
+
+.high-perf .cursor-follower {
     will-change: transform;
 }
 
@@ -30,4 +56,38 @@
 
 .cursor-follower.hover {
     border-color: var(--neon-pink);
+}
+
+/* Curseur natif quand custom désactivé (mobile / no-custom) */
+html.no-custom-cursor {
+    cursor: auto;
+}
+
+html:not(.no-custom-cursor).low-perf,
+html:not(.no-custom-cursor).medium-perf,
+html:not(.no-custom-cursor).high-perf {
+    cursor: none;
+}
+
+html:not(.no-custom-cursor).low-perf a,
+html:not(.no-custom-cursor).low-perf button,
+html:not(.no-custom-cursor).low-perf .magnetic,
+html:not(.no-custom-cursor).medium-perf a,
+html:not(.no-custom-cursor).medium-perf button,
+html:not(.no-custom-cursor).medium-perf .magnetic,
+html:not(.no-custom-cursor).high-perf a,
+html:not(.no-custom-cursor).high-perf button,
+html:not(.no-custom-cursor).high-perf .magnetic {
+    cursor: none;
+}
+
+@media (max-width: 767px) {
+    .cursor,
+    .cursor-follower {
+        display: none !important;
+    }
+
+    html {
+        cursor: auto !important;
+    }
 }

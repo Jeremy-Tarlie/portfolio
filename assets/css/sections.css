@@ -83,6 +83,19 @@ section {
     opacity: 1;
 }
 
+.low-perf .glitch-hover::before,
+.low-perf .glitch-hover::after {
+    display: none;
+}
+
+.low-perf .reveal-up,
+.low-perf .reveal-left,
+.low-perf .reveal-right {
+    opacity: 1;
+    transform: none;
+    transition: none;
+}
+
 .glitch-hover::before {
     color: var(--neon-pink);
     animation: glitch1 0.3s infinite linear alternate-reverse;

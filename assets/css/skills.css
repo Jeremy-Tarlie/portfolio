@@ -91,13 +91,17 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 40px;
-    height: 40px;
-    background: var(--neon-cyan);
+    width: 48px;
+    height: 48px;
+    background: radial-gradient(circle, rgba(0, 240, 255, 0.55) 0%, transparent 70%);
     border-radius: 50%;
-    filter: blur(15px);
     opacity: 0;
     transition: opacity var(--transition-normal);
+    pointer-events: none;
+}
+
+.low-perf .skill-glow {
+    display: none;
 }
 
 .skill-card:hover .skill-glow {

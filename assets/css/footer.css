@@ -38,16 +38,15 @@
 .footer-glow {
     position: absolute;
     border-radius: 50%;
-    filter: blur(100px);
-    opacity: 0.4;
-    will-change: transform, opacity;
-    transform: translateZ(0);
+    opacity: 0.45;
+    pointer-events: none;
+    contain: strict;
 }
 
 .footer-glow-1 {
     width: 400px;
     height: 400px;
-    background: var(--neon-cyan);
+    background: radial-gradient(circle, rgba(0, 240, 255, 0.5) 0%, transparent 70%);
     top: -100px;
     left: 10%;
     animation: footerGlow1 8s ease-in-out infinite;
@@ -56,7 +55,7 @@
 .footer-glow-2 {
     width: 300px;
     height: 300px;
-    background: var(--neon-purple);
+    background: radial-gradient(circle, rgba(139, 92, 246, 0.45) 0%, transparent 70%);
     bottom: 0;
     right: 15%;
     animation: footerGlow2 10s ease-in-out infinite;
@@ -64,23 +63,29 @@
 
 @keyframes footerGlow1 {
     0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.3; }
-    50% { transform: translate(50px, 30px) scale(1.2); opacity: 0.5; }
+    50% { transform: translate(30px, 18px) scale(1.1); opacity: 0.45; }
 }
 
 @keyframes footerGlow2 {
     0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.3; }
-    50% { transform: translate(-30px, -20px) scale(1.1); opacity: 0.4; }
+    50% { transform: translate(-20px, -12px) scale(1.05); opacity: 0.4; }
 }
 
-body.low-perf .footer-glow {
+.low-perf .footer-glow {
     animation: none !important;
-    filter: blur(40px);
+}
+
+.low-perf .footer-glow {
+    opacity: 0.2;
+}
+
+.low-perf .footer-grid {
+    display: none;
 }
 
 @media (prefers-reduced-motion: reduce) {
     .footer-glow {
         animation: none !important;
-        filter: blur(40px);
     }
 }
 
@@ -462,8 +467,12 @@ body.low-perf .footer-glow {
     height: 5px;
     background: linear-gradient(90deg, transparent, var(--neon-cyan), transparent);
     border-radius: 50%;
-    filter: blur(3px);
+    opacity: 0.85;
     animation: lineGlowMove 8s ease-in-out infinite;
+}
+
+.low-perf .line-glow {
+    animation: none;
 }
 
 @keyframes lineGlowMove {

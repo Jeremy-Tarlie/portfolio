@@ -8,9 +8,9 @@
     <!-- SEO Meta Tags -->
     <title>Jérémy Tarlié | Développeur Full Stack - Portfolio 2026</title>
     <meta name="description"
-        content="Portfolio de Jérémy Tarlié, développeur Full Stack passionné. Spécialisé en React, Node.js, Next.js et PHP. Découvrez mes projets et compétences en développement web.">
+        content="Portfolio de Jérémy Tarlié, développeur Full Stack. Spécialisé en React, Node.js, Next.js, PHP et Python. Ouvert aux opportunités CDI et freelance.">
     <meta name="keywords"
-        content="développeur full stack, développeur web, React, Node.js, Next.js, PHP, JavaScript, portfolio, Jérémy Tarlié, France">
+        content="développeur full stack, développeur web, CDI, freelance, React, Node.js, Next.js, PHP, Python, JavaScript, portfolio, Jérémy Tarlié, France">
     <meta name="author" content="Jérémy Tarlié">
     <meta name="robots" content="index, follow">
     <meta name="language" content="French">
@@ -22,7 +22,7 @@
     <meta property="og:url" content="https://tarlie.fr/">
     <meta property="og:title" content="Jérémy Tarlié | Développeur Full Stack">
     <meta property="og:description"
-        content="Portfolio de Jérémy Tarlié, développeur Full Stack passionné. Spécialisé en React, Node.js, Next.js et PHP. Découvrez mes projets et compétences.">
+        content="Portfolio de Jérémy Tarlié, développeur Full Stack. Spécialisé en React, Node.js, Next.js, PHP et Python. Ouvert aux opportunités CDI et freelance.">
     <meta property="og:image" content="https://tarlie.fr/assets/img/og-image.png">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
@@ -34,7 +34,7 @@
     <meta name="twitter:url" content="https://tarlie.fr/">
     <meta name="twitter:title" content="Jérémy Tarlié | Développeur Full Stack">
     <meta name="twitter:description"
-        content="Portfolio de Jérémy Tarlié, développeur Full Stack passionné. Spécialisé en React, Node.js, Next.js et PHP.">
+        content="Portfolio de Jérémy Tarlié, développeur Full Stack. Ouvert aux opportunités CDI et freelance.">
     <meta name="twitter:image" content="https://tarlie.fr/assets/img/og-image.png">
 
     <!-- Favicon -->
@@ -44,6 +44,24 @@
     <link rel="manifest" href="site.webmanifest">
     <meta name="theme-color" content="#0a0a0f">
     <meta name="msapplication-TileColor" content="#00f0ff">
+
+    <!-- Hint perf avant premier paint (évite blur/overlays lourds sans GPU) -->
+    <script>
+        (function () {
+            try {
+                var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+                var cores = navigator.hardwareConcurrency || 4;
+                var mem = navigator.deviceMemory || 8;
+                var saveData = navigator.connection && navigator.connection.saveData;
+                var tier = 'high';
+                if (reduced || saveData || cores <= 2 || mem <= 2) tier = 'low';
+                else if (cores <= 4 && mem <= 4) tier = 'medium';
+                document.documentElement.classList.add(tier + '-perf');
+            } catch (e) {
+                document.documentElement.classList.add('low-perf');
+            }
+        })();
+    </script>
 
     <!-- Preconnect for performance -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -84,15 +102,11 @@
         "url": "https://tarlie.fr",
         "image": "https://tarlie.fr/assets/img/avatar.webp",
         "jobTitle": "Développeur Full Stack",
-        "worksFor": {
-            "@type": "Organization",
-            "name": "Freelance"
-        },
         "sameAs": [
             "https://github.com/Jeremy-Tarlie",
             "https://www.linkedin.com/in/jeremy-tarlie/"
         ],
-        "knowsAbout": ["React", "Node.js", "Next.js", "PHP", "JavaScript", "TypeScript", "Docker"],
+        "knowsAbout": ["React", "Node.js", "Next.js", "PHP", "Python", "JavaScript", "TypeScript", "Docker"],
         "email": "contact@tarlie.fr",
         "address": {
             "@type": "PostalAddress",
@@ -240,7 +254,7 @@
         <div class="hero-content">
             <div class="hero-badge reveal-up">
                 <span class="badge-dot"></span>
-                <span class="badge-text">Disponible pour de nouveaux projets</span>
+                <span class="badge-text">Ouvert aux opportunités CDI &amp; freelance</span>
                 <span class="badge-pulse"></span>
             </div>
 
@@ -278,11 +292,11 @@
             </div>
 
             <p class="hero-description reveal-up" style="--delay: 0.6s">
-                Je transforme vos idées en <span class="text-gradient">expériences digitales</span> uniques.
+                Développeur Full Stack — je conçois des <span class="text-gradient">expériences digitales</span> solides et soignées.
                 <br>
                 <span class="highlight-box">Code propre</span> •
-                <span class="highlight-box">Design audacieux</span> •
-                <span class="highlight-box">Innovation constante</span>
+                <span class="highlight-box">Esprit d'équipe</span> •
+                <span class="highlight-box">Impact produit</span>
             </p>
 
             <div class="hero-cta reveal-up" style="--delay: 0.8s">
@@ -333,7 +347,7 @@
                             <span class="dot yellow"></span>
                             <span class="dot green"></span>
                         </div>
-                        <span class="code-title">~/developer.config.js</span>
+                        <span class="code-title">~/me.js</span>
                         <div class="code-actions">
                             <span>−</span>
                             <span>□</span>
@@ -343,23 +357,16 @@
                         <div class="code-line-numbers">
                             <span>1</span><span>2</span><span>3</span><span>4</span><span>5</span>
                             <span>6</span><span>7</span><span>8</span><span>9</span><span>10</span>
-                            <span>11</span><span>12</span><span>13</span><span>14</span><span>15</span>
+                            <span>11</span>
                         </div>
-                        <pre class="code-content"><code><span class="code-comment">// Configuration du développeur</span>
-<span class="code-keyword">const</span> <span class="code-variable">developer</span> = {
+                        <pre class="code-content"><code><span class="code-keyword">const</span> <span class="code-variable">me</span> = {
   <span class="code-property">name</span>: <span class="code-string">"Jérémy Tarlié"</span>,
-  <span class="code-property">title</span>: <span class="code-string">"Full Stack Developer"</span>,
-  <span class="code-property">location</span>: <span class="code-string">"France 🇫🇷"</span>,
-  <span class="code-property">experience</span>: <span class="code-number">2</span>,
-  <span class="code-property">available</span>: <span class="code-boolean">true</span>,
-  
-  <span class="code-property">skills</span>: [
-    <span class="code-string">"React"</span>, <span class="code-string">"Node.js"</span>, <span class="code-string">"Next.js"</span>
-  ],
-  
-  <span class="code-function">contact</span>: () <span class="code-keyword">=></span> {
-    <span class="code-keyword">return</span> <span class="code-string">"contact@tarlie.fr"</span>;
-  }
+  <span class="code-property">role</span>: <span class="code-string">"Full Stack Developer"</span>,
+  <span class="code-property">from</span>: <span class="code-string">"France"</span>,
+  <span class="code-property">years</span>: <span class="code-number" data-experience-years>3</span>,
+  <span class="code-property">openToWork</span>: <span class="code-boolean">true</span>,
+  <span class="code-property">stack</span>: [<span class="code-string">"React"</span>, <span class="code-string">"Node.js"</span>, <span class="code-string">"Python"</span>],
+  <span class="code-property">email</span>: <span class="code-string">"contact@tarlie.fr"</span>,
 };</code></pre>
                     </div>
                     <div class="code-footer">
@@ -514,7 +521,7 @@
                             </svg>
                         </div>
                         <div class="stat-content">
-                            <span class="stat-number counter" data-target="3" data-suffix="+">0</span>
+                            <span class="stat-number counter" data-start="2023-09-01" data-suffix="+">0</span>
                             <span class="stat-label">Années d'expérience</span>
                         </div>
                     </div>
@@ -684,14 +691,14 @@
             </article>
 
             <!-- Project 2 -->
-            <article class="project-card" data-category="web">
+            <article class="project-card" data-category="web app tool">
                 <div class="project-image">
                     <div class="project-bg">
                         <span class="project-emoji">
-                            <img src="assets/img/codepath.png" alt="Codepath" loading="lazy" decoding="async">
+                            <img src="assets/img/discelyn.png" alt="Discelyn" loading="lazy" decoding="async">
                         </span>
                     </div>
-                    <a href="https://codepath.fr" class="project-overlay" target="_blank">
+                    <a href="https://discelyn.fr/" class="project-overlay" target="_blank">
                         <div class="overlay-content">
                             <span class="overlay-label">VOIR LE PROJET</span>
                             <div class="overlay-icon">
@@ -705,20 +712,20 @@
                 </div>
                 <div class="project-content">
                     <div class="project-meta">
-                        <span class="project-category">Site Web</span>
-                        <span class="project-year">2025</span>
+                        <span class="project-category">SaaS / Discord</span>
+                        <span class="project-year">2026</span>
                     </div>
-                    <h3 class="project-title">Codepath</h3>
-                    <p class="project-description">Entreprise de développement web proposant des devis personnalisés et
-                        des templates prêts à l'emploi.</p>
+                    <h3 class="project-title">Discelyn</h3>
+                    <p class="project-description">Paiement formation → accès Discord : Stripe, claim OAuth, rôles et
+                        révocation refund — 0 % de commission.</p>
                     <div class="project-tech">
-                        <span class="tech-tag">HTML</span>
-                        <span class="tech-tag">CSS</span>
-                        <span class="tech-tag">JS</span>
-                        <span class="tech-tag">PHP</span>
+                        <span class="tech-tag">Next.js</span>
+                        <span class="tech-tag">Stripe</span>
+                        <span class="tech-tag">Discord.js</span>
+                        <span class="tech-tag">Prisma</span>
                     </div>
                     <div class="project-links">
-                        <a href="https://codepath.fr" class="project-link" target="_blank">
+                        <a href="https://discelyn.fr/" class="project-link" target="_blank">
                             <span>Live Demo</span>
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                 <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
@@ -786,55 +793,6 @@
                 <div class="project-image">
                     <div class="project-bg">
                         <span class="project-emoji">
-                            <img src="assets/img/mydiscordbot.png" alt="MyDiscordBot" loading="lazy" decoding="async">
-                        </span>
-                    </div>
-                    <a href="https://mydiscordbot.com" class="project-overlay" target="_blank">
-                        <div class="overlay-content">
-                            <span class="overlay-label">VOIR LE PROJET</span>
-                            <div class="overlay-icon">
-                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <line x1="7" y1="17" x2="17" y2="7" />
-                                    <polyline points="7 7 17 7 17 17" />
-                                </svg>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-                <div class="project-content">
-                    <div class="project-meta">
-                        <span class="project-category">Bot / SaaS</span>
-                        <span class="project-year">2024</span>
-                    </div>
-                    <h3 class="project-title">MyDiscordBot</h3>
-                    <p class="project-description">Plateforme de création et gestion de bots Discord personnalisés pour
-                        les communautés.</p>
-                    <div class="project-tech">
-                        <span class="tech-tag">Node.js</span>
-                        <span class="tech-tag">Discord.js</span>
-                        <span class="tech-tag">Next.js</span>
-                        <span class="tech-tag">Prisma</span>
-                    </div>
-                    <div class="project-links">
-                        <a href="https://mydiscordbot.com" class="project-link" target="_blank">
-                            <span>Live Demo</span>
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6" />
-                                <polyline points="15 3 21 3 21 9" />
-                                <line x1="10" y1="14" x2="21" y2="3" />
-                            </svg>
-                        </a>
-                    </div>
-                </div>
-                <div class="project-number">04</div>
-                <div class="project-glow"></div>
-            </article>
-
-            <!-- Project 5 -->
-            <article class="project-card" data-category="app tool">
-                <div class="project-image">
-                    <div class="project-bg">
-                        <span class="project-emoji">
                             <img src="assets/img/cotapro.png" alt="CotaPro" loading="lazy" decoding="async">
                         </span>
                     </div>
@@ -864,11 +822,11 @@
                         </span>
                     </div>
                 </div>
-                <div class="project-number">05</div>
+                <div class="project-number">04</div>
                 <div class="project-glow"></div>
             </article>
 
-            <!-- Project 6 -->
+            <!-- Project 5 -->
             <article class="project-card" data-category="web">
                 <div class="project-image">
                     <div class="project-bg">
@@ -911,7 +869,7 @@
                         </a>
                     </div>
                 </div>
-                <div class="project-number">06</div>
+                <div class="project-number">05</div>
                 <div class="project-glow"></div>
             </article>
         </div>
@@ -1701,7 +1659,7 @@
         <div class="section-header">
             <div class="section-tag">
                 <span class="tag-line"></span>
-                <span class="tag-text">TRAVAILLONS ENSEMBLE</span>
+                <span class="tag-text">ENTRONS EN CONTACT</span>
             </div>
             <div class="section-title-wrapper">
                 <span class="section-number">04</span>
@@ -1714,12 +1672,12 @@
             <div class="contact-info reveal-left">
                 <div class="contact-intro">
                     <h3 class="contact-headline">
-                        <span class="headline-line">Vous avez un</span>
-                        <span class="headline-line highlight-line">projet en tête ?</span>
+                        <span class="headline-line">Un poste, une mission,</span>
+                        <span class="headline-line highlight-line">une discussion ?</span>
                     </h3>
                     <p class="contact-text">
-                        Je suis toujours enthousiaste à l'idée de collaborer sur de nouveaux projets excitants.
-                        Que vous ayez une idée précise ou juste une ébauche, discutons-en !
+                        Je suis ouvert aux opportunités en CDI comme en freelance.
+                        Recruteur, client ou simple échange — n'hésitez pas à me écrire.
                     </p>
                 </div>
 
@@ -1793,7 +1751,7 @@
 
                 <div class="contact-availability">
                     <div class="availability-dot"></div>
-                    <span>Actuellement disponible pour de nouveaux projets</span>
+                    <span>Ouvert aux opportunités CDI &amp; freelance</span>
                 </div>
             </div>
 
@@ -1875,9 +1833,9 @@
                         <div class="input-wrapper">
                             <select id="subject" name="subject" class="form-input form-select">
                                 <option value="">Sélectionnez un sujet</option>
-                                <option value="project">Nouveau projet</option>
+                                <option value="job">Opportunité CDI</option>
+                                <option value="freelance">Mission freelance</option>
                                 <option value="collaboration">Collaboration</option>
-                                <option value="job">Opportunité d'emploi</option>
                                 <option value="other">Autre</option>
                             </select>
                             <span class="input-focus-line"></span>
@@ -1912,7 +1870,7 @@
                         </label>
                         <div class="input-wrapper">
                             <textarea id="message" name="message" class="form-input form-textarea"
-                                placeholder="Parlez-moi de votre projet..." rows="5" required></textarea>
+                                placeholder="Parlez-moi du poste, de la mission ou de votre besoin..." rows="5" required></textarea>
                             <span class="input-focus-line"></span>
                         </div>
                         <span class="char-count"><span id="charCount">0</span>/500</span>
@@ -1951,14 +1909,14 @@
             <div class="footer-cta-content">
                 <span class="footer-cta-tag">
                     <span class="tag-dot"></span>
-                    PRÊT À COLLABORER ?
+                    OUVERT AUX OPPORTUNITÉS
                 </span>
                 <h2 class="footer-cta-title">
-                    <span class="cta-line">Transformons vos</span>
-                    <span class="cta-line cta-highlight">idées en réalité</span>
+                    <span class="cta-line">CDI ou freelance,</span>
+                    <span class="cta-line cta-highlight">parlons-en</span>
                 </h2>
                 <p class="footer-cta-text">
-                    Un projet en tête ? Discutons-en autour d'un café virtuel
+                    Une offre, une mission ou un échange ? Discutons-en autour d'un café virtuel
                     <span class="coffee">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="20" height="20">
                             <!-- Steam -->
@@ -1989,7 +1947,7 @@
                 <div class="footer-cta-buttons">
                     <a href="#contact" class="btn btn-primary magnetic">
                         <span class="btn-bg"></span>
-                        <span class="btn-text">Démarrer un projet</span>
+                        <span class="btn-text">Me contacter</span>
                         <span class="btn-icon">
                             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                 <line x1="5" y1="12" x2="19" y2="12" />
@@ -2019,7 +1977,7 @@
                 <div class="terminal-content">
                     <code>
                         <span class="t-prompt">$</span> <span class="t-cmd">status</span><br>
-                        <span class="t-output">✓ Disponible pour freelance</span><br>
+                        <span class="t-output">✓ Ouvert CDI &amp; freelance</span><br>
                         <span class="t-output">✓ Réponse sous 24h</span><br>
                         <span class="t-prompt">$</span> <span class="t-cursor">_</span>
                     </code>
@@ -2036,8 +1994,7 @@
                         <span class="footer-logo-dot"></span>
                     </div>
                     <p class="footer-tagline">
-                        Développeur Full Stack passionné par la création d'expériences digitales uniques et
-                        performantes.
+                        Développeur Full Stack — ouvert aux opportunités en CDI et en freelance.
                     </p>
                     <div class="footer-social">
                         <a href="https://github.com/Jeremy-Tarlie" class="footer-social-link magnetic"
@@ -2092,27 +2049,27 @@
                     </nav>
                 </div>
 
-                <!-- Services Column -->
+                <!-- Expertise Column -->
                 <div class="footer-col">
                     <h4 class="footer-col-title">
-                        Services
+                        Expertise
                     </h4>
                     <nav class="footer-nav">
-                        <a href="#contact" class="footer-link">
+                        <a href="#skills" class="footer-link">
                             <span class="link-arrow">→</span>
-                            <span>Sites Web</span>
+                            <span>Frontend</span>
                         </a>
-                        <a href="#contact" class="footer-link">
+                        <a href="#skills" class="footer-link">
                             <span class="link-arrow">→</span>
-                            <span>Applications</span>
+                            <span>Backend &amp; APIs</span>
                         </a>
-                        <a href="#contact" class="footer-link">
+                        <a href="#skills" class="footer-link">
                             <span class="link-arrow">→</span>
-                            <span>E-commerce</span>
+                            <span>Full Stack</span>
                         </a>
-                        <a href="#contact" class="footer-link">
+                        <a href="assets/file/CV_TARLIE_JEREMY.pdf" class="footer-link" target="_blank">
                             <span class="link-arrow">→</span>
-                            <span>APIs & Backend</span>
+                            <span>Télécharger le CV</span>
                         </a>
                     </nav>
                 </div>
@@ -2150,7 +2107,7 @@
                         </div>
                         <div class="footer-availability">
                             <span class="availability-indicator"></span>
-                            <span>Disponible pour freelance</span>
+                            <span>Ouvert CDI &amp; freelance</span>
                         </div>
                     </div>
                 </div>

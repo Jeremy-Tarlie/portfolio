@@ -17,17 +17,24 @@ Le design s'inspire de l'esthétique cyberpunk avec des couleurs néon, des effe
                     github: 'https://github.com/Jeremy-Tarlie/portfolio'
                 }
             },
-            'codepath': {
-                title: 'Codepath',
-                category: 'Site Web',
-                year: '2025',
-                description: `Entreprise de développement web proposant des devis personnalisés et des templates prêts à l'emploi.
+            'discelyn': {
+                title: 'Discelyn',
+                category: 'SaaS / Discord',
+                year: '2026',
+                description: `SaaS français pour organismes de formation : paiement Stripe → claim Discord → rôle apprenant, avec révocation automatique en cas de refund.
 
-Codepath est une plateforme qui permet aux entreprises et particuliers d'obtenir des sites web professionnels. Le site propose un système de devis en ligne, une galerie de templates et un espace client.`,
-                tech: ['HTML', 'CSS', 'JavaScript', 'PHP'],
-                images: ['assets/img/codepath.png'],
+Discelyn se branche sur ton compte Stripe (0 % de commission), mappe tes Price ID vers des rôles Discord, et livre un socle ops (welcome, tickets, modération, RGPD).
+
+Fonctionnalités :
+• Webhook Stripe → rôle Discord
+• Claim OAuth + révocation refund / fin d'abo
+• Tickets support, welcome, modération traçable
+• Dashboard self-serve (mapping prix → rôle)
+• Facturation UE / RGPD`,
+                tech: ['Next.js', 'Stripe', 'Discord.js', 'Prisma', 'PostgreSQL'],
+                images: ['assets/img/discelyn.png'],
                 links: {
-                    demo: 'https://codepath.fr'
+                    demo: 'https://discelyn.fr/'
                 }
             },
             'codepass': {
@@ -46,27 +53,6 @@ Fonctionnalités principales :
                 tech: ['React.js', 'Node.js', 'MongoDB', 'JWT', 'Electron'],
                 images: ['assets/img/codepass.png'],
                 links: {}
-            },
-            'mydiscordbot': {
-                title: 'MyDiscordBot',
-                category: 'Bot / SaaS',
-                year: '2024',
-                description: `Plateforme de création et gestion de bots Discord personnalisés pour les communautés.
-
-MyDiscordBot permet à n'importe qui de créer son propre bot Discord sans avoir besoin de coder. L'interface intuitive permet de configurer des commandes personnalisées, des systèmes de modération, des messages automatiques et bien plus.
-
-Fonctionnalités :
-• Création de bots sans code
-• Commandes personnalisables
-• Système de modération avancé
-• Analytics et statistiques
-• Intégrations tierces
-• Support 24/7`,
-                tech: ['Node.js', 'Discord.js', 'Next.js', 'Prisma', 'PostgreSQL'],
-                images: ['assets/img/mydiscordbot.png'],
-                links: {
-                    demo: 'https://mydiscordbot.com'
-                }
             },
             'cotapro': {
                 title: 'CotaPro',

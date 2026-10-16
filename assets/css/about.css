@@ -471,3 +471,15 @@
     background: rgba(139, 92, 246, 0.2);
     transform: translateY(-2px);
 }
+
+/* Perf : couper les animations continues about uniquement en low */
+.low-perf .avatar-ring,
+.low-perf .image-glitch-overlay,
+.low-perf .image-scanline {
+    animation: none !important;
+}
+
+.low-perf .image-glitch-overlay,
+.low-perf .image-scanline {
+    display: none;
+}

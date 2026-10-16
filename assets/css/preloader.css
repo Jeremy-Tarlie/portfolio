@@ -119,6 +119,14 @@
     animation: scanlineMove 0.1s linear infinite;
 }
 
+.low-perf .preloader-glitch {
+    animation: none;
+}
+
+.low-perf .logo-letter {
+    animation: none;
+}
+
 @keyframes scanlineMove {
     0% { transform: translateY(0); }
     100% { transform: translateY(4px); }

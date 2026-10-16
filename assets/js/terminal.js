@@ -41,7 +41,7 @@ class InteractiveTerminal {
             },
             '~/about/experience.md': {
                 type: 'file',
-                content: `<span class="output-emoji">💼</span> Avec plus de <span class="highlight">2 ans d'expérience</span>, je me spécialise dans la création de sites web qui allient <span class="highlight">esthétique</span> et <span class="highlight">fonctionnalité</span>.`
+                content: `<span class="output-emoji">💼</span> Avec plus de <span class="highlight">${getYearsOfExperience('2023-09-01')} ans d'expérience</span>, je me spécialise dans la création de sites web qui allient <span class="highlight">esthétique</span> et <span class="highlight">fonctionnalité</span>.`
             },
             '~/about/philosophy.md': {
                 type: 'file',
@@ -142,7 +142,7 @@ class InteractiveTerminal {
             },
             '~/contact/availability.md': {
                 type: 'file',
-                content: `<span class="output-emoji">✅</span> Statut: <span class="highlight" style="color: var(--neon-green);">Disponible pour freelance</span> - Réponse garantie sous 24h !`
+                content: `<span class="output-emoji">✅</span> Statut: <span class="highlight" style="color: var(--neon-green);">Ouvert aux opportunités CDI & freelance</span> - Réponse garantie sous 24h !`
             }
         };
 
@@ -469,7 +469,7 @@ class InteractiveTerminal {
    <a href="https://www.linkedin.com/in/jeremy-tarlie/" target="_blank" class="link">linkedin.com/in/jeremy-tarlie</a><br><br>
 <span class="output-emoji">🌐</span> Website:<br>
    <a href="https://tarlie.fr" target="_blank" class="link">tarlie.fr</a><br><br>
-<span class="success">✅ Disponible pour freelance !</span>
+<span class="success">✅ Ouvert aux opportunités CDI & freelance !</span>
         `.trim());
     }
 

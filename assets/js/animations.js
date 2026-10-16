@@ -118,47 +118,61 @@ function initScrollAnimations() {
     });
 }
 
-// Parallax
+// Parallax — off en low uniquement ; medium = amplitude réduite
 function initParallaxEffects() {
+    if (typeof isLowPerf === 'function' ? isLowPerf() : window.PERF_TIER === 'low') {
+        return;
+    }
+
     const heroGlows = document.querySelectorAll('.hero-glow');
     const codeWindow = document.querySelector('.code-window');
-    
-    // Mouse parallax for hero section
-    document.addEventListener('mousemove', throttle((e) => {
+    let enabled = window.PERF_TIER !== 'low';
+
+    const onMouseMove = throttle((e) => {
+        if (!enabled || window.PERF_TIER === 'low') return;
+        const intensity = window.PERF_TIER === 'medium' ? 0.55 : 1;
         const mouseX = (e.clientX / window.innerWidth - 0.5) * 2;
         const mouseY = (e.clientY / window.innerHeight - 0.5) * 2;
-        
+
         heroGlows.forEach((glow, index) => {
-            const speed = (index + 1) * 20;
+            const speed = (index + 1) * 12 * intensity;
             glow.style.transform = `translate(${mouseX * speed}px, ${mouseY * speed}px)`;
         });
-        
+
         if (codeWindow && window.innerWidth > 1024) {
+            const rot = 4 * intensity;
             codeWindow.style.transform = `
-                perspective(1000px) 
-                rotateY(${mouseX * -5}deg) 
-                rotateX(${mouseY * 5}deg)
+                perspective(1000px)
+                rotateY(${mouseX * -rot}deg)
+                rotateX(${mouseY * rot}deg)
             `;
         }
-    }, 50));
-    
-    // Scroll parallax
-    window.addEventListener('scroll', throttle(() => {
-        const scrollY = window.scrollY;
-        
-        heroGlows.forEach((glow, index) => {
-            const speed = 0.1 + (index * 0.05);
-            glow.style.transform = `translateY(${scrollY * speed}px)`;
+    }, 80);
+
+    document.addEventListener('mousemove', onMouseMove, { passive: true });
+
+    if (typeof onPerfTierReady === 'function') {
+        onPerfTierReady((tier) => {
+            enabled = tier !== 'low';
+            if (!enabled) {
+                heroGlows.forEach((glow) => { glow.style.transform = ''; });
+                if (codeWindow) codeWindow.style.transform = '';
+            }
         });
-    }, 50));
+    }
 }
 
-// Glitch effects
+// Glitch effects — high + medium
 function initGlitchEffects() {
+    if (typeof isLowPerf === 'function' ? isLowPerf() : window.PERF_TIER === 'low') {
+        return;
+    }
+
     const glitchElements = document.querySelectorAll('.glitch, .glitch-hover');
-    
-    // Random glitch effect
+    if (!glitchElements.length) return;
+
     function triggerRandomGlitch() {
+        if (window.PERF_TIER === 'low') return;
         const randomElement = glitchElements[Math.floor(Math.random() * glitchElements.length)];
         if (randomElement) {
             randomElement.classList.add('glitching');
@@ -167,6 +181,6 @@ function initGlitchEffects() {
             }, 200);
         }
     }
-    
-    setInterval(triggerRandomGlitch, 8000);
+
+    setInterval(triggerRandomGlitch, window.PERF_TIER === 'medium' ? 10000 : 12000);
 }

@@ -23,7 +23,7 @@
     width: 100%;
     height: 100%;
     background: rgba(5, 5, 8, 0.95);
-    backdrop-filter: blur(10px);
+    /* pas de backdrop-filter par défaut (coûteux sans accélération) */
 }
 
 .modal-container {
