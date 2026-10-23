@@ -140,6 +140,10 @@
     .about-stats {
         grid-template-columns: repeat(3, 1fr);
     }
+
+    .certificates-grid {
+        grid-template-columns: 1fr;
+    }
     
     /* Contact */
     .contact-layout {
@@ -645,6 +649,22 @@
     .about-tag {
         padding: var(--space-xs) var(--space-sm);
         font-size: 0.7rem;
+    }
+
+    .about-certificates {
+        margin-top: var(--space-3xl);
+    }
+
+    .certificate-info {
+        padding: var(--space-md);
+    }
+
+    .certificate-name {
+        font-size: 0.9rem;
+    }
+
+    .cert-thumb-link {
+        max-width: 100%;
     }
     
     .interactive-terminal {

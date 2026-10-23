@@ -77,6 +77,9 @@ class InteractiveTerminal {
             '~/about/certifications.md': {
                 type: 'file',
                 content: `<span class="highlight">📜 Certifications & Projets notables</span><br><br>
+<span class="highlight">Exam Prep: AWS Certified Solutions Architect - Associate</span><br>
+   Coursera / Amazon Web Services - Oct. 2026<br>
+   <a href="https://coursera.org/share/d6f4bd2ce807ebd699fa4799bcd788b2" target="_blank" rel="noopener noreferrer" class="link">Voir le certificat →</a><br><br>
 <span class="highlight">Titre RNCP Niveau 6</span> - Développeur d'applications<br>
    Doranco / Nexa - 2023<br><br>
 <span class="highlight">Titre Professionnel</span> - Développeur Web et Web Mobile<br>
@@ -88,7 +91,7 @@ class InteractiveTerminal {
 <span class="cmd-name">Frontend:</span> <span class="highlight">React</span> / <span class="highlight">Next.js</span> + Tailwind CSS<br>
 <span class="cmd-name">Backend:</span> <span class="highlight">Node.js</span> + Express / <span class="highlight">Python</span> + FastAPI<br>
 <span class="cmd-name">Database:</span> <span class="highlight">PostgreSQL</span> / MongoDB / MySQL<br>
-<span class="cmd-name">DevOps:</span> Docker, Git, CI/CD<br>
+<span class="cmd-name">DevOps / Cloud:</span> Docker, Git, CI/CD, <span class="highlight">AWS</span><br>
 <span class="cmd-name">Data/IA:</span> Pandas, NumPy, TensorFlow, OpenAI API<br><br>
 <span class="tip">💡 J'aime combiner performance et expérience utilisateur !</span>`
             },
@@ -484,8 +487,8 @@ class InteractiveTerminal {
   MySQL, PostgreSQL, MongoDB, SQLite<br><br>
 <span class="cmd-name">Data Science / IA:</span><br>
   Pandas, NumPy, Matplotlib, Seaborn, TensorFlow, OpenAI API<br><br>
-<span class="cmd-name">Outils:</span><br>
-  Git, Docker, VS Code, Figma, Linux, CI/CD, Electron.js
+<span class="cmd-name">DevOps / Cloud:</span><br>
+  Git, Docker, AWS, VS Code, Figma, Linux, CI/CD, Electron.js
         `.trim());
     }
 
