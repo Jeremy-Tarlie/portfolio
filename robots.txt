@@ -3,12 +3,37 @@
 
 User-agent: *
 Allow: /
-
-# Disallow admin/private directories
 Disallow: /assets/php/
 
-# Sitemap location
-Sitemap: https://tarlie.fr/sitemap.xml
+# AI / Generative Engine crawlers (GEO)
+User-agent: GPTBot
+Allow: /
 
-# Crawl-delay (optional, for polite crawlers)
-Crawl-delay: 1
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Bytespider
+Allow: /
+
+User-agent: CCBot
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+Sitemap: https://tarlie.fr/sitemap.xml

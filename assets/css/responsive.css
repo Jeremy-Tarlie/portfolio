@@ -1,5 +1,13 @@
 /* Responsive - All breakpoints centralized */
 
+/* Empêche le zoom iOS sur focus des inputs */
+.form-input,
+.form-select,
+.form-textarea,
+.terminal-input {
+    font-size: max(16px, 1em);
+}
+
 @media (hover: none) and (pointer: coarse) {
     body,
     a,
@@ -23,6 +31,26 @@
     
     .btn-primary:active .btn-bg {
         transform: translateX(0);
+    }
+
+    /* Overlays projets visibles au tactile (pas de hover) */
+    .project-overlay {
+        opacity: 1;
+        background: linear-gradient(to top, rgba(0, 0, 0, 0.75) 0%, transparent 55%);
+        align-items: flex-end;
+        padding-bottom: var(--space-md);
+    }
+
+    .project-card:hover {
+        transform: none;
+    }
+
+    .contact-card:hover {
+        transform: none;
+    }
+
+    .skill-card:hover {
+        transform: none;
     }
 }
 
@@ -48,7 +76,7 @@
     .hero {
         flex-direction: column;
         text-align: center;
-        padding: 120px var(--space-xl) var(--space-4xl);
+        padding: max(120px, calc(env(safe-area-inset-top) + 5rem)) var(--space-xl) var(--space-4xl);
     }
     
     .hero-content {
@@ -108,6 +136,21 @@
 
     .title-decoration {
         justify-content: center;
+    }
+}
+
+/* Nav desktop trop chargée (Quitter + 5 liens + CTA) → hamburger plus tôt */
+@media (max-width: 1180px) {
+    .nav {
+        padding: var(--space-md) var(--space-lg);
+    }
+
+    .nav-links {
+        display: none;
+    }
+
+    .menu-toggle {
+        display: flex;
     }
 }
 
@@ -194,18 +237,32 @@
     }
     
     section {
-        padding: var(--space-3xl) var(--space-lg);
+        padding: var(--space-3xl) max(var(--space-lg), env(safe-area-inset-right)) var(--space-3xl) max(var(--space-lg), env(safe-area-inset-left));
     }
     
     /* Navigation */
     .nav {
-        padding: var(--space-sm) var(--space-md);
+        padding: max(var(--space-sm), env(safe-area-inset-top)) max(var(--space-md), env(safe-area-inset-right)) var(--space-sm) max(var(--space-md), env(safe-area-inset-left));
     }
     
     .nav.scrolled {
-        padding: var(--space-sm) var(--space-md);
+        padding: max(var(--space-sm), env(safe-area-inset-top)) max(var(--space-md), env(safe-area-inset-right)) var(--space-sm) max(var(--space-md), env(safe-area-inset-left));
     }
-    
+
+    .projects-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .code-window {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .code-body {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
     .mobile-menu {
         max-width: 100%;
         padding: var(--space-2xl);
@@ -476,12 +533,44 @@
 @media (max-width: 576px) {
     /* Base */
     section {
-        padding: var(--space-2xl) var(--space-md);
+        padding: var(--space-2xl) max(var(--space-md), env(safe-area-inset-right)) var(--space-2xl) max(var(--space-md), env(safe-area-inset-left));
     }
     
     /* Navigation */
     .nav {
-        padding: var(--space-xs) var(--space-sm);
+        padding: max(var(--space-xs), env(safe-area-inset-top)) max(var(--space-sm), env(safe-area-inset-right)) var(--space-xs) max(var(--space-sm), env(safe-area-inset-left));
+    }
+
+    .projects-filter {
+        display: flex;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        justify-content: flex-start;
+        gap: var(--space-xs);
+        padding-bottom: var(--space-xs);
+        margin-inline: calc(-1 * max(var(--space-md), env(safe-area-inset-left)));
+        padding-inline: max(var(--space-md), env(safe-area-inset-left));
+        scrollbar-width: none;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .projects-filter::-webkit-scrollbar {
+        display: none;
+    }
+
+    .filter-btn {
+        flex: 0 0 auto;
+        white-space: nowrap;
+    }
+
+    .skill-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .project-emoji img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
     }
     
     .logo-text {
@@ -1241,6 +1330,15 @@
     }
 }
 
+/* Ultra-wide safety: contenu centré et lisible */
+@media (min-width: 1600px) {
+    .hero,
+    section {
+        padding-left: max(var(--space-3xl), calc((100vw - 1400px) / 2));
+        padding-right: max(var(--space-3xl), calc((100vw - 1400px) / 2));
+    }
+}
+
 /* Print Styles (print) */
 @media print {
     .nav,
@@ -1255,8 +1353,13 @@
     .hero-visual,
     .scroll-indicator,
     .corner-deco,
-    .footer-bg-effects {
+    .footer-bg-effects,
+    .recruiter-gate {
         display: none !important;
+    }
+
+    .portfolio-app {
+        pointer-events: auto !important;
     }
     
     body {

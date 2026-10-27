@@ -1,0 +1,23 @@
+---
+description: Isolation stricte de l'environnement Python
+globs: ["**/*.py", "pyproject.toml", "requirements*.txt"]
+alwaysApply: false
+---
+# Python : isolation stricte
+## Interpréteur
+- .venv du projet uniquement : .venv/bin/python (Linux/macOS), .venv\Scripts\python.exe (Windows).
+- Ne suppose jamais que python/python3/pip pointent vers .venv.
+- Vérifie une fois par session : .venv/bin/python -c "import sys; print(sys.executable)".
+- uv.lock présent → « uv run » pour exécuter, jamais pip directement.
+
+## .venv absent
+Ne le crée pas. Signale-le, demande la permission. Accordée → création dans le projet uniquement.
+
+## Dépendances
+- Avant toute nouvelle dépendance : inspecte pyproject.toml, requirements*.txt, poetry.lock, uv.lock et le .venv. Réutilise l'existant.
+- ModuleNotFoundError → n'installe rien. Signale, explique, demande.
+- Autorisé → dans le projet, avec l'outil du projet : uv add / poetry add / .venv/bin/python -m pip install (+ maj requirements.txt).
+
+## Interdits absolus
+pip/pip3 global, sudo, pipx, conda, apt, brew, winget, choco ; modifier le Python système, la config globale, les variables d'env globales.
+Doute sur l'effet d'une commande → ne l'exécute pas, explique, demande.

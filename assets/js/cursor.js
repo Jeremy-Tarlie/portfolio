@@ -93,12 +93,6 @@ function initCustomCursor() {
         showNative();
     }
 
-    function applyTier(tier) {
-        // Curseur custom sur tous les tiers ; en low le follower reste léger (rAF idle)
-        void tier;
-        enable();
-    }
-
     document.addEventListener('mousemove', (e) => {
         if (!isActive) return;
         mouseX = e.clientX;
@@ -142,6 +136,28 @@ function initCustomCursor() {
         follower.style.opacity = '1';
     });
 
+    function isUniverseReady() {
+        return document.body.classList.contains('universe-entered');
+    }
+
+    function applyTier(tier) {
+        void tier;
+        if (isUniverseReady()) {
+            enable();
+        } else {
+            disable();
+        }
+    }
+
+    window.addEventListener('portfolio:universe-entered', () => {
+        applyTier(window.PERF_TIER || 'high');
+    });
+
+    window.addEventListener('portfolio:gate-returned', () => {
+        disable();
+    });
+
+    // Accueil (gate) : curseur natif. Custom uniquement après le portail.
     if (typeof onPerfTierReady === 'function') {
         onPerfTierReady(applyTier);
     } else {

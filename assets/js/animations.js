@@ -1,30 +1,4 @@
-// Preloader
-function initPreloader() {
-    const preloader = document.querySelector('.preloader');
-    const percentage = document.querySelector('.preloader-percentage');
-    let progress = 0;
-    
-    const interval = setInterval(() => {
-        progress += Math.random() * 15;
-        if (progress >= 100) {
-            progress = 100;
-            clearInterval(interval);
-            
-            setTimeout(() => {
-                document.body.classList.add('loaded');
-                
-                // Start hero animations
-                setTimeout(() => {
-                    animateHeroElements();
-                }, 300);
-            }, 500);
-        }
-        if (percentage) {
-            percentage.textContent = Math.floor(progress) + '%';
-        }
-    }, 100);
-}
-
+// Hero reveal — déclenché après entrée dans l'univers (gate.js)
 function animateHeroElements() {
     const elements = document.querySelectorAll('.hero .reveal-up');
     elements.forEach((el, index) => {
@@ -33,6 +7,8 @@ function animateHeroElements() {
         }, index * 150);
     });
 }
+
+window.animateHeroElements = animateHeroElements;
 
 // Typewriter
 function initTypewriter() {

@@ -1,6 +1,6 @@
 /* Common Section Styles */
 section {
-    padding: var(--space-5xl) var(--space-3xl);
+    padding: var(--space-3xl);
     position: relative;
     overflow-x: hidden;
 }

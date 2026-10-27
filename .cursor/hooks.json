@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "hooks": {
+    "beforeReadFile": [
+      { "command": "powershell -NoProfile -ExecutionPolicy Bypass -File .cursor/hooks/block-secrets.ps1", "failClosed": true }
+    ],
+    "beforeShellExecution": [
+      { "command": "powershell -NoProfile -ExecutionPolicy Bypass -File .cursor/hooks/guard-shell.ps1", "failClosed": true }
+    ],
+    "subagentStart": [
+      { "command": "powershell -NoProfile -ExecutionPolicy Bypass -File .cursor/hooks/guard-subagent.ps1" }
+    ],
+    "afterFileEdit": [
+      { "command": "powershell -NoProfile -ExecutionPolicy Bypass -File .cursor/hooks/format-on-edit.ps1" }
+    ],
+    "stop": [
+      { "command": "powershell -NoProfile -ExecutionPolicy Bypass -File .cursor/hooks/quality-stop.ps1", "loop_limit": 3 }
+    ],
+    "sessionStart": [
+      { "command": "powershell -NoProfile -ExecutionPolicy Bypass -File .cursor/hooks/session-init.ps1" }
+    ]
+  }
+}

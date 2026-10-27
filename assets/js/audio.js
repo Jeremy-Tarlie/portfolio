@@ -16,6 +16,8 @@ const SOUND_VOLUMES = {
 class CyberpunkAudio {
     constructor() {
         this.enabled = false;
+        /** Mute explicite de l’utilisateur pour la session (respecté à la réentrée). */
+        this.userMuted = false;
         this.audioContext = null;
         this.masterGain = null;
         this.initialized = false;
@@ -36,15 +38,58 @@ class CyberpunkAudio {
             console.warn('Web Audio API not supported');
         }
     }
+
+    /**
+     * Débloquer l’AudioContext dans le geste utilisateur (clic Entrée),
+     * avant les awaits de la transition portail.
+     */
+    prepareUniverseAudio() {
+        if (this.userMuted) return;
+
+        if (!this.initialized) {
+            this.init();
+        }
+
+        if (this.audioContext?.state === 'suspended') {
+            void this.audioContext.resume().catch(() => {});
+        }
+    }
+
+    /** Démarre le son à l’entrée dans l’univers, sauf si mute session. */
+    enableForUniverse() {
+        if (this.userMuted) return false;
+
+        if (!this.initialized) {
+            this.init();
+        }
+
+        this.enabled = true;
+
+        if (this.audioContext?.state === 'suspended') {
+            void this.audioContext.resume().catch(() => {});
+        }
+
+        if (!this.ambientPlaying) {
+            this.startAmbient();
+        }
+
+        return true;
+    }
+
+    /** Coupe l’ambiance au retour gate, sans forcer le mute. */
+    pauseForGate() {
+        this.stopAmbient();
+    }
     
     toggle() {
         if (!this.initialized) {
             this.init();
         }
         this.enabled = !this.enabled;
+        this.userMuted = !this.enabled;
         
         if (this.enabled && this.audioContext?.state === 'suspended') {
-            this.audioContext.resume();
+            void this.audioContext.resume().catch(() => {});
         }
         
         return this.enabled;
@@ -214,6 +259,12 @@ class CyberpunkAudio {
     // Lofi music
     startAmbient() {
         if (!this.enabled || !this.audioContext || this.ambientPlaying) return;
+
+        // Coupe net un fade en cours pour éviter deux ambiances empilées.
+        if (typeof this.flushAmbientStop === 'function') {
+            this.flushAmbientStop();
+        }
+
         this.ambientPlaying = true;
         
         // BPM
@@ -308,8 +359,6 @@ class CyberpunkAudio {
                 this.playLofiMelody();
             }
         }, this.beatInterval * 2);
-        
-        console.log('🎧 Lofi hip-hop started ~ chill vibes ☕');
     }
     
     playLofiChord() {
@@ -459,27 +508,58 @@ class CyberpunkAudio {
     }
     
     stopAmbient() {
-        if (this.ambientPlaying) {
-            this.ambientMaster.gain.linearRampToValueAtTime(0, this.audioContext.currentTime + 2);
-            
-            clearInterval(this.chordInterval);
-            clearInterval(this.bassInterval);
-            clearInterval(this.kickInterval);
-            clearInterval(this.hihatInterval);
-            clearInterval(this.melodyInterval);
-            
-            setTimeout(() => {
-                this.chordOscillators?.forEach(osc => {
-                    try { osc.stop(); } catch(e) {}
-                });
-                this.chordOscillators = [];
-                
-                try { this.vinylNoise?.stop(); } catch(e) {}
-                
-                this.ambientPlaying = false;
-                console.log('🔇 Lofi music stopped');
-            }, 2000);
+        if (!this.ambientPlaying && !this.ambientMaster) return;
+
+        this.ambientPlaying = false;
+
+        clearInterval(this.chordInterval);
+        clearInterval(this.bassInterval);
+        clearInterval(this.kickInterval);
+        clearInterval(this.hihatInterval);
+        clearInterval(this.melodyInterval);
+        this.chordInterval = null;
+        this.bassInterval = null;
+        this.kickInterval = null;
+        this.hihatInterval = null;
+        this.melodyInterval = null;
+
+        if (typeof this.flushAmbientStop === 'function') {
+            this.flushAmbientStop();
         }
+
+        const master = this.ambientMaster;
+        const chords = this.chordOscillators || [];
+        const vinyl = this.vinylNoise;
+        this.chordOscillators = [];
+        this.vinylNoise = null;
+        this.ambientMaster = null;
+
+        const now = this.audioContext?.currentTime ?? 0;
+
+        if (master && this.audioContext) {
+            try {
+                master.gain.cancelScheduledValues(now);
+                master.gain.setValueAtTime(master.gain.value, now);
+                master.gain.linearRampToValueAtTime(0, now + 2);
+            } catch (e) {
+                /* ignore */
+            }
+        }
+
+        const finalize = () => {
+            chords.forEach((osc) => {
+                try { osc.stop(); } catch (e) { /* already stopped */ }
+            });
+            try { vinyl?.stop(); } catch (e) { /* already stopped */ }
+            if (this.ambientStopTimer) {
+                clearTimeout(this.ambientStopTimer);
+                this.ambientStopTimer = null;
+            }
+            this.flushAmbientStop = null;
+        };
+
+        this.flushAmbientStop = finalize;
+        this.ambientStopTimer = setTimeout(finalize, 2000);
     }
     
     createNoise(duration) {
@@ -500,23 +580,48 @@ class CyberpunkAudio {
 
 const cyberpunkAudio = new CyberpunkAudio();
 
+function syncSoundToggleIcon(enabled) {
+    const soundToggle = document.querySelector('.sound-toggle');
+    if (!soundToggle) return;
+    const icon = soundToggle.querySelector('.sound-icon');
+    if (icon) {
+        icon.textContent = enabled ? '🔊' : '🔇';
+    }
+    soundToggle.setAttribute('aria-pressed', enabled ? 'true' : 'false');
+}
+
+function bindUniverseAudioLifecycle() {
+    window.addEventListener('portfolio:universe-entered', () => {
+        const enabled = cyberpunkAudio.enableForUniverse();
+        if (enabled) {
+            syncSoundToggleIcon(true);
+        }
+    });
+
+    window.addEventListener('portfolio:gate-returned', () => {
+        cyberpunkAudio.pauseForGate();
+    });
+}
+
 // Toggle son
 function initSoundToggle() {
     const soundToggle = document.querySelector('.sound-toggle');
-    if (!soundToggle) return;
-    
-    soundToggle.addEventListener('click', () => {
-        const enabled = cyberpunkAudio.toggle();
-        soundToggle.querySelector('.sound-icon').textContent = enabled ? '🔊' : '🔇';
-        
-        if (enabled) {
-            cyberpunkAudio.playSuccess();
-            setTimeout(() => cyberpunkAudio.startAmbient(), 500);
-        } else {
-            cyberpunkAudio.stopAmbient();
-        }
-    });
-    
+    if (soundToggle) {
+        soundToggle.setAttribute('aria-pressed', 'false');
+        soundToggle.addEventListener('click', () => {
+            const enabled = cyberpunkAudio.toggle();
+            syncSoundToggleIcon(enabled);
+
+            if (enabled) {
+                cyberpunkAudio.playSuccess();
+                setTimeout(() => cyberpunkAudio.startAmbient(), 500);
+            } else {
+                cyberpunkAudio.stopAmbient();
+            }
+        });
+    }
+
+    bindUniverseAudioLifecycle();
     initSoundEffects();
 }
 

@@ -1,0 +1,10 @@
+---
+description: Gestion des erreurs et logs
+alwaysApply: true
+---
+# Erreurs et logs
+- Jamais de catch vide ni d'erreur avalée. Distingue erreur attendue (gérée) et bug (remonté).
+- Messages d'erreur sans fuite d'info sensible (pas de stack trace brute côté client, pas de secret).
+- Codes HTTP corrects côté API. Erreurs typées plutôt que strings.
+- Logs structurés (JSON), niveaux cohérents. JAMAIS de donnée personnelle ni de secret dans un log.
+- Pas de console.log de debug laissé dans le code livré.

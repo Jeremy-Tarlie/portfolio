@@ -582,8 +582,8 @@
 /* Back to Top Button */
 .back-to-top {
     position: fixed;
-    bottom: var(--space-xl);
-    right: var(--space-xl);
+    bottom: max(var(--space-xl), env(safe-area-inset-bottom));
+    right: max(var(--space-xl), env(safe-area-inset-right));
     width: 56px;
     height: 56px;
     display: flex;

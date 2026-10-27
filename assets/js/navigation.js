@@ -1,14 +1,18 @@
 // Navigation
 function initNavigation() {
     const nav = document.querySelector('.nav');
+    if (!nav) return;
+
     const navLinks = document.querySelectorAll('.nav-link, .mobile-link');
     const sections = document.querySelectorAll('section');
     
     // Smooth scroll for nav links
     navLinks.forEach(link => {
         link.addEventListener('click', (e) => {
-            e.preventDefault();
             const targetId = link.getAttribute('href');
+            if (!targetId || !targetId.startsWith('#')) return;
+
+            e.preventDefault();
             const targetSection = document.querySelector(targetId);
             
             if (targetSection) {
@@ -21,9 +25,13 @@ function initNavigation() {
                 });
                 
                 // Close mobile menu if open
-                document.querySelector('.mobile-menu')?.classList.remove('active');
-                document.querySelector('.menu-toggle')?.classList.remove('active');
+                const mobileMenu = document.querySelector('.mobile-menu');
+                const menuToggle = document.querySelector('.menu-toggle');
+                mobileMenu?.classList.remove('active');
+                menuToggle?.classList.remove('active');
                 document.body.classList.remove('no-scroll');
+                menuToggle?.setAttribute('aria-expanded', 'false');
+                menuToggle?.setAttribute('aria-label', 'Ouvrir le menu de navigation');
             }
         });
     });
@@ -73,10 +81,20 @@ function initMobileMenu() {
     
     if (!menuToggle || !mobileMenu) return;
     
+    const syncMenuState = () => {
+        const isOpen = mobileMenu.classList.contains('active');
+        menuToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+        menuToggle.setAttribute(
+            'aria-label',
+            isOpen ? 'Fermer le menu de navigation' : 'Ouvrir le menu de navigation'
+        );
+    };
+
     menuToggle.addEventListener('click', () => {
         menuToggle.classList.toggle('active');
         mobileMenu.classList.toggle('active');
         document.body.classList.toggle('no-scroll');
+        syncMenuState();
     });
     
     // Close on escape key
@@ -85,6 +103,7 @@ function initMobileMenu() {
             menuToggle.classList.remove('active');
             mobileMenu.classList.remove('active');
             document.body.classList.remove('no-scroll');
+            syncMenuState();
         }
     });
 }
@@ -143,3 +162,8 @@ function initKeyboardNav() {
         }
     });
 }
+
+window.initNavigation = initNavigation;
+window.initMobileMenu = initMobileMenu;
+window.initBackToTop = initBackToTop;
+window.initKeyboardNav = initKeyboardNav;

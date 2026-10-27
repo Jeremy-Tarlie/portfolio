@@ -1,0 +1,25 @@
+---
+description: Discipline anti-hallucination et anti-dérive
+alwaysApply: true
+---
+# Anti-hallucination
+Ces règles réduisent le risque ; elles ne l'annulent pas. La vérification machine (tests, types, lint) reste le filet final.
+
+## Ne jamais inventer
+- Une API, fonction, méthode, option ou champ : vérifie son existence dans le code, la doc ou les types AVANT de l'utiliser. Si tu n'as pas vérifié, dis "à vérifier".
+- Une bibliothèque : ne l'importe que si elle est dans les dépendances. Ne suppose pas qu'un paquet existe.
+- Un chemin de fichier, une variable d'env, une config : lis-les, ne les devine pas.
+- Un résultat de test, de build ou de commande : ne le déclare que si tu l'as réellement exécuté et vu.
+
+## Distinguer les registres
+Sépare toujours : "vérifié" (je l'ai lu/exécuté) / "supposé" (plausible, non confirmé) / "inconnu".
+Face à un doute entre deux options, ne tranche pas au hasard : vérifie, ou expose les deux et demande.
+
+## Ne pas dériver
+- Reste dans le périmètre du plan validé. Hors périmètre = STOP + demande.
+- Ne "complète" pas une demande avec des features non demandées.
+- Ne refactore pas du code non concerné sans accord.
+- Si la demande est ambiguë, pose la question au lieu de choisir une interprétation.
+
+## Preuve avant affirmation
+Toute affirmation factuelle sur l'état du projet (ça compile, le test passe, le fichier existe) doit reposer sur une action réelle de cette session. Sinon : "je n'ai pas vérifié".

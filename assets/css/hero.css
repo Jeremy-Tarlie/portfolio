@@ -1,6 +1,7 @@
 /* Hero Section */
 .hero {
     min-height: 100vh;
+    min-height: 100dvh;
     display: flex;
     align-items: center;
     padding: var(--space-5xl) var(--space-3xl);
@@ -74,9 +75,23 @@
     50% { opacity: 0.4; transform: translate(-50%, -50%) scale(1.1); }
 }
 
+.medium-perf .hero-glow {
+    animation-duration: 12s;
+    opacity: 0.32;
+}
+
+.medium-perf .glow-3 {
+    display: none;
+}
+
 .low-perf .hero-glow {
     animation: none !important;
     opacity: 0.25;
+}
+
+.low-perf .glow-2,
+.low-perf .glow-3 {
+    display: none;
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -91,6 +106,12 @@
     max-width: 700px;
     z-index: 10;
     position: relative;
+    min-width: 0;
+}
+
+.hero-description strong {
+    color: var(--text-primary);
+    font-weight: 600;
 }
 
 /* Hero Badge */
@@ -327,6 +348,8 @@
     align-items: center;
     position: relative;
     z-index: 10;
+    min-width: 0;
+    max-width: 100%;
 }
 
 .visual-container {

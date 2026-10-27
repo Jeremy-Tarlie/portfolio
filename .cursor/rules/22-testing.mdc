@@ -1,0 +1,27 @@
+---
+description: Stratégie de tests obligatoire (pyramide)
+alwaysApply: true
+---
+# Tests obligatoires
+Tout changement de comportement s'accompagne de tests. Respecte la pyramide — pas « tout en e2e ».
+
+## Unitaires (majorité)
+- Chaque fonction/méthode avec logique non triviale : cas nominal, cas limites, cas d'erreur.
+- Rapides, isolés, sans I/O réel (mocke DB/réseau/FS).
+- Un comportement = un test lisible. Nom de test = ce qui est vérifié.
+
+## Intégration (frontières)
+- Points de contact réels : routes API, requêtes DB, intégrations de services.
+- Base de test dédiée (jamais la vraie). État réinitialisé entre les tests.
+
+## E2E (parcours critiques UNIQUEMENT)
+- Seulement les parcours à forte valeur : auth/login, paiement, action métier principale, inscription.
+- Pas d'e2e pour de la logique couverte en unitaire. Si tu hésites, c'est non.
+
+## Règles communes
+- Pas de test qui teste l'implémentation (détails internes) : teste le comportement observable.
+- Pas de test flaky toléré : si un test est instable, corrige-le ou isole-le, ne le relance pas en boucle.
+- Pas de snapshot géant opaque comme seule assertion.
+- Couvre le bug AVANT de le corriger (test de régression qui échoue, puis le fix).
+- Respecte le framework déjà présent (Vitest/Jest/Pytest…). N'en introduis pas un nouveau sans accord.
+- Si un comportement n'est pas testable en l'état, dis-le au lieu d'écrire un test factice.

@@ -1,0 +1,25 @@
+---
+description: Qualité — lint, format, types, tests toujours verts
+alwaysApply: true
+---
+# Portail qualité
+Une tâche n'est PAS terminée tant que tout n'est pas vert. Lance les outils déjà configurés dans le projet, sans rien installer.
+
+## Doivent passer avant de déclarer « fini »
+- Lint : ESLint (JS/TS) / Ruff (Python) — zéro erreur.
+- Format : Prettier (JS/TS) / Ruff format (Python) — aucun fichier non formaté.
+- Types : tsc --noEmit (TS) / mypy ou pyright si présent (Python) — zéro erreur.
+- Tests : la suite passe en entier.
+
+## Interdits pour « faire passer » artificiellement
+- eslint-disable, @ts-ignore, @ts-expect-error, # noqa, # type: ignore, skip/xfail de tests, sans mon accord explicite.
+- Supprimer ou affaiblir une règle de lint/tsconfig/ruff pour masquer une erreur.
+- Baisser le seuil de couverture pour cacher du code non testé.
+
+## Si ça ne passe pas après des essais raisonnables
+Arrête-toi. Rapporte précisément ce qui échoue (sortie exacte de l'outil, fichier:ligne) et ce que tu as tenté. Ne masque jamais, ne contourne jamais en silence.
+
+## Commandes à privilégier (détecte celles du projet)
+- Python (uv) : uv run ruff check . && uv run ruff format --check . && uv run pytest
+- Python (venv) : .venv/bin/ruff check . && .venv/bin/pytest
+- JS/TS : le script du package.json (lint, typecheck, test). Ne devine pas : lis package.json.

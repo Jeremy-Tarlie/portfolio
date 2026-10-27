@@ -58,9 +58,22 @@
     border-color: var(--neon-pink);
 }
 
-/* Curseur natif quand custom désactivé (mobile / no-custom) */
-html.no-custom-cursor {
+/* Accueil gate : pas de curseur custom (natif jusqu’au passage du portail) */
+body.gate-locked .cursor,
+body.gate-locked .cursor-follower {
+    display: none !important;
+    opacity: 0 !important;
+}
+
+/* Curseur natif quand custom désactivé (mobile / no-custom / gate) */
+html.no-custom-cursor,
+html.no-custom-cursor body {
     cursor: auto;
+}
+
+html.no-custom-cursor a,
+html.no-custom-cursor button {
+    cursor: pointer;
 }
 
 html:not(.no-custom-cursor).low-perf,

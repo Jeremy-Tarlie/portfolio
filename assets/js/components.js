@@ -1,9 +1,12 @@
 function initCounters() {
-    const years = getYearsOfExperience('2023-09-01');
+    const defaultYears = getYearsOfExperience('2023-09-01');
     const counters = document.querySelectorAll('.counter');
 
     document.querySelectorAll('[data-experience-years]').forEach((el) => {
-        el.textContent = String(years);
+        const since = el.getAttribute('data-experience-since');
+        el.textContent = String(
+            since ? getYearsOfExperience(since) : defaultYears
+        );
     });
 
     counters.forEach((counter) => {
@@ -98,71 +101,126 @@ function initMagneticButtons() {
     });
 }
 
-function initContactForm() {
-    const form = document.getElementById('contactForm');
-    if (!form) return;
+function isValidEmail(email) {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+}
 
-    const csrfTokenInput = document.getElementById('csrf_token');
-    const timestampInput = document.getElementById('_timestamp');
-    const messageInput = document.getElementById('message');
-    const charCount = document.getElementById('charCount');
+function showFormNotification(form, message, type) {
+    const host = form.parentElement || form;
+    const existing = host.querySelector('.form-notification');
+    if (existing) existing.remove();
 
-    fetchCSRFToken();
+    const notif = document.createElement('div');
+    notif.className = `form-notification ${type}`;
+    notif.innerHTML = `
+        <span class="notif-icon">${type === 'success' ? '✓' : '✕'}</span>
+        <span class="notif-message">${message}</span>
+    `;
+
+    host.appendChild(notif);
+    setTimeout(() => notif.classList.add('visible'), 10);
+    setTimeout(() => {
+        notif.classList.remove('visible');
+        setTimeout(() => notif.remove(), 300);
+    }, 5000);
+}
+
+async function fetchCSRFTokenForForm(form) {
+    const csrfTokenInput = form.querySelector('[name="csrf_token"]');
+    if (window.location.protocol === 'file:') return;
+
+    try {
+        const response = await fetch('assets/php/contact.php?csrf=1', {
+            credentials: 'same-origin'
+        });
+        if (!response.ok) return;
+        const data = await response.json();
+        if (csrfTokenInput && data.csrf_token) {
+            csrfTokenInput.value = data.csrf_token;
+        }
+    } catch (error) {
+        if (window.location.protocol.startsWith('http')) {
+            console.warn('Impossible de récupérer le token CSRF:', error);
+        }
+    }
+}
+
+function bindContactForm(form) {
+    const timestampInput = form.querySelector('[name="_timestamp"]');
+    const messageInput = form.querySelector('[name="message"]');
+    const charCount = form.querySelector('[data-char-count], #charCount');
+    const submitBtn = form.querySelector('[type="submit"]');
+
+    fetchCSRFTokenForForm(form);
 
     if (timestampInput) {
-        timestampInput.value = Math.floor(Date.now() / 1000);
+        timestampInput.value = String(Math.floor(Date.now() / 1000));
     }
 
     if (messageInput && charCount) {
         messageInput.addEventListener('input', () => {
             const count = messageInput.value.length;
-            charCount.textContent = count;
+            charCount.textContent = String(count);
 
+            const host = charCount.parentElement;
+            if (!host) return;
             if (count > 450) {
-                charCount.parentElement.style.color = count > 490 ? '#ff3366' : '#ffd700';
+                host.style.color = count > 490 ? '#ff3366' : '#ffd700';
             } else {
-                charCount.parentElement.style.color = '';
+                host.style.color = '';
             }
         });
-    }
-
-    async function fetchCSRFToken() {
-        try {
-            const response = await fetch('assets/php/contact.php?csrf=1');
-            const data = await response.json();
-            if (csrfTokenInput && data.csrf_token) {
-                csrfTokenInput.value = data.csrf_token;
-            }
-        } catch (error) {
-            console.warn('Impossible de récupérer le token CSRF:', error);
-        }
     }
 
     form.addEventListener('submit', async (e) => {
         e.preventDefault();
 
-        const submitBtn = form.querySelector('.btn-submit');
-        const name = form.querySelector('#name').value.trim();
-        const email = form.querySelector('#email').value.trim();
-        const message = form.querySelector('#message').value.trim();
+        const nameInput = form.querySelector('[name="name"]');
+        const emailInput = form.querySelector('[name="email"]');
+        const messageField = form.querySelector('[name="message"]');
+
+        const name = nameInput ? nameInput.value.trim() : '';
+        const email = emailInput ? emailInput.value.trim() : '';
+        const message = messageField ? messageField.value.trim() : '';
 
         if (name.length < 2) {
-            showNotification('Le nom doit contenir au moins 2 caractères', 'error');
+            showFormNotification(form, 'Le nom doit contenir au moins 2 caractères', 'error');
             return;
         }
 
         if (!isValidEmail(email)) {
-            showNotification('Veuillez entrer une adresse email valide', 'error');
+            showFormNotification(form, 'Veuillez entrer une adresse email valide', 'error');
             return;
         }
 
         if (message.length < 10) {
-            showNotification('Le message doit contenir au moins 10 caractères', 'error');
+            showFormNotification(form, 'Le message doit contenir au moins 10 caractères', 'error');
             return;
         }
 
-        submitBtn.classList.add('loading');
-        submitBtn.disabled = true;
+        const consentInput = form.querySelector('[name="privacy_consent"]');
+        if (consentInput && !consentInput.checked) {
+            showFormNotification(form, 'Veuillez accepter le traitement de vos données pour envoyer le message', 'error');
+            return;
+        }
+
+        if (submitBtn) {
+            submitBtn.classList.add('loading');
+            submitBtn.disabled = true;
+        }
+
+        if (window.location.protocol === 'file:') {
+            if (submitBtn) {
+                submitBtn.classList.remove('loading');
+                submitBtn.disabled = false;
+            }
+            showFormNotification(
+                form,
+                'Le formulaire nécessite un serveur local (http). Ouvre le site via Live Server ou php -S.',
+                'error'
+            );
+            return;
+        }
 
         try {
             const response = await fetch('assets/php/contact.php', {
@@ -177,8 +235,10 @@ function initContactForm() {
                 throw new Error(result.message || 'Une erreur est survenue');
             }
 
-            submitBtn.classList.remove('loading');
-            submitBtn.classList.add('success');
+            if (submitBtn) {
+                submitBtn.classList.remove('loading');
+                submitBtn.classList.add('success');
+            }
 
             if (typeof cyberpunkAudio !== 'undefined') {
                 cyberpunkAudio.playSuccess();
@@ -186,66 +246,61 @@ function initContactForm() {
 
             form.reset();
             if (charCount) charCount.textContent = '0';
-            fetchCSRFToken();
+            fetchCSRFTokenForForm(form);
 
             if (timestampInput) {
-                timestampInput.value = Math.floor(Date.now() / 1000);
+                timestampInput.value = String(Math.floor(Date.now() / 1000));
             }
 
-            showNotification(result.message, 'success');
+            showFormNotification(form, result.message, 'success');
 
             setTimeout(() => {
-                submitBtn.classList.remove('success');
-                submitBtn.disabled = false;
+                if (submitBtn) {
+                    submitBtn.classList.remove('success');
+                    submitBtn.disabled = false;
+                }
             }, 3000);
         } catch (error) {
-            submitBtn.classList.remove('loading');
-            submitBtn.disabled = false;
+            if (submitBtn) {
+                submitBtn.classList.remove('loading');
+                submitBtn.disabled = false;
+            }
 
-            if (error.message.includes('Session') || error.message.includes('CSRF')) {
-                fetchCSRFToken();
+            const errMessage = error instanceof Error ? error.message : 'Une erreur est survenue';
+
+            if (errMessage.includes('Session') || errMessage.includes('CSRF')) {
+                fetchCSRFTokenForForm(form);
             }
 
             if (typeof cyberpunkAudio !== 'undefined') {
                 cyberpunkAudio.playError();
             }
 
-            showNotification(error.message, 'error');
+            showFormNotification(form, errMessage, 'error');
         }
     });
 
-    function isValidEmail(email) {
-        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-    }
-
-    function showNotification(message, type) {
-        const existing = document.querySelector('.form-notification');
-        if (existing) existing.remove();
-
-        const notif = document.createElement('div');
-        notif.className = `form-notification ${type}`;
-        notif.innerHTML = `
-            <span class="notif-icon">${type === 'success' ? '✓' : '✕'}</span>
-            <span class="notif-message">${message}</span>
-        `;
-
-        form.parentElement.appendChild(notif);
-        setTimeout(() => notif.classList.add('visible'), 10);
-        setTimeout(() => {
-            notif.classList.remove('visible');
-            setTimeout(() => notif.remove(), 300);
-        }, 5000);
-    }
-
-    form.querySelectorAll('.form-input').forEach((input) => {
+    form.querySelectorAll('.form-input, .gate-form-group input, .gate-form-group textarea, .gate-form-group select').forEach((input) => {
         input.addEventListener('focus', () => {
-            input.parentElement.classList.add('focused');
+            if (input.parentElement) input.parentElement.classList.add('focused');
         });
 
         input.addEventListener('blur', () => {
-            if (!input.value) {
+            if (!input.value && input.parentElement) {
                 input.parentElement.classList.remove('focused');
             }
         });
     });
 }
+
+function initContactForm() {
+    const forms = document.querySelectorAll('form[data-contact-form]');
+    if (!forms.length) {
+        const legacy = document.getElementById('contactForm');
+        if (legacy) bindContactForm(legacy);
+        return;
+    }
+    forms.forEach((form) => bindContactForm(form));
+}
+
+

@@ -1,30 +1,41 @@
+function callInit(name) {
+    const fn = window[name];
+    if (typeof fn !== 'function') {
+        console.error(`[main] ${name} is not defined — script manquant ou en erreur`);
+        return;
+    }
+    fn();
+}
+
 document.addEventListener('DOMContentLoaded', () => {
+    // Gate recruteur → portail → univers
+    callInit('initRecruiterGate');
+
     // Core UI
-    initPreloader();
-    initCustomCursor();
-    initParticles();
-    
+    callInit('initCustomCursor');
+    callInit('initParticles');
+
     // Navigation
-    initNavigation();
-    initMobileMenu();
-    initBackToTop();
-    initKeyboardNav();
-    
+    callInit('initNavigation');
+    callInit('initMobileMenu');
+    callInit('initBackToTop');
+    callInit('initKeyboardNav');
+
     // Animations
-    initTypewriter();
-    initScrollAnimations();
-    initParallaxEffects();
-    initGlitchEffects();
-    
+    callInit('initTypewriter');
+    callInit('initScrollAnimations');
+    callInit('initParallaxEffects');
+    callInit('initGlitchEffects');
+
     // Components
-    initCounters();
-    initSkillBars();
-    initProjectFilters();
-    initMagneticButtons();
-    initContactForm();
-    
+    callInit('initCounters');
+    callInit('initSkillBars');
+    callInit('initProjectFilters');
+    callInit('initMagneticButtons');
+    callInit('initContactForm');
+
     // Audio
-    initSoundToggle();
+    callInit('initSoundToggle');
 });
 
 // Perf monitoring

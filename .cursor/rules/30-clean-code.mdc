@@ -1,0 +1,14 @@
+---
+description: Critères de code propre
+alwaysApply: true
+---
+# Code propre
+- Une fonction = une responsabilité. Noms explicites, pas d'abréviations obscures.
+- Pas de code mort, pas de code commenté, pas de console.log de debug laissé.
+- Pas de duplication : factorise à la 2e répétition réelle, pas avant (évite l'abstraction prématurée).
+- Gestion d'erreur explicite : jamais de catch vide, jamais d'erreur avalée en silence.
+- Respecte conventions, structure et linter déjà présents. N'introduis pas un nouveau style.
+- Pas de nouvelle dépendance si le projet ou la lib standard couvre déjà le besoin.
+- Commentaires : le POURQUOI, pas le quoi.
+- Changement de comportement = test associé si le projet a des tests.
+- Fonctions courtes ; si une fonction dépasse ~40 lignes ou 3 niveaux d'imbrication, questionne-la.

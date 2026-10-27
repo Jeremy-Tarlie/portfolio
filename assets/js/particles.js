@@ -77,8 +77,8 @@ function initParticles() {
     function createParticles() {
         particles = [];
         const area = window.innerWidth * window.innerHeight;
-        const maxCount = perfTier === 'low' ? 40 : perfTier === 'medium' ? 40 : 55;
-        const density = perfTier === 'low' ? 22000 : perfTier === 'medium' ? 20000 : 18000;
+        const maxCount = perfTier === 'low' ? 22 : perfTier === 'medium' ? 32 : 55;
+        const density = perfTier === 'low' ? 28000 : perfTier === 'medium' ? 24000 : 18000;
         const particleCount = Math.min(maxCount, Math.floor(area / density));
         for (let i = 0; i < particleCount; i++) {
             particles.push(new Particle());

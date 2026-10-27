@@ -1,10 +1,9 @@
 /* Projects Modal */
 .project-modal {
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
+    inset: 0;
+    width: 100%;
+    height: 100dvh;
     z-index: 99999;
     opacity: 0;
     visibility: hidden;
@@ -121,10 +120,9 @@
 /* Fullscreen Image Zoom */
 .image-zoom-overlay {
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
+    inset: 0;
+    width: 100%;
+    height: 100dvh;
     background: rgba(0, 0, 0, 0.95);
     z-index: 1000000;
     display: flex;

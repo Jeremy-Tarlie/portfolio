@@ -331,6 +331,34 @@
     background: rgba(255, 51, 102, 0.2);
 }
 
+.form-privacy {
+    margin-top: var(--space-sm);
+}
+
+.form-consent {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-sm);
+    font-size: 0.85rem;
+    line-height: 1.45;
+    color: var(--text-secondary);
+    cursor: pointer;
+}
+
+.form-consent input {
+    margin-top: 0.2rem;
+    flex-shrink: 0;
+    accent-color: var(--neon-cyan);
+}
+
+.form-privacy-note {
+    margin: var(--space-sm) 0 0;
+    font-size: 0.75rem;
+    line-height: 1.5;
+    color: var(--text-muted, var(--text-secondary));
+    opacity: 0.85;
+}
+
 .notif-message {
     flex: 1;
 }

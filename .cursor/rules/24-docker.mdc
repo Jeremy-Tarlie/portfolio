@@ -1,0 +1,26 @@
+---
+description: Conteneurisation Docker
+globs: ["**/Dockerfile", "**/*.dockerfile", "**/docker-compose*.yml", "**/compose*.yml", "**/.dockerignore"]
+alwaysApply: false
+---
+# Docker
+## Image
+- Multi-stage build : étape de build séparée de l'étape runtime. L'image finale ne contient que le nécessaire.
+- Image de base précise et minimale (tag versionné, jamais latest ; -slim ou -alpine quand adapté).
+- Utilisateur non-root dans l'image finale (USER app). Jamais root au runtime.
+- Ordre des layers optimisé pour le cache : dépendances copiées et installées AVANT le code source.
+- .dockerignore présent et sérieux (node_modules, .git, .env, .venv, dist, coverage…).
+- Aucun secret dans l'image ni dans un layer (pas de COPY .env, pas d'ARG secret). Secrets via variables d'env au runtime ou build secrets.
+- HEALTHCHECK défini. Port exposé explicite. CMD/ENTRYPOINT clairs.
+- Épingle les versions de dépendances système quand c'est critique.
+
+## Compose
+- Un service par responsabilité. Réseaux et volumes nommés explicitement.
+- Variables sensibles via env_file (.env non commité) ou secrets, jamais en dur dans le yml.
+- depends_on avec condition de santé quand l'ordre compte.
+- Volumes pour la persistance des données (DB), bind mounts seulement en dev.
+
+## Interdits
+- Builder ou lancer un conteneur qui monte des secrets en clair dans l'image.
+- docker system prune, docker volume rm, suppression de volumes de données sans mon accord explicite.
+- Toute commande docker destructrice sur des ressources existantes sans confirmation.

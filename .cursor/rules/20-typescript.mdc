@@ -1,0 +1,13 @@
+---
+description: TypeScript strict
+globs: ["**/*.ts", "**/*.tsx"]
+alwaysApply: false
+---
+# TypeScript strict
+- strict: true. Ne jamais l'affaiblir. Pas de @ts-ignore / @ts-expect-error / eslint-disable sans mon accord.
+- Interdit : any (explicite ou implicite — active noImplicitAny).
+- unknown autorisé UNIQUEMENT aux frontières (JSON.parse, réseau, catch, entrées utilisateur, données externes) et réduit immédiatement par type guard ou schéma (lib de validation déjà présente ; sinon demande).
+- Interdit : assertions « as X » (sauf « as const ») et opérateur non-null « ! ». Préfère le narrowing.
+- Types de retour explicites sur les fonctions exportées.
+- Unions discriminées plutôt que booléens multiples ou champs optionnels qui s'excluent.
+- Pas de type trop large (object, Function, any[]). Préfère des types précis.

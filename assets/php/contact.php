@@ -111,9 +111,13 @@ $name = sanitizeInput($_POST['name'] ?? '', 100);
 $email = filter_var(trim($_POST['email'] ?? ''), FILTER_SANITIZE_EMAIL);
 $subject = sanitizeInput($_POST['subject'] ?? '', 50);
 $message = sanitizeInput($_POST['message'] ?? '', 5000);
+$privacyConsent = isset($_POST['privacy_consent']) && ($_POST['privacy_consent'] === '1' || $_POST['privacy_consent'] === 'on');
 
 $errors = [];
 
+if (!$privacyConsent) {
+    $errors[] = 'Le consentement au traitement des données est requis';
+}
 if (empty($name) || strlen($name) < 2) $errors[] = 'Le nom est requis (minimum 2 caractères)';
 if (empty($email) || !filter_var($email, FILTER_VALIDATE_EMAIL)) $errors[] = 'Une adresse email valide est requise';
 
@@ -148,6 +152,7 @@ $email_body_text .= "Nom: $name\n";
 $email_body_text .= "Email: $email\n";
 $email_body_text .= "Sujet: $subject_text\n";
 $email_body_text .= "Message:\n$message\n\n";
+$email_body_text .= "Consentement RGPD: oui\n";
 $email_body_text .= "---\nIP: $clientIP\n";
 $email_body_text .= "Date: " . date('d/m/Y à H:i:s');
 
@@ -230,7 +235,7 @@ $mail_sent = @mail(TO_EMAIL, $email_subject, $email_body, implode("\r\n", $heade
 
 if ($mail_sent) {
     unset($_SESSION['csrf_token'], $_SESSION['csrf_token_time']);
-    logActivity("Message sent successfully from $name <$email>", $clientIP);
+    logActivity("Message sent successfully from $name <$email> (consent=yes)", $clientIP);
     jsonResponse(true, 'Votre message a été envoyé avec succès ! Je vous répondrai dans les plus brefs délais.');
 } else {
     logActivity("Failed to send message from $name <$email>", $clientIP);

@@ -1,0 +1,10 @@
+---
+description: Conventions Git
+alwaysApply: true
+---
+# Git
+- Commits Conventional Commits (feat/fix/refactor/test/docs/chore). Sujet clair, impératif.
+- Un commit = un changement cohérent. Pas de commit fourre-tout.
+- Jamais de secret dans un commit. Jamais de --force sur une branche partagée.
+- Ne commit pas de code rouge (lint/types/tests en échec).
+- Ne crée pas de tag, ne push, ne merge sans mon accord.

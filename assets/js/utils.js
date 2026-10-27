@@ -111,12 +111,14 @@ function getHeuristicTier() {
     const cores = navigator.hardwareConcurrency || 4;
     const memory = navigator.deviceMemory || 8;
     const software = isSoftwareRenderer();
+    const coarsePointer = window.matchMedia('(hover: none) and (pointer: coarse)').matches;
+    const smallViewport = Math.min(window.innerWidth, window.innerHeight) < 700;
 
     if (reducedMotion || saveData || software || cores <= 2 || memory <= 2) {
         return 'low';
     }
-    // 4 cœurs / 4 Go : souvent OK en GPU, mais fragile sans accélération → medium
-    if (cores <= 4 && memory <= 4) {
+    // Tablettes / tactile : medium max (canvas portail + particules trop lourds sinon)
+    if (coarsePointer || (cores <= 4 && memory <= 4) || (cores <= 6 && smallViewport)) {
         return 'medium';
     }
     return 'high';

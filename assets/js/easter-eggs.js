@@ -386,6 +386,8 @@ class EasterEggs {
         let secretShown = false;
 
         window.addEventListener('scroll', () => {
+            if (document.body.classList.contains('gate-locked')) return;
+
             const scrolledToBottom = (window.innerHeight + window.scrollY) >= document.body.scrollHeight - 50;
 
             if (scrolledToBottom && !secretShown) {
@@ -445,7 +447,7 @@ class EasterEggs {
 }
 
 
-// Easter egg console
+// Easter egg console — hint affiché seulement après l'entrée dans l'univers
 window.secret = function() {
     console.clear();
     console.log('%c✓ Easter egg trouvé !', 'color: #00f0ff; font-family: monospace;');
@@ -456,7 +458,11 @@ window.secret = function() {
     return 'ok';
 };
 
-console.log(
+function showConsoleEasterEggHint() {
+    if (showConsoleEasterEggHint.shown) return;
+    showConsoleEasterEggHint.shown = true;
+
+    console.log(
 `%c╔══════════════════════════════════════════════════════════╗
 ║                                                          ║
 ║   Quelque chose dort ici, invisible à l'œil nu.          ║
@@ -477,8 +483,28 @@ console.log(
 ║                                                          ║
 ╚══════════════════════════════════════════════════════════╝`,
 'color: #00f0ff; font-family: monospace; font-size: 11px;'
-);
+    );
+}
+
+function initEasterEggsSystem() {
+    if (window.easterEggs) return;
+    window.easterEggs = new EasterEggs();
+    showConsoleEasterEggHint();
+}
 
 document.addEventListener('DOMContentLoaded', () => {
-    window.easterEggs = new EasterEggs();
+    // Déjà dans l’univers → activer tout de suite
+    if (document.body.classList.contains('universe-entered')) {
+        initEasterEggsSystem();
+        return;
+    }
+
+    // Sinon : après le clic sur le portail
+    window.addEventListener(
+        'portfolio:universe-entered',
+        () => {
+            initEasterEggsSystem();
+        },
+        { once: true }
+    );
 });
