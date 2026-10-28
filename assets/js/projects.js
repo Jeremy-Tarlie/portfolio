@@ -11,7 +11,7 @@ Ce site a été entièrement développé from scratch avec HTML, CSS et JavaScri
 
 Le design s'inspire de l'esthétique cyberpunk avec des couleurs néon, des effets de glitch et une ambiance futuriste.`,
                 tech: ['HTML5', 'CSS3', 'JavaScript', 'PHP', 'Docker'],
-                images: ['assets/img/portfolio.png'],
+                images: ['/assets/img/portfolio.png'],
                 links: {
                     demo: 'https://tarlie.fr',
                     github: 'https://github.com/Jeremy-Tarlie/portfolio'
@@ -32,7 +32,7 @@ Fonctionnalités :
 • Dashboard self-serve (mapping prix → rôle)
 • Facturation UE / RGPD`,
                 tech: ['Next.js', 'Stripe', 'Discord.js', 'Prisma', 'PostgreSQL'],
-                images: ['assets/img/discelyn.png'],
+                images: ['/assets/img/discelyn.png'],
                 links: {
                     demo: 'https://discelyn.fr/'
                 }
@@ -51,7 +51,7 @@ Fonctionnalités principales :
 • Générateur de mots de passe sécurisés
 `,
                 tech: ['React.js', 'Node.js', 'MongoDB', 'JWT', 'Electron'],
-                images: ['assets/img/codepass.png'],
+                images: ['/assets/img/codepass.png'],
                 links: {}
             },
             'cotapro': {
@@ -70,7 +70,7 @@ Fonctionnalités :
 • Statistiques et rapports
 • Sauvegarde automatique`,
                 tech: ['Electron.js', 'SQLite', 'Next.js', 'Tailwind CSS'],
-                images: ['assets/img/cotapro.png'],
+                images: ['/assets/img/cotapro.png'],
                 links: {}
             }
         };

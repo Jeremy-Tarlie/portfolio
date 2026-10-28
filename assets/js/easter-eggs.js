@@ -386,7 +386,7 @@ class EasterEggs {
         let secretShown = false;
 
         window.addEventListener('scroll', () => {
-            if (document.body.classList.contains('gate-locked')) return;
+            if (!document.body.classList.contains('universe-entered')) return;
 
             const scrolledToBottom = (window.innerHeight + window.scrollY) >= document.body.scrollHeight - 50;
 

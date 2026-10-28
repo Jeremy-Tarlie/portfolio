@@ -13,6 +13,8 @@ const SOUND_VOLUMES = {
     ambient: 1          // Ambient music
 };
 
+const AUDIO_VOLUME_STORAGE_KEY = 'portfolioAudioMasterVolume';
+
 class CyberpunkAudio {
     constructor() {
         this.enabled = false;
@@ -21,8 +23,70 @@ class CyberpunkAudio {
         this.audioContext = null;
         this.masterGain = null;
         this.initialized = false;
-        this.volumes = SOUND_VOLUMES;
+        this.volumes = { ...SOUND_VOLUMES };
         this.ambientPlaying = false;
+        this.volumes.master = this.readStoredMasterVolume();
+    }
+
+    readStoredMasterVolume() {
+        try {
+            const raw = localStorage.getItem(AUDIO_VOLUME_STORAGE_KEY);
+            if (raw === null) return SOUND_VOLUMES.master;
+            const value = Number(raw);
+            if (!Number.isFinite(value)) return SOUND_VOLUMES.master;
+            return Math.min(1, Math.max(0, value));
+        } catch (e) {
+            return SOUND_VOLUMES.master;
+        }
+    }
+
+    persistMasterVolume() {
+        try {
+            localStorage.setItem(AUDIO_VOLUME_STORAGE_KEY, String(this.volumes.master));
+        } catch (e) {
+            /* ignore quota / private mode */
+        }
+    }
+
+    /** @param {number} value 0–1 */
+    setMasterVolume(value) {
+        const next = Math.min(1, Math.max(0, Number(value)));
+        if (!Number.isFinite(next)) return this.volumes.master;
+
+        this.volumes.master = next;
+        this.persistMasterVolume();
+
+        if (!this.initialized) {
+            this.init();
+        }
+
+        if (this.masterGain && this.audioContext) {
+            const now = this.audioContext.currentTime;
+            this.masterGain.gain.cancelScheduledValues(now);
+            this.masterGain.gain.setValueAtTime(this.masterGain.gain.value, now);
+            this.masterGain.gain.linearRampToValueAtTime(next, now + 0.05);
+        }
+
+        if (next === 0) {
+            this.enabled = false;
+            this.userMuted = true;
+            this.stopAmbient();
+        } else if (this.userMuted && next > 0) {
+            this.userMuted = false;
+            this.enabled = true;
+            if (this.audioContext?.state === 'suspended') {
+                void this.audioContext.resume().catch(() => {});
+            }
+            if (!this.ambientPlaying && document.body.classList.contains('universe-entered')) {
+                this.startAmbient();
+            }
+        }
+
+        return this.volumes.master;
+    }
+
+    getMasterVolume() {
+        return this.volumes.master;
     }
     
     init() {
@@ -584,18 +648,33 @@ function syncSoundToggleIcon(enabled) {
     const soundToggle = document.querySelector('.sound-toggle');
     if (!soundToggle) return;
     const icon = soundToggle.querySelector('.sound-icon');
+    const volume = cyberpunkAudio.getMasterVolume();
     if (icon) {
-        icon.textContent = enabled ? '🔊' : '🔇';
+        if (!enabled || volume === 0) {
+            icon.textContent = '🔇';
+        } else if (volume < 0.35) {
+            icon.textContent = '🔉';
+        } else {
+            icon.textContent = '🔊';
+        }
     }
-    soundToggle.setAttribute('aria-pressed', enabled ? 'true' : 'false');
+    soundToggle.setAttribute('aria-pressed', enabled && volume > 0 ? 'true' : 'false');
+}
+
+function syncSoundVolumeSlider() {
+    const slider = document.querySelector('.sound-volume-slider');
+    if (!slider) return;
+    const percent = Math.round(cyberpunkAudio.getMasterVolume() * 100);
+    slider.value = String(percent);
+    slider.setAttribute('aria-valuenow', String(percent));
+    slider.style.setProperty('--volume-percent', `${percent}%`);
 }
 
 function bindUniverseAudioLifecycle() {
     window.addEventListener('portfolio:universe-entered', () => {
         const enabled = cyberpunkAudio.enableForUniverse();
-        if (enabled) {
-            syncSoundToggleIcon(true);
-        }
+        syncSoundToggleIcon(enabled && cyberpunkAudio.getMasterVolume() > 0);
+        syncSoundVolumeSlider();
     });
 
     window.addEventListener('portfolio:gate-returned', () => {
@@ -603,13 +682,21 @@ function bindUniverseAudioLifecycle() {
     });
 }
 
-// Toggle son
+// Toggle son + volume
 function initSoundToggle() {
     const soundToggle = document.querySelector('.sound-toggle');
+    const slider = document.querySelector('.sound-volume-slider');
+
+    syncSoundVolumeSlider();
+    syncSoundToggleIcon(false);
+
     if (soundToggle) {
-        soundToggle.setAttribute('aria-pressed', 'false');
         soundToggle.addEventListener('click', () => {
             const enabled = cyberpunkAudio.toggle();
+            if (enabled && cyberpunkAudio.getMasterVolume() === 0) {
+                cyberpunkAudio.setMasterVolume(SOUND_VOLUMES.master);
+                syncSoundVolumeSlider();
+            }
             syncSoundToggleIcon(enabled);
 
             if (enabled) {
@@ -619,6 +706,67 @@ function initSoundToggle() {
                 cyberpunkAudio.stopAmbient();
             }
         });
+    }
+
+    if (slider) {
+        const controls = document.querySelector('.sound-controls');
+        let closeTimer = 0;
+
+        const applyVolume = () => {
+            const percent = Number(slider.value);
+            const volume = Math.min(100, Math.max(0, percent)) / 100;
+            cyberpunkAudio.setMasterVolume(volume);
+            const rounded = Math.round(volume * 100);
+            slider.setAttribute('aria-valuenow', String(rounded));
+            slider.style.setProperty('--volume-percent', `${rounded}%`);
+            syncSoundToggleIcon(volume > 0 && (cyberpunkAudio.enabled || !cyberpunkAudio.userMuted));
+
+            if (volume > 0) {
+                if (!cyberpunkAudio.enabled) {
+                    cyberpunkAudio.enabled = true;
+                    cyberpunkAudio.userMuted = false;
+                }
+                if (document.body.classList.contains('universe-entered') && !cyberpunkAudio.ambientPlaying) {
+                    cyberpunkAudio.startAmbient();
+                }
+            }
+        };
+
+        const openVolume = () => {
+            if (closeTimer) {
+                window.clearTimeout(closeTimer);
+                closeTimer = 0;
+            }
+            controls?.classList.add('is-volume-open');
+        };
+
+        const scheduleCloseVolume = () => {
+            if (closeTimer) window.clearTimeout(closeTimer);
+            closeTimer = window.setTimeout(() => {
+                if (controls?.contains(document.activeElement)) return;
+                controls?.classList.remove('is-volume-open');
+                closeTimer = 0;
+            }, 180);
+        };
+
+        controls?.addEventListener('mouseenter', openVolume);
+        controls?.addEventListener('mouseleave', scheduleCloseVolume);
+        slider.addEventListener('pointerdown', openVolume);
+        slider.addEventListener('pointerup', () => {
+            /* garde ouvert un instant après le drag */
+            openVolume();
+        });
+        slider.addEventListener('focus', openVolume);
+        slider.addEventListener('blur', scheduleCloseVolume);
+        document.addEventListener('pointerdown', (event) => {
+            if (!(event.target instanceof Node)) return;
+            if (controls && !controls.contains(event.target)) {
+                controls.classList.remove('is-volume-open');
+            }
+        });
+
+        slider.addEventListener('input', applyVolume);
+        slider.addEventListener('change', applyVolume);
     }
 
     bindUniverseAudioLifecycle();

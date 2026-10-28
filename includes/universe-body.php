@@ -1,553 +1,3 @@
-<!DOCTYPE html>
-<html lang="fr">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-
-    <!-- SEO Meta Tags -->
-    <title>Jérémy Tarlié | Développeur Full Stack en France, Portfolio</title>
-    <meta name="description"
-        content="Jérémy Tarlié, développeur Full Stack en France. React, Next.js, Node.js, PHP, Python. Sites &amp; apps web de A à Z. Ouvert CDI, freelance et télétravail. Réponse sous 24h.">
-    <meta name="keywords"
-        content="développeur full stack France, développeur web CDI, freelance React, Next.js, Node.js, PHP, Python, Jérémy Tarlié, portfolio développeur, télétravail">
-    <meta name="author" content="Jérémy Tarlié">
-    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1">
-    <meta name="googlebot" content="index, follow">
-    <meta name="language" content="fr">
-    <meta name="revisit-after" content="7 days">
-    <link rel="canonical" href="https://tarlie.fr/">
-    <link rel="alternate" hreflang="fr" href="https://tarlie.fr/">
-    <link rel="alternate" hreflang="x-default" href="https://tarlie.fr/">
-
-    <!-- GEO (géolocalisation + Generative Engine Optimization) -->
-    <meta name="geo.region" content="FR">
-    <meta name="geo.placename" content="France">
-    <meta name="ICBM" content="46.603354, 1.888334">
-    <meta name="coverage" content="France">
-    <meta name="distribution" content="global">
-    <meta name="rating" content="general">
-    <meta name="format-detection" content="telephone=no">
-
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="profile">
-    <meta property="og:url" content="https://tarlie.fr/">
-    <meta property="og:title" content="Jérémy Tarlié | Développeur Full Stack en France">
-    <meta property="og:description"
-        content="Développeur Full Stack — React, Next.js, Node.js, PHP, Python. Ouvert aux opportunités CDI et freelance en France et en télétravail.">
-    <meta property="og:image" content="https://tarlie.fr/assets/img/avatar.webp">
-    <meta property="og:image:alt" content="Portrait de Jérémy Tarlié, développeur Full Stack">
-    <meta property="og:image:width" content="512">
-    <meta property="og:image:height" content="512">
-    <meta property="og:locale" content="fr_FR">
-    <meta property="og:site_name" content="Portfolio Jérémy Tarlié">
-    <meta property="profile:first_name" content="Jérémy">
-    <meta property="profile:last_name" content="Tarlié">
-
-    <!-- Twitter Cards -->
-    <meta name="twitter:card" content="summary">
-    <meta name="twitter:url" content="https://tarlie.fr/">
-    <meta name="twitter:title" content="Jérémy Tarlié | Développeur Full Stack en France">
-    <meta name="twitter:description"
-        content="Développeur Full Stack — React, Next.js, Node.js, PHP, Python. CDI &amp; freelance. France / télétravail.">
-    <meta name="twitter:image" content="https://tarlie.fr/assets/img/avatar.webp">
-    <meta name="twitter:image:alt" content="Portrait de Jérémy Tarlié, développeur Full Stack">
-
-    <!-- Favicon -->
-    <link rel="icon" type="image/png" sizes="32x32" href="assets/img/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="assets/img/favicon-16x16.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="assets/img/avatar.webp">
-    <link rel="manifest" href="site.webmanifest">
-    <meta name="theme-color" content="#0a0a0f">
-    <meta name="msapplication-TileColor" content="#00f0ff">
-    <meta name="color-scheme" content="dark">
-
-    <!-- Hint perf avant premier paint (évite blur/overlays lourds sans GPU) -->
-    <script>
-        (function () {
-            try {
-                var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-                var cores = navigator.hardwareConcurrency || 4;
-                var mem = navigator.deviceMemory || 8;
-                var saveData = navigator.connection && navigator.connection.saveData;
-                var coarse = window.matchMedia('(hover: none) and (pointer: coarse)').matches;
-                var small = Math.min(window.innerWidth, window.innerHeight) < 700;
-                var tier = 'high';
-                if (reduced || saveData || cores <= 2 || mem <= 2) tier = 'low';
-                else if (coarse || (cores <= 4 && mem <= 4) || (cores <= 6 && small)) tier = 'medium';
-                document.documentElement.classList.add(tier + '-perf');
-            } catch (e) {
-                document.documentElement.classList.add('low-perf');
-            }
-        })();
-    </script>
-
-    <!-- Preconnect for performance -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-    <!-- DNS Prefetch -->
-    <link rel="dns-prefetch" href="https://fonts.googleapis.com">
-
-    <!-- Styles -->
-    <!-- CSS chargé en parallèle (remplace l'ancienne chaîne @import de main.css, qui était bloquante et sérielle) -->
-    <link rel="stylesheet" href="assets/css/variables.css">
-    <link rel="stylesheet" href="assets/css/base.css">
-    <link rel="stylesheet" href="assets/css/cursor.css">
-    <link rel="stylesheet" href="assets/css/backgrounds.css">
-    <link rel="stylesheet" href="assets/css/navigation.css">
-    <link rel="stylesheet" href="assets/css/components.css">
-    <link rel="stylesheet" href="assets/css/hero.css">
-    <link rel="stylesheet" href="assets/css/sections.css">
-    <link rel="stylesheet" href="assets/css/about.css">
-    <link rel="stylesheet" href="assets/css/projects.css">
-    <link rel="stylesheet" href="assets/css/skills.css">
-    <link rel="stylesheet" href="assets/css/contact.css">
-    <link rel="stylesheet" href="assets/css/footer.css">
-    <link rel="stylesheet" href="assets/css/easter-eggs.css">
-    <link rel="stylesheet" href="assets/css/projects-modal.css">
-    <link rel="stylesheet" href="assets/css/gate.css?v=ux-rh-9">
-    <link rel="stylesheet" href="assets/css/responsive.css">
-    <link
-        href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@300;400;500;600;700&family=Bebas+Neue&family=Space+Mono:wght@400;700&family=Outfit:wght@400;500;600;700&family=Source+Sans+3:wght@400;500;600;700&display=swap"
-        rel="stylesheet">
-
-    <!-- Structured Data / JSON-LD (SEO + GEO) -->
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@graph": [
-            {
-                "@type": "WebSite",
-                "@id": "https://tarlie.fr/#website",
-                "url": "https://tarlie.fr/",
-                "name": "Portfolio Jérémy Tarlié",
-                "description": "Portfolio de Jérémy Tarlié, développeur Full Stack en France.",
-                "inLanguage": "fr-FR",
-                "publisher": { "@id": "https://tarlie.fr/#person" }
-            },
-            {
-                "@type": "Person",
-                "@id": "https://tarlie.fr/#person",
-                "name": "Jérémy Tarlié",
-                "url": "https://tarlie.fr/",
-                "image": {
-                    "@type": "ImageObject",
-                    "url": "https://tarlie.fr/assets/img/avatar.webp",
-                    "caption": "Jérémy Tarlié, développeur Full Stack"
-                },
-                "jobTitle": "Développeur Full Stack",
-                "description": "Développeur Full Stack basé en France, spécialisé en React, Next.js, Node.js, PHP et Python. Conçoit des sites et applications web de A à Z. Ouvert aux opportunités CDI, freelance et télétravail.",
-                "email": "mailto:contact@tarlie.fr",
-                "nationality": "FR",
-                "address": {
-                    "@type": "PostalAddress",
-                    "addressCountry": "FR",
-                    "addressLocality": "France"
-                },
-                "worksFor": {
-                    "@type": "Organization",
-                    "name": "Indépendant / Freelance"
-                },
-                "sameAs": [
-                    "https://github.com/Jeremy-Tarlie",
-                    "https://www.linkedin.com/in/jeremy-tarlie/"
-                ],
-                "knowsAbout": [
-                    "Développement Full Stack",
-                    "React",
-                    "Next.js",
-                    "Node.js",
-                    "PHP",
-                    "Python",
-                    "JavaScript",
-                    "TypeScript",
-                    "Docker",
-                    "AWS",
-                    "SQL",
-                    "APIs REST"
-                ],
-                "alumniOf": {
-                    "@type": "EducationalOrganization",
-                    "name": "Master Chef de Projet IA"
-                }
-            },
-            {
-                "@type": "ProfessionalService",
-                "@id": "https://tarlie.fr/#service",
-                "name": "Développement web Full Stack — Jérémy Tarlié",
-                "url": "https://tarlie.fr/",
-                "image": "https://tarlie.fr/assets/img/avatar.webp",
-                "provider": { "@id": "https://tarlie.fr/#person" },
-                "areaServed": {
-                    "@type": "Country",
-                    "name": "France"
-                },
-                "availableLanguage": ["fr", "en"],
-                "serviceType": [
-                    "Développement Full Stack",
-                    "Création de sites web",
-                    "Applications web",
-                    "APIs",
-                    "Freelance"
-                ],
-                "description": "Conception et développement de sites et applications web (frontend, backend, base de données, mise en ligne). CDI ou mission freelance, en France ou en télétravail."
-            }
-        ]
-    }
-    </script>
-</head>
-
-<body class="gate-locked">
-    <!-- Accueil / gate recruteur -->
-    <div id="recruiter-gate" class="recruiter-gate" aria-labelledby="gate-brand">
-        <div class="gate-bg" aria-hidden="true">
-            <div class="gate-wash"></div>
-            <div class="gate-grain"></div>
-        </div>
-
-        <nav class="gate-nav" aria-label="Navigation accueil">
-            <a href="#gate-home" class="gate-nav-logo" data-gate-nav="home">
-                <span class="gate-nav-mark">JT</span>
-            </a>
-            <div class="gate-nav-links">
-                <a href="#gate-home" class="gate-nav-link is-active" data-gate-nav="home">Accueil</a>
-                <a href="#gate-parcours" class="gate-nav-link" data-gate-nav="parcours">Parcours</a>
-                <a href="#gate-skills" class="gate-nav-link" data-gate-nav="skills">Compétences</a>
-                <a href="#gate-contact" class="gate-nav-link" data-gate-nav="contact">Contact</a>
-            </div>
-        </nav>
-
-        <main class="gate-main" id="gate-home">
-            <div class="gate-panel">
-                <section class="gate-section">
-                <header class="gate-header">
-                    <p class="gate-eyebrow">
-                        <span class="gate-eyebrow-dot"></span>
-                        Disponible · CDI &amp; freelance
-                    </p>
-
-                    <h1 id="gate-brand" class="gate-brand">Jérémy Tarlié</h1>
-
-                    <p class="gate-role">Développeur Full-Stack &amp; Expert en Intelligence Artificielle</p>
-                    <p class="gate-pitch">Je conçois des solutions web intégrant Machine Learning et automatisation, architectures performantes, sécurisées et optimisées. France · réponse sous 24h.</p>
-                </header>
-
-                <ul class="gate-snapshot">
-                    <li><strong data-experience-years data-experience-since="2023">3</strong> ans d’expérience</li>
-                    <li><strong>15+</strong> projets livrés</li>
-                    <li>Télétravail possible</li>
-                    <li>Master Web &amp; IA (Bac+5)</li>
-                </ul>
-
-                <nav class="gate-actions" aria-label="CV et contact">
-                    <a href="assets/file/CV_TARLIE_JEREMY.pdf" class="gate-link gate-link-cv" target="_blank" rel="noopener noreferrer">CV PDF</a>
-                    <a href="#gate-contact" class="gate-link gate-link-contact" data-gate-nav="contact">Contact</a>
-                    <a href="https://www.linkedin.com/in/jeremy-tarlie/" class="gate-link gate-link-secondary" target="_blank" rel="noopener noreferrer">LinkedIn</a>
-                    <a href="https://github.com/Jeremy-Tarlie" class="gate-link gate-link-secondary" target="_blank" rel="noopener noreferrer">GitHub</a>
-                </nav>
-
-                <button type="button" id="enter-universe" class="gate-enter-btn">
-                    Entrer dans mon univers
-                </button>
-
-                </section>
-
-                <section id="gate-parcours" class="gate-section" aria-labelledby="gate-parcours-title">
-                    <h2 id="gate-parcours-title" class="gate-block-title">Parcours</h2>
-
-                    <h3 class="gate-subhead">Expérience professionnelle</h3>
-                    <ol class="gate-timeline">
-                        <li class="gate-timeline-item">
-                            <div class="gate-timeline-meta">
-                                <div class="gate-timeline-main">
-                                    <span class="gate-timeline-role">Développeur Web &amp; IA</span>
-                                    <span class="gate-timeline-org">Romain Piveteau</span>
-                                </div>
-                                <time class="gate-timeline-date" datetime="2024-2026">2024 – 2026</time>
-                            </div>
-                            <ul class="gate-timeline-points">
-                                <li>Solutions web intégrant Machine Learning et automatisation</li>
-                                <li>Architectures performantes, sécurisées et optimisées</li>
-                                <li>Intégration de briques d’IA dans les applications métier</li>
-                            </ul>
-                        </li>
-                        <li class="gate-timeline-item">
-                            <div class="gate-timeline-meta">
-                                <div class="gate-timeline-main">
-                                    <span class="gate-timeline-role">Concepteur Développeur d’Applications Web</span>
-                                    <span class="gate-timeline-org">Myreklam</span>
-                                </div>
-                                <time class="gate-timeline-date" datetime="2023/2024">2023 – 2024</time>
-                            </div>
-                            <ul class="gate-timeline-points">
-                                <li>Conception et développement d’applications web sur mesure</li>
-                                <li>Intégration de modèles d’IA pour l’automatisation des processus métier</li>
-                                <li>Optimisation des performances et renforcement de la sécurité</li>
-                                <li>Analyse des besoins, rédaction de spécifications, développement agile en équipe</li>
-                            </ul>
-                        </li>
-                        <li class="gate-timeline-item">
-                            <div class="gate-timeline-meta">
-                                <div class="gate-timeline-main">
-                                    <span class="gate-timeline-role">Développeur Web</span>
-                                    <span class="gate-timeline-org">Oxygène</span>
-                                </div>
-                                <time class="gate-timeline-date" datetime="2021-05">Mai 2021 – Juillet 2021</time>
-                            </div>
-                            <ul class="gate-timeline-points">
-                                <li>Site vitrine et intranet développés en autonomie</li>
-                                <li>Base de données MariaDB ; front HTML5, CSS3, JavaScript ; back PHP / MySQL</li>
-                            </ul>
-                        </li>
-                    </ol>
-
-                    <h3 class="gate-subhead">Formation</h3>
-                    <ol class="gate-timeline">
-                        <li class="gate-timeline-item">
-                            <div class="gate-timeline-meta">
-                                <div class="gate-timeline-main">
-                                    <span class="gate-timeline-role">Master Expert en Développement Web et IA (Bac+5)</span>
-                                    <span class="gate-timeline-org">Nexa – Nantes</span>
-                                </div>
-                                <time class="gate-timeline-date" datetime="2026">2026</time>
-                            </div>
-                        </li>
-                        <li class="gate-timeline-item">
-                            <div class="gate-timeline-meta">
-                                <div class="gate-timeline-main">
-                                    <span class="gate-timeline-role">Titre Professionnel Concepteur Développeur d’Applications (Bac+3)</span>
-                                    <span class="gate-timeline-org">Nexa – Nantes</span>
-                                </div>
-                                <time class="gate-timeline-date" datetime="2024">2024</time>
-                            </div>
-                        </li>
-                        <li class="gate-timeline-item">
-                            <div class="gate-timeline-meta">
-                                <div class="gate-timeline-main">
-                                    <span class="gate-timeline-role">Formation Développeur Web (Bac+2)</span>
-                                    <span class="gate-timeline-org">WebForce3 – Dieppe</span>
-                                </div>
-                                <time class="gate-timeline-date" datetime="2021">2021</time>
-                            </div>
-                        </li>
-                        <li class="gate-timeline-item">
-                            <div class="gate-timeline-meta">
-                                <div class="gate-timeline-main">
-                                    <span class="gate-timeline-role">Bac STI2D</span>
-                                    <span class="gate-timeline-org">Pablo Neruda – Dieppe</span>
-                                </div>
-                                <time class="gate-timeline-date" datetime="2017">2017</time>
-                            </div>
-                        </li>
-                    </ol>
-
-                    <h3 class="gate-subhead">Certifications</h3>
-                    <ol class="gate-timeline">
-                        <li class="gate-timeline-item">
-                            <div class="gate-timeline-meta">
-                                <div class="gate-timeline-main">
-                                    <span class="gate-timeline-role">Préparation Exam Prep : AWS Certified Solutions Architect – Associate</span>
-                                    <span class="gate-timeline-org">Coursera / Amazon Web Services</span>
-                                    <a class="gate-cert-link" href="https://coursera.org/share/d6f4bd2ce807ebd699fa4799bcd788b2" target="_blank" rel="noopener noreferrer">Voir le certificat</a>
-                                </div>
-                                <time class="gate-timeline-date" datetime="2026">2026</time>
-                            </div>
-                        </li>
-                    </ol>
-                </section>
-
-                <section id="gate-skills" class="gate-section" aria-labelledby="gate-skills-title">
-                    <h2 id="gate-skills-title" class="gate-block-title">Compétences</h2>
-
-                    <div class="gate-skill-groups">
-                        <div class="gate-skill-group">
-                            <h3 class="gate-skill-label">Frontend</h3>
-                            <ul class="gate-skill-list">
-                                <li>HTML5 / CSS3</li>
-                                <li>JavaScript</li>
-                                <li>TypeScript</li>
-                                <li>React / React Native</li>
-                                <li>Next.js</li>
-                                <li>Vue.js</li>
-                                <li>Tailwind CSS</li>
-                                <li>Bootstrap</li>
-                                <li>SASS</li>
-                                <li>Responsive design</li>
-                            </ul>
-                        </div>
-                        <div class="gate-skill-group">
-                            <h3 class="gate-skill-label">Backend</h3>
-                            <ul class="gate-skill-list">
-                                <li>Node.js</li>
-                                <li>Express</li>
-                                <li>PHP</li>
-                                <li>Symfony</li>
-                                <li>Python</li>
-                                <li>FastAPI</li>
-                                <li>Java</li>
-                                <li>Spring Boot</li>
-                                <li>Prisma</li>
-                                <li>REST APIs</li>
-                                <li>GraphQL</li>
-                                <li>JWT</li>
-                                <li>Electron.js</li>
-                            </ul>
-                        </div>
-                        <div class="gate-skill-group">
-                            <h3 class="gate-skill-label">Bases de données</h3>
-                            <ul class="gate-skill-list">
-                                <li>MySQL</li>
-                                <li>MariaDB</li>
-                                <li>PostgreSQL</li>
-                                <li>MongoDB</li>
-                                <li>SQLite</li>
-                            </ul>
-                        </div>
-                        <div class="gate-skill-group">
-                            <h3 class="gate-skill-label">DevOps &amp; cloud</h3>
-                            <ul class="gate-skill-list">
-                                <li>Git / GitHub</li>
-                                <li>Docker</li>
-                                <li>CI/CD</li>
-                                <li>GitHub Actions</li>
-                                <li>AWS</li>
-                                <li>GCP</li>
-                                <li>Linux</li>
-                                <li>Vercel</li>
-                                <li>Netlify</li>
-                            </ul>
-                        </div>
-                        <div class="gate-skill-group">
-                            <h3 class="gate-skill-label">Data / IA</h3>
-                            <ul class="gate-skill-list">
-                                <li>Machine Learning</li>
-                                <li>Deep Learning</li>
-                                <li>NLP / LLM</li>
-                                <li>Pandas</li>
-                                <li>NumPy</li>
-                                <li>Matplotlib</li>
-                                <li>Seaborn</li>
-                                <li>Scikit-learn</li>
-                                <li>TensorFlow</li>
-                                <li>PyTorch</li>
-                                <li>OpenAI API</li>
-                            </ul>
-                        </div>
-                        <div class="gate-skill-group">
-                            <h3 class="gate-skill-label">Outils</h3>
-                            <ul class="gate-skill-list">
-                                <li>VS Code</li>
-                                <li>Cursor</li>
-                                <li>Claude</li>
-                                <li>Postman</li>
-                                <li>Figma</li>
-                            </ul>
-                        </div>
-                        <div class="gate-skill-group">
-                            <h3 class="gate-skill-label">Méthodes</h3>
-                            <ul class="gate-skill-list">
-                                <li>Agile / Scrum</li>
-                                <li>Kanban</li>
-                                <li>Microservices</li>
-                                <li>OWASP</li>
-                                <li>SEO technique</li>
-                            </ul>
-                        </div>
-                        <div class="gate-skill-group">
-                            <h3 class="gate-skill-label">Soft skills</h3>
-                            <ul class="gate-skill-list">
-                                <li>Adaptabilité</li>
-                                <li>Autonomie</li>
-                                <li>Rigueur</li>
-                                <li>Écoute active</li>
-                                <li>Curiosité technologique</li>
-                                <li>Travail d’équipe</li>
-                                <li>Communication</li>
-                                <li>Résolution de problèmes</li>
-                                <li>Gestion du temps</li>
-                                <li>Apprentissage continu</li>
-                            </ul>
-                        </div>
-                        <div class="gate-skill-group gate-skill-group-wide">
-                            <h3 class="gate-skill-label">Langues</h3>
-                            <ul class="gate-skill-list">
-                                <li>Français (maternelle)</li>
-                                <li>Anglais (B1 technique)</li>
-                            </ul>
-                        </div>
-                    </div>
-                </section>
-
-                <section id="gate-contact" class="gate-section" aria-labelledby="gate-contact-title">
-                    <h2 id="gate-contact-title" class="gate-block-title">Contact</h2>
-                    <p class="gate-contact-lead">Une opportunité ou une question, réponse sous 24h.</p>
-                    <a href="mailto:contact@tarlie.fr" class="gate-contact-mail">contact@tarlie.fr</a>
-
-                    <form class="gate-form" id="gateContactForm" data-contact-form novalidate>
-                        <input type="hidden" name="csrf_token" value="">
-                        <input type="hidden" name="_timestamp" value="">
-                        <div class="gate-honeypot" aria-hidden="true">
-                            <input type="text" name="website" tabindex="-1" autocomplete="off">
-                        </div>
-
-                        <div class="gate-form-grid">
-                            <div class="gate-form-group">
-                                <label for="gate-name">Nom <span aria-hidden="true">*</span></label>
-                                <input type="text" id="gate-name" name="name" placeholder="Votre nom" required autocomplete="name" maxlength="100">
-                            </div>
-                            <div class="gate-form-group">
-                                <label for="gate-email">Email <span aria-hidden="true">*</span></label>
-                                <input type="email" id="gate-email" name="email" placeholder="votre@email.com" required autocomplete="email" maxlength="254">
-                            </div>
-                        </div>
-
-                        <div class="gate-form-group">
-                            <label for="gate-subject">Sujet</label>
-                            <select id="gate-subject" name="subject">
-                                <option value="">Sélectionnez un sujet</option>
-                                <option value="job">Opportunité CDI</option>
-                                <option value="freelance">Mission freelance</option>
-                                <option value="collaboration">Collaboration</option>
-                                <option value="other">Autre</option>
-                            </select>
-                        </div>
-
-                        <div class="gate-form-group">
-                            <label for="gate-message">Message <span aria-hidden="true">*</span></label>
-                            <textarea id="gate-message" name="message" rows="4" placeholder="Parlez-moi du poste, de la mission ou de votre besoin..." required maxlength="500"></textarea>
-                            <span class="gate-char-count"><span data-char-count>0</span>/500</span>
-                        </div>
-
-                        <div class="gate-privacy">
-                            <label class="gate-consent">
-                                <input type="checkbox" name="privacy_consent" id="gate-privacy-consent" value="1" required>
-                                <span>J’accepte que mes données (nom, email, message) soient traitées pour me recontacter. <span aria-hidden="true">*</span></span>
-                            </label>
-                            <details class="gate-privacy-details">
-                                <summary>Informations sur le traitement des données (RGPD)</summary>
-                                <div class="gate-privacy-body">
-                                    <p><strong>Responsable :</strong> Jérémy Tarlié — <a href="mailto:contact@tarlie.fr">contact@tarlie.fr</a></p>
-                                    <p><strong>Finalité :</strong> répondre à votre demande de contact (intérêt légitime / consentement).</p>
-                                    <p><strong>Données :</strong> nom, email, sujet, message — uniquement ce qui est nécessaire.</p>
-                                    <p><strong>Destinataire :</strong> uniquement le responsable du traitement. Pas de revente ni de transfert hors UE.</p>
-                                    <p><strong>Durée :</strong> conservation le temps du traitement de la demande, puis suppression sous 12 mois maximum.</p>
-                                    <p><strong>Droits :</strong> accès, rectification, effacement, opposition, limitation — via contact@tarlie.fr. Réclamation possible auprès de la CNIL.</p>
-                                </div>
-                            </details>
-                        </div>
-
-                        <button type="submit" class="gate-form-submit">
-                            <span class="text-default">Envoyer le message</span>
-                            <span class="text-loading">Envoi en cours...</span>
-                            <span class="text-success">Message envoyé !</span>
-                        </button>
-                    </form>
-                </section>
-            </div>
-        </main>
-    </div>
-
     <!-- Boot console + allumage écran après le portail -->
     <div id="universe-boot" class="universe-boot" aria-hidden="true">
         <div class="boot-console" id="boot-console">
@@ -579,20 +29,20 @@
     <!-- Grid background -->
     <div class="grid-bg"></div>
 
-    <div id="portfolio-app" class="portfolio-app" aria-hidden="true">
+    <div id="portfolio-app" class="portfolio-app" aria-hidden="true" inert>
     <!-- Navigation -->
-    <nav class="nav">
+    <nav class="nav" aria-label="Navigation univers">
         <div class="nav-logo">
             <span class="logo-text glitch" data-text="JT">JT</span>
             <span class="logo-dot"></span>
         </div>
 
         <div class="nav-links">
-            <button type="button" class="nav-link nav-link-exit" id="return-to-gate-link" aria-label="Quitter l’univers et revenir à l’accueil">
+            <a href="/" class="nav-link nav-link-exit" id="return-to-gate-link" aria-label="Quitter l’univers et revenir à l’accueil">
                 <span class="nav-link-number">00</span>
                 <span class="nav-link-text">Quitter</span>
                 <span class="nav-link-line"></span>
-            </button>
+            </a>
             <a href="#home" class="nav-link active" data-section="home">
                 <span class="nav-link-number">01</span>
                 <span class="nav-link-text">Accueil</span>
@@ -621,10 +71,16 @@
         </div>
 
         <div class="nav-actions">
-            <button class="sound-toggle" aria-label="Activer ou couper le son">
-                <span class="sound-icon">🔇</span>
-            </button>
-            <a href="assets/file/CV_TARLIE_JEREMY.pdf" class="nav-cta magnetic" target="_blank">
+            <div class="sound-controls">
+                <button type="button" class="sound-toggle" aria-label="Activer ou couper le son" aria-pressed="false">
+                    <span class="sound-icon" aria-hidden="true">🔇</span>
+                </button>
+                <label class="sound-volume">
+                    <span class="visually-hidden">Volume</span>
+                    <input type="range" class="sound-volume-slider" min="0" max="100" step="1" value="50" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50" aria-label="Volume du son">
+                </label>
+            </div>
+            <a href="/cv" class="nav-cta magnetic" target="_blank">
                 <span class="cta-text">Télécharger CV</span>
                 <span class="cta-icon">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -647,10 +103,10 @@
     <!-- Mobile menu -->
     <div id="mobile-menu" class="mobile-menu">
         <div class="mobile-menu-content">
-            <button type="button" class="mobile-link mobile-link-exit" id="return-to-gate-mobile" aria-label="Quitter l’univers et revenir à l’accueil">
+            <a href="/" class="mobile-link mobile-link-exit" id="return-to-gate-mobile" aria-label="Quitter l’univers et revenir à l’accueil">
                 <span class="mobile-link-number">00</span>
                 <span class="mobile-link-text">Quitter</span>
-            </button>
+            </a>
             <a href="#home" class="mobile-link">
                 <span class="mobile-link-number">01</span>
                 <span class="mobile-link-text">Accueil</span>
@@ -677,6 +133,7 @@
         </div>
     </div>
 
+    <main id="main-content">
     <!-- Hero Section -->
     <section id="home" class="hero">
         <div class="hero-bg-effects">
@@ -930,7 +387,7 @@
                 <div class="image-wrapper">
                     <div class="image-frame">
                         <div class="image-inner">
-                            <img src="assets/img/avatar.webp" alt="Photo de Jérémy Tarlié, développeur Full Stack en France" class="avatar-image" width="400" height="400" decoding="async">
+                            <img src="/assets/img/avatar.webp" alt="Photo de Jérémy Tarlié, développeur Full Stack en France" class="avatar-image" width="400" height="400" decoding="async">
                         </div>
                         <div class="image-glitch-overlay"></div>
                         <div class="image-scanline"></div>
@@ -1081,7 +538,7 @@
                 <div class="project-image">
                     <div class="project-bg">
                         <span class="project-emoji">
-                            <img src="assets/img/portfolio.png" alt="Aperçu du portfolio de Jérémy Tarlié" loading="lazy" decoding="async" width="640" height="400">
+                            <img src="/assets/img/portfolio.png" alt="Aperçu du portfolio de Jérémy Tarlié" loading="lazy" decoding="async" width="640" height="400">
                         </span>
                     </div>
                     <a href="https://github.com/Jeremy-Tarlie/portfolio" class="project-overlay" target="_blank">
@@ -1130,7 +587,7 @@
                 <div class="project-image">
                     <div class="project-bg">
                         <span class="project-emoji">
-                            <img src="assets/img/discelyn.png" alt="Application Discelyn — outil en ligne avec paiements" loading="lazy" decoding="async" width="640" height="400">
+                            <img src="/assets/img/discelyn.png" alt="Application Discelyn — outil en ligne avec paiements" loading="lazy" decoding="async" width="640" height="400">
                         </span>
                     </div>
                     <a href="https://discelyn.fr/" class="project-overlay" target="_blank">
@@ -1179,7 +636,7 @@
                 <div class="project-image">
                     <div class="project-bg">
                         <span class="project-emoji">
-                            <img src="assets/img/codepass.png" alt="Application Codepass — comptes sécurisés" loading="lazy" decoding="async" width="640" height="400">
+                            <img src="/assets/img/codepass.png" alt="Application Codepass — comptes sécurisés" loading="lazy" decoding="async" width="640" height="400">
                         </span>
                     </div>
                     <a href="https://github.com/Jeremy-Tarlie/CodePass" class="project-overlay" target="_blank">
@@ -1228,7 +685,7 @@
                 <div class="project-image">
                     <div class="project-bg">
                         <span class="project-emoji">
-                            <img src="assets/img/cotapro.png" alt="Logiciel CotaPro — outil interne d'entreprise" loading="lazy" decoding="async" width="640" height="400">
+                            <img src="/assets/img/cotapro.png" alt="Logiciel CotaPro — outil interne d'entreprise" loading="lazy" decoding="async" width="640" height="400">
                         </span>
                     </div>
                     <div class="project-overlay" style="cursor: default;">
@@ -1265,7 +722,7 @@
             <article class="project-card" data-category="web">
                 <div class="project-image">
                     <div class="project-bg">
-                        <img src="assets/img/myreklam.png" alt="Plateforme MyReklam — projet web en alternance" loading="lazy" decoding="async" width="640" height="400">
+                        <img src="/assets/img/myreklam.png" alt="Plateforme MyReklam — projet web en alternance" loading="lazy" decoding="async" width="640" height="400">
                     </div>
                     <a href="https://www.myreklam.fr/" class="project-overlay" target="_blank">
                         <div class="overlay-content">
@@ -2354,6 +1811,7 @@
         </div>
     </section>
 
+    </main>
     <!-- Footer -->
     <footer class="footer">
         <!-- Footer Background Effects -->
@@ -2414,7 +1872,7 @@
                             </svg>
                         </span>
                     </a>
-                    <a href="assets/file/CV_TARLIE_JEREMY.pdf" class="btn btn-outline magnetic footer-cv-btn"
+                    <a href="/cv" class="btn btn-outline magnetic footer-cv-btn"
                         target="_blank">
                         <span class="btn-text">Télécharger CV</span>
                         <span class="btn-icon">
@@ -2526,7 +1984,7 @@
                             <span class="link-arrow">→</span>
                             <span>Full Stack</span>
                         </a>
-                        <a href="assets/file/CV_TARLIE_JEREMY.pdf" class="footer-link" target="_blank">
+                        <a href="/cv" class="footer-link" target="_blank">
                             <span class="link-arrow">→</span>
                             <span>Télécharger le CV</span>
                         </a>
@@ -2647,20 +2105,3 @@
         </button>
     </footer>
     </div><!-- /#portfolio-app -->
-
-    <!-- JavaScript Modules (defer : téléchargement parallèle, exécution dans l'ordre après le parsing) -->
-    <script defer src="assets/js/utils.js?v=2026-10-27"></script>
-    <script defer src="assets/js/cursor.js?v=2026-10-27"></script>
-    <script defer src="assets/js/particles.js?v=2026-10-27"></script>
-    <script defer src="assets/js/navigation.js?v=2026-10-27"></script>
-    <script defer src="assets/js/animations.js?v=2026-10-27"></script>
-    <script defer src="assets/js/components.js?v=2026-10-27"></script>
-    <script defer src="assets/js/audio.js?v=2026-10-27"></script>
-    <script defer src="assets/js/terminal.js?v=2026-10-27"></script>
-    <script defer src="assets/js/projects.js?v=2026-10-27"></script>
-    <script defer src="assets/js/easter-eggs.js?v=2026-10-27"></script>
-    <script defer src="assets/js/gate.js?v=2026-10-27"></script>
-    <script defer src="assets/js/main.js?v=2026-10-27"></script>
-</body>
-
-</html>

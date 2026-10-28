@@ -4,34 +4,74 @@ const BOOT_DURATION_MS = 1350;
 const BOOT_DURATION_REDUCED_MS = 350;
 const BOOT_FADE_MS = 550;
 
-const BOOT_LINES = [
-    { text: 'JT_OS v2026.1 — cold boot sequence', cls: 'boot-accent' },
-    { text: '', cls: '' },
-    { text: '[  0.000000] kernel: initializing memory map...', cls: 'boot-dim' },
-    { text: '[  0.041201] kernel: CPU cores online', cls: 'boot-ok' },
-    { text: '[  0.088412] loading modules...', cls: 'boot-dim' },
-    { text: '  → react@19 ............... OK', cls: 'boot-ok' },
-    { text: '  → node.js / express ...... OK', cls: 'boot-ok' },
-    { text: '  → next.js ................ OK', cls: 'boot-ok' },
-    { text: '  → php / python ........... OK', cls: 'boot-ok' },
-    { text: '  → docker / aws ........... OK', cls: 'boot-ok' },
-    { text: '[  0.214088] mounting filesystem /universe', cls: 'boot-dim' },
-    { text: '[  0.301552] scanning portfolio assets', cls: 'boot-dim' },
-    { text: '  projects/discelyn ........ linked', cls: 'boot-ok' },
-    { text: '  projects/codepass ........ linked', cls: 'boot-ok' },
-    { text: '  projects/cotapro ......... linked', cls: 'boot-ok' },
-    { text: '[  0.412990] easter_eggs: dormant (awaiting discovery)', cls: 'boot-warn' },
-    { text: '[  0.488120] interactive terminal: ready', cls: 'boot-ok' },
-    { text: '[  0.550001] contact channel: contact@tarlie.fr', cls: 'boot-accent' },
-    { text: '', cls: '' },
-    { text: 'status: OPEN_TO_WORK = true  (CDI | freelance)', cls: 'boot-accent' },
-    { text: '', cls: '' },
-    { text: '>>> SYSTEM READY', cls: 'boot-ok' },
-    { text: '>>> launching interface...', cls: 'boot-accent' }
+const BOOT_SECTIONS = [
+    'accueil',
+    'à propos',
+    'projets',
+    'compétences',
+    'contact',
+    'terminal',
+    'audio ambiance',
+    'easter eggs'
 ];
 
-let gateKeydownHandler = null;
-let returningToGate = false;
+const BOOT_PROJECTS = [
+    'portfolio cyberpunk',
+    'discelyn',
+    'codepass',
+    'cotapro',
+    'myreklam'
+];
+
+const BOOT_MODULES = [
+    'react@19',
+    'next.js',
+    'node.js / express',
+    'php / python',
+    'docker / aws'
+];
+
+function buildBootLines() {
+    const lines = [
+        { text: 'JT_OS v2026.1 — cold boot sequence', cls: 'boot-title' },
+        { text: '', cls: '' },
+        { text: '[init] kernel: mémoire OK', cls: 'boot-ok' },
+        { text: '[init] montage du système de fichiers /universe', cls: 'boot-dim' },
+        { text: '', cls: '' },
+        { text: '[modules] chargement des briques...', cls: 'boot-accent' }
+    ];
+
+    BOOT_MODULES.forEach((mod) => {
+        lines.push({ text: `  → ${mod} ............... OK`, cls: 'boot-ok' });
+    });
+
+    lines.push({ text: '', cls: '' });
+    lines.push({ text: '[ui] construction des sections...', cls: 'boot-accent' });
+
+    BOOT_SECTIONS.forEach((section) => {
+        lines.push({ text: `> ${section} en cours de création...`, cls: 'boot-dim' });
+        lines.push({ text: `> ${section} créé`, cls: 'boot-ok' });
+    });
+
+    lines.push({ text: '', cls: '' });
+    lines.push({ text: '[projects] liaison des projets...', cls: 'boot-accent' });
+
+    BOOT_PROJECTS.forEach((project) => {
+        lines.push({ text: `> projet « ${project} » en cours de création...`, cls: 'boot-dim' });
+        lines.push({ text: `> projet « ${project} » créé`, cls: 'boot-ok' });
+        lines.push({ text: `  projects/${project.replace(/\s+/g, '-')} ........ linked`, cls: 'boot-ok' });
+    });
+
+    lines.push({ text: '', cls: '' });
+    lines.push({ text: 'status: OPEN_TO_WORK = true  (CDI | freelance)', cls: 'boot-accent' });
+    lines.push({ text: '', cls: '' });
+    lines.push({ text: '>>> SYSTEM READY', cls: 'boot-ok' });
+    lines.push({ text: '>>> interface en attente', cls: 'boot-accent' });
+
+    return lines;
+}
+
+const BOOT_LINES = buildBootLines();
 
 function wait(ms) {
     return new Promise((resolve) => {
@@ -63,62 +103,26 @@ function getBootDuration() {
     return BOOT_DURATION_MS;
 }
 
-function getGateFocusables(gate) {
-    return Array.from(
-        gate.querySelectorAll(
-            'a[href], button:not([disabled]), input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])'
-        )
-    ).filter((el) => !el.hasAttribute('disabled') && el.offsetParent !== null);
-}
-
-function trapFocusInGate(gate, event) {
-    if (event.key !== 'Tab' || !document.body.classList.contains('gate-locked')) {
-        return;
-    }
-
-    const focusables = getGateFocusables(gate);
-    if (!focusables.length) return;
-
-    const first = focusables[0];
-    const last = focusables[focusables.length - 1];
-
-    if (event.shiftKey && document.activeElement === first) {
-        event.preventDefault();
-        last.focus();
-    } else if (!event.shiftKey && document.activeElement === last) {
-        event.preventDefault();
-        first.focus();
-    }
-}
-
 function unlockPortfolioApp(portfolioApp) {
     if (!portfolioApp) return;
     portfolioApp.removeAttribute('inert');
     portfolioApp.setAttribute('aria-hidden', 'false');
 }
 
-function lockPortfolioApp(portfolioApp) {
-    if (!portfolioApp) return;
-    portfolioApp.setAttribute('inert', '');
-    portfolioApp.setAttribute('aria-hidden', 'true');
-}
-
-function hideGateHard(gate) {
-    if (!gate) return;
-    gate.setAttribute('aria-hidden', 'true');
-    gate.classList.add('is-removed');
-}
-
-function showGate(gate) {
-    if (!gate) return;
-    gate.classList.remove('is-removed');
-    gate.removeAttribute('aria-hidden');
-    gate.style.removeProperty('display');
-}
-
 function clearBootLog() {
     const log = document.getElementById('boot-log');
     if (log) log.textContent = '';
+}
+
+function appendBootLine(log, scroller, text, cls) {
+    const line = document.createElement('div');
+    if (cls) line.className = cls;
+    line.textContent = text || '\u00a0';
+    log.appendChild(line);
+    if (scroller) {
+        scroller.scrollTop = scroller.scrollHeight;
+    }
+    return line;
 }
 
 async function playBootLog() {
@@ -129,133 +133,127 @@ async function playBootLog() {
     log.textContent = '';
     const fast = prefersReducedMotion() || isLowPerfTier();
     const lines = fast
-        ? BOOT_LINES.filter((entry, i) => i % 2 === 0 || entry.text.includes('READY') || entry.text.includes('launching'))
+        ? BOOT_LINES.filter((entry) => entry.cls === 'boot-ok' || entry.cls === 'boot-accent' || entry.cls === 'boot-title' || entry.text === '')
         : BOOT_LINES;
 
     for (let i = 0; i < lines.length; i += 1) {
         const entry = lines[i];
-        const line = document.createElement('div');
-        if (entry.cls) line.className = entry.cls;
-        line.textContent = entry.text || '\u00a0';
-        log.appendChild(line);
-
-        if (scroller) {
-            scroller.scrollTop = scroller.scrollHeight;
-        }
+        appendBootLine(log, scroller, entry.text, entry.cls);
 
         const delay = fast
-            ? 16
+            ? 20
             : entry.text === ''
-                ? 35
-                : entry.text.includes('>>>')
-                    ? 85
-                    : 26 + Math.floor(Math.random() * 34);
+                ? 40
+                : entry.text.includes('créé')
+                    ? 55
+                    : entry.text.includes('en cours')
+                        ? 90 + Math.floor(Math.random() * 50)
+                        : 28 + Math.floor(Math.random() * 36);
 
         await wait(delay);
     }
 
-    await wait(fast ? 100 : 260);
+    await wait(fast ? 80 : 200);
 }
 
-function setGateNavActive(sectionId) {
-    const links = document.querySelectorAll('.gate-nav-link');
-    links.forEach((link) => {
-        const href = link.getAttribute('href') || '';
-        link.classList.toggle('is-active', href === `#${sectionId}`);
-    });
+function isInsideBootScroller(target) {
+    const scroller = document.querySelector('.boot-console-inner');
+    return Boolean(scroller && target instanceof Node && scroller.contains(target));
 }
 
-function initGateNav(gate) {
-    const links = gate.querySelectorAll('[data-gate-nav]');
-    links.forEach((link) => {
-        link.addEventListener('click', (event) => {
-            const href = link.getAttribute('href');
-            if (!href || !href.startsWith('#')) return;
-            const target = gate.querySelector(href);
-            if (!target) return;
+function lockPageScrollDuringBoot() {
+    const onWheel = (event) => {
+        if (isInsideBootScroller(event.target)) return;
+        event.preventDefault();
+    };
+    const onTouchMove = (event) => {
+        if (isInsideBootScroller(event.target)) return;
+        event.preventDefault();
+    };
+
+    document.addEventListener('wheel', onWheel, { passive: false });
+    document.addEventListener('touchmove', onTouchMove, { passive: false });
+    window.scrollTo(0, 0);
+
+    return () => {
+        document.removeEventListener('wheel', onWheel);
+        document.removeEventListener('touchmove', onTouchMove);
+    };
+}
+
+function waitForEnterToContinue(log, scroller) {
+    return new Promise((resolve) => {
+        appendBootLine(log, scroller, '', '');
+        const prompt = appendBootLine(
+            log,
+            scroller,
+            '>>> Appuyez sur Entrée pour entrer dans l’univers_',
+            'boot-prompt'
+        );
+        prompt.setAttribute('role', 'status');
+        prompt.setAttribute('aria-live', 'polite');
+        if (scroller) {
+            scroller.scrollTop = scroller.scrollHeight;
+        }
+
+        const onKey = (event) => {
+            if (event.key !== 'Enter') return;
             event.preventDefault();
-            target.scrollIntoView({ behavior: prefersReducedMotion() ? 'auto' : 'smooth', block: 'start' });
-            setGateNavActive(href.slice(1));
-        });
+            document.removeEventListener('keydown', onKey);
+            prompt.classList.remove('boot-prompt');
+            prompt.classList.add('boot-ok');
+            prompt.textContent = '>>> Entrée validée — lancement de l’interface...';
+            resolve();
+        };
+
+        document.addEventListener('keydown', onKey);
     });
 }
 
-function revealUniverse({ animateHero = true } = {}) {
+async function runUniverseBoot() {
     const body = document.body;
-    const gate = document.getElementById('recruiter-gate');
     const portfolioApp = document.getElementById('portfolio-app');
     const boot = document.getElementById('universe-boot');
+    const log = document.getElementById('boot-log');
+    const scroller = log ? log.parentElement : null;
 
-    body.classList.remove(
-        'gate-locked',
-        'portal-active',
-        'portal-void',
-        'boot-logging',
-        'boot-active',
-        'boot-fade'
-    );
-    body.classList.add('universe-entered', 'loaded');
-    unlockPortfolioApp(portfolioApp);
-    hideGateHard(gate);
-    clearBootLog();
-
-    if (boot) {
-        boot.setAttribute('aria-hidden', 'true');
-    }
-
-    if (animateHero && typeof animateHeroElements === 'function') {
-        window.setTimeout(() => {
-            animateHeroElements();
-        }, 200);
-    }
-
-    const home = document.getElementById('home');
-    if (home) {
-        home.setAttribute('tabindex', '-1');
-        home.focus({ preventScroll: true });
-    }
-
-    window.dispatchEvent(new CustomEvent('portfolio:universe-entered'));
-}
-
-async function runPortalTransition(enterBtn) {
-    const body = document.body;
-    const gate = document.getElementById('recruiter-gate');
-    const portfolioApp = document.getElementById('portfolio-app');
-    const boot = document.getElementById('universe-boot');
-
-    if (body.classList.contains('portal-active') || body.classList.contains('universe-entered')) {
+    if (body.classList.contains('universe-entered') || body.classList.contains('boot-logging')) {
         return;
     }
 
-    if (gateKeydownHandler) {
-        document.removeEventListener('keydown', gateKeydownHandler);
-        gateKeydownHandler = null;
+    if (typeof cyberpunkAudio !== 'undefined' && cyberpunkAudio.prepareUniverseAudio) {
+        cyberpunkAudio.prepareUniverseAudio();
     }
 
-    body.classList.add('portal-active');
-    if (enterBtn) {
-        enterBtn.setAttribute('disabled', 'true');
-        enterBtn.setAttribute('aria-busy', 'true');
+    if (body.classList.contains('portal-void')) {
+        await wait(prefersReducedMotion() || isLowPerfTier() ? 80 : 220);
+    } else {
+        body.classList.add('portal-active');
+        await wait(getPortalDuration());
+        body.classList.add('portal-void');
+        body.classList.remove('portal-active');
+        await wait(160);
     }
-
-    await wait(getPortalDuration());
-
-    body.classList.add('portal-void');
-    body.classList.remove('portal-active');
-    hideGateHard(gate);
-
-    await wait(160);
 
     if (boot) {
         boot.setAttribute('aria-hidden', 'false');
     }
-    body.classList.add('boot-logging');
+    body.classList.add('boot-logging', 'boot-awaiting-enter');
     body.classList.remove('portal-void');
+    const unlockPageScroll = lockPageScrollDuringBoot();
 
-    await playBootLog();
+    try {
+        await playBootLog();
 
-    body.classList.remove('gate-locked', 'boot-logging');
+        if (log) {
+            await waitForEnterToContinue(log, scroller);
+            await wait(prefersReducedMotion() || isLowPerfTier() ? 80 : 280);
+        }
+    } finally {
+        unlockPageScroll();
+    }
+
+    body.classList.remove('boot-logging', 'boot-awaiting-enter');
     body.classList.add('universe-entered', 'loaded', 'boot-active');
     unlockPortfolioApp(portfolioApp);
 
@@ -285,149 +283,22 @@ async function runPortalTransition(enterBtn) {
     }
 }
 
-function closeUniverseMenus() {
-    const mobileMenu = document.getElementById('mobile-menu');
-    const menuToggle = document.querySelector('.menu-toggle');
-    if (mobileMenu) {
-        mobileMenu.classList.remove('active');
-    }
-    if (menuToggle) {
-        menuToggle.setAttribute('aria-expanded', 'false');
-        menuToggle.classList.remove('active');
-        menuToggle.setAttribute('aria-label', 'Ouvrir le menu de navigation');
-    }
-    document.body.classList.remove('no-scroll');
-}
-
-function clearLegacyUniverseStorage() {
+function initUniverseBoot() {
     try {
         sessionStorage.removeItem('portfolioUniverseEntered');
     } catch (e) {
         /* ignore */
     }
-}
-
-function returnToGate() {
-    if (returningToGate) return;
-
-    const body = document.body;
-    const gate = document.getElementById('recruiter-gate');
-    if (!gate || !body.classList.contains('universe-entered')) return;
-
-    returningToGate = true;
-    clearLegacyUniverseStorage();
-
-    const portfolioApp = document.getElementById('portfolio-app');
-    const boot = document.getElementById('universe-boot');
-    const enterBtn = document.getElementById('enter-universe');
-
-    closeUniverseMenus();
-
-    body.classList.remove(
-        'universe-entered',
-        'loaded',
-        'portal-active',
-        'portal-void',
-        'boot-logging',
-        'boot-active',
-        'boot-fade'
-    );
-    body.classList.add('gate-locked');
-
-    if (boot) {
-        boot.setAttribute('aria-hidden', 'true');
-    }
-    clearBootLog();
-    lockPortfolioApp(portfolioApp);
-    showGate(gate);
-
-    if (enterBtn) {
-        enterBtn.removeAttribute('disabled');
-        enterBtn.removeAttribute('aria-busy');
-    }
-
-    if (gate) {
-        gate.scrollTop = 0;
-        setGateNavActive('gate-home');
-    }
-
-    window.scrollTo(0, 0);
-
-    if (gateKeydownHandler) {
-        document.removeEventListener('keydown', gateKeydownHandler);
-    }
-    gateKeydownHandler = (event) => trapFocusInGate(gate, event);
-    document.addEventListener('keydown', gateKeydownHandler);
-
-    window.setTimeout(() => {
-        if (enterBtn) enterBtn.focus();
-        returningToGate = false;
-    }, 80);
-
-    window.dispatchEvent(new CustomEvent('portfolio:gate-returned'));
-}
-
-function bindReturnToGateControls() {
-    const controls = [
-        document.getElementById('return-to-gate-link'),
-        document.getElementById('return-to-gate-mobile')
-    ];
-
-    controls.forEach((el) => {
-        if (!el) return;
-        el.addEventListener('click', (event) => {
-            event.preventDefault();
-            returnToGate();
-        });
-    });
-}
-
-function initRecruiterGate() {
-    const gate = document.getElementById('recruiter-gate');
-    const portfolioApp = document.getElementById('portfolio-app');
-    const enterBtn = document.getElementById('enter-universe');
-
-    clearLegacyUniverseStorage();
     document.documentElement.classList.remove('skip-gate');
-    bindReturnToGateControls();
 
-    if (!gate) {
-        document.body.classList.remove('gate-locked');
+    const portfolioApp = document.getElementById('portfolio-app');
+    if (!portfolioApp) {
         document.body.classList.add('universe-entered', 'loaded');
-        if (typeof animateHeroElements === 'function') {
-            animateHeroElements();
-        }
         return;
     }
 
-    lockPortfolioApp(portfolioApp);
-    document.body.classList.add('gate-locked');
-    document.body.classList.remove('universe-entered', 'loaded');
-    showGate(gate);
-    initGateNav(gate);
-
-    const yearsEls = gate.querySelectorAll('[data-experience-years]');
-    if (typeof getYearsOfExperience === 'function' && yearsEls.length) {
-        yearsEls.forEach((el) => {
-            const since = el.getAttribute('data-experience-since') || '2021-05-01';
-            el.textContent = String(getYearsOfExperience(since));
-        });
-    }
-
-    gateKeydownHandler = (event) => trapFocusInGate(gate, event);
-    document.addEventListener('keydown', gateKeydownHandler);
-
-    if (enterBtn) {
-        enterBtn.addEventListener('click', () => {
-            // Unlock AudioContext pendant le geste utilisateur (avant les awaits portail).
-            if (typeof cyberpunkAudio !== 'undefined' && cyberpunkAudio.prepareUniverseAudio) {
-                cyberpunkAudio.prepareUniverseAudio();
-            }
-            runPortalTransition(enterBtn);
-        });
-    }
+    runUniverseBoot();
 }
 
-window.initRecruiterGate = initRecruiterGate;
-window.revealUniverse = revealUniverse;
-window.returnToGate = returnToGate;
+window.initUniverseBoot = initUniverseBoot;
+window.initRecruiterGate = initUniverseBoot;

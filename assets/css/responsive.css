@@ -591,6 +591,10 @@
         height: 36px;
         font-size: 0.9rem;
     }
+
+    .sound-volume-slider {
+        width: 5.25rem;
+    }
     
     .menu-toggle {
         width: 36px;
@@ -1354,7 +1358,7 @@
     .scroll-indicator,
     .corner-deco,
     .footer-bg-effects,
-    .recruiter-gate {
+    .universe-boot {
         display: none !important;
     }
 
