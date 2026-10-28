@@ -12,7 +12,6 @@ $ogImage = $ogImage ?? 'https://tarlie.fr/assets/img/avatar.webp';
 $bodyClass = $bodyClass ?? '';
 $extraHead = $extraHead ?? '';
 $jsonLd = $jsonLd ?? '';
-$perfHint = $perfHint ?? false;
 ?>
 <!DOCTYPE html>
 <html lang="fr">
@@ -55,27 +54,6 @@ $perfHint = $perfHint ?? false;
 <link rel="manifest" href="<?= asset('site.webmanifest') ?>">
 <meta name="theme-color" content="<?= htmlspecialchars($themeColor, ENT_QUOTES, 'UTF-8') ?>">
 <meta name="color-scheme" content="<?= htmlspecialchars($colorScheme, ENT_QUOTES, 'UTF-8') ?>">
-
-<?php if ($perfHint): ?>
-<script>
-(function () {
-    try {
-        var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-        var cores = navigator.hardwareConcurrency || 4;
-        var mem = navigator.deviceMemory || 8;
-        var saveData = navigator.connection && navigator.connection.saveData;
-        var coarse = window.matchMedia('(hover: none) and (pointer: coarse)').matches;
-        var small = Math.min(window.innerWidth, window.innerHeight) < 700;
-        var tier = 'high';
-        if (reduced || saveData || cores <= 2 || mem <= 2) tier = 'low';
-        else if (coarse || (cores <= 4 && mem <= 4) || (cores <= 6 && small)) tier = 'medium';
-        document.documentElement.classList.add(tier + '-perf');
-    } catch (e) {
-        document.documentElement.classList.add('low-perf');
-    }
-})();
-</script>
-<?php endif; ?>
 
 <?= $extraHead ?>
 

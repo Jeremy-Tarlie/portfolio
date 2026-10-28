@@ -48,17 +48,17 @@ require __DIR__ . '/includes/home-nav.php';
 <main>
   <div class="wrap">
     <div class="hero">
-      <p class="avail"><i></i>Disponible en CDI et en freelance</p>
-      <h1>Jérémy Tarlié</h1>
-      <p class="role">Développeur Full-Stack &amp; Expert en Intelligence Artificielle</p>
-      <p class="pitch">Je conçois des applications web qui intègrent du Machine Learning et de l’automatisation, avec des architectures rapides, sûres et faciles à faire évoluer.</p>
-      <div class="links">
+      <p class="avail anim-fade-up"><i></i>Disponible en CDI et en freelance</p>
+      <h1 class="anim-fade-up" style="--anim-delay:.1s">Jérémy Tarlié</h1>
+      <p class="role anim-fade-up" style="--anim-delay:.18s">Développeur Full-Stack &amp; Expert en Intelligence Artificielle</p>
+      <p class="pitch anim-fade-up" style="--anim-delay:.26s">Je conçois des applications web qui intègrent du Machine Learning et de l’automatisation, avec des architectures rapides, sûres et faciles à faire évoluer.</p>
+      <div class="links anim-fade-up" style="--anim-delay:.34s">
         <a class="btn pri" href="/cv" target="_blank" rel="noopener noreferrer">Télécharger mon CV</a>
         <a class="btn sec" href="https://www.linkedin.com/in/jeremy-tarlie/" target="_blank" rel="noopener noreferrer">LinkedIn</a>
         <a class="btn sec" href="https://github.com/Jeremy-Tarlie" target="_blank" rel="noopener noreferrer">GitHub</a>
         <a class="btn sec" href="/contact">Écrire un message</a>
       </div>
-      <ul class="facts">
+      <ul class="facts anim-fade-up" style="--anim-delay:.42s">
         <li><b>3 ans</b> d’expérience</li>
         <li><b>15+</b> projets livrés</li>
         <li><b>Master</b> Web &amp; IA (Bac+5)</li>
@@ -66,7 +66,7 @@ require __DIR__ . '/includes/home-nav.php';
       </ul>
     </div>
 
-    <div class="portal-wrap">
+    <div class="portal-wrap anim-fade-up" style="--anim-delay:.1s">
       <a href="/univers" class="portal" id="enter-universe">
         <span class="portal-frame" aria-hidden="true"></span>
         <span class="portal-corners" aria-hidden="true"></span>
@@ -80,41 +80,41 @@ require __DIR__ . '/includes/home-nav.php';
     </div>
 
     <section id="parcours">
-      <h2>Mon parcours</h2>
-      <p class="lead">Trois ans à construire des applications utiles, de l’agence web à l’intégration d’IA dans des outils métier.</p>
-      <h3>Expérience</h3>
+      <h2 class="anim-fade-up">Mon parcours</h2>
+      <p class="lead anim-fade-up" style="--anim-delay:.08s">Trois ans à construire des applications utiles, de l’agence web à l’intégration d’IA dans des outils métier.</p>
+      <h3 class="anim-fade-up">Expérience</h3>
       <ol class="tl">
-        <li>
+        <li class="anim-fade-up" style="--anim-delay:.05s">
           <div class="top"><div><span class="t">Développeur Web &amp; IA</span> · <span class="o">Romain Piveteau</span></div><time>2024 – 2026</time></div>
           <ul><li>Solutions web intégrant Machine Learning et automatisation</li><li>Architectures performantes, sécurisées et optimisées</li><li>Briques d’IA intégrées dans des applications métier</li></ul>
         </li>
-        <li>
+        <li class="anim-fade-up" style="--anim-delay:.13s">
           <div class="top"><div><span class="t">Concepteur Développeur d’Applications Web</span> · <span class="o">Myreklam</span></div><time>2023 – 2024</time></div>
           <ul><li>Applications web sur mesure, de l’analyse du besoin au développement agile en équipe</li><li>Modèles d’IA pour automatiser des processus métier</li><li>Optimisation des performances et renforcement de la sécurité</li></ul>
         </li>
-        <li>
+        <li class="anim-fade-up" style="--anim-delay:.21s">
           <div class="top"><div><span class="t">Développeur Web</span> · <span class="o">Oxygène</span></div><time>Mai – juillet 2021</time></div>
           <ul><li>Site vitrine et intranet développés en autonomie (HTML, CSS, JavaScript, PHP, MariaDB)</li></ul>
         </li>
       </ol>
 
-      <h3>Formation</h3>
+      <h3 class="anim-fade-up">Formation</h3>
       <div class="grid">
-        <div class="card"><time>2026</time><b>Master Expert en Développement Web et IA</b><span>Nexa, Nantes · Bac+5</span></div>
-        <div class="card"><time>2024</time><b>Concepteur Développeur d’Applications</b><span>Nexa, Nantes · Bac+3</span></div>
-        <div class="card"><time>2021</time><b>Formation Développeur Web</b><span>WebForce3, Dieppe · Bac+2</span></div>
-        <div class="card"><time>2017</time><b>Bac STI2D</b><span>Lycée Pablo Neruda, Dieppe</span></div>
+        <div class="card anim-fade-up"><time>2026</time><b>Master Expert en Développement Web et IA</b><span>Nexa, Nantes · Bac+5</span></div>
+        <div class="card anim-fade-up" style="--anim-delay:.08s"><time>2024</time><b>Concepteur Développeur d’Applications</b><span>Nexa, Nantes · Bac+3</span></div>
+        <div class="card anim-fade-up" style="--anim-delay:.16s"><time>2021</time><b>Formation Développeur Web</b><span>WebForce3, Dieppe · Bac+2</span></div>
+        <div class="card anim-fade-up" style="--anim-delay:.24s"><time>2017</time><b>Bac STI2D</b><span>Lycée Pablo Neruda, Dieppe</span></div>
       </div>
-      <h3>Certification</h3>
+      <h3 class="anim-fade-up">Certification</h3>
       <div class="grid">
-        <div class="card"><time>2026</time><b>Préparation AWS Certified Solutions Architect – Associate</b><span>Coursera / Amazon Web Services</span>
+        <div class="card anim-fade-up"><time>2026</time><b>Préparation AWS Certified Solutions Architect – Associate</b><span>Coursera / Amazon Web Services</span>
           <a href="https://coursera.org/share/d6f4bd2ce807ebd699fa4799bcd788b2" target="_blank" rel="noopener noreferrer">Voir le certificat</a></div>
       </div>
     </section>
 
     <section id="competences">
-      <h2>Mes compétences</h2>
-      <p class="lead">L’essentiel en un coup d’œil. Ouvrez une carte pour voir le détail.</p>
+      <h2 class="anim-fade-up">Mes compétences</h2>
+      <p class="lead anim-fade-up" style="--anim-delay:.08s">L’essentiel en un coup d’œil. Ouvrez une carte pour voir le détail.</p>
       <div class="skills" id="skills"></div>
     </section>
   </div>

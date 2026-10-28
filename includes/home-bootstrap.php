@@ -5,7 +5,7 @@ require_once __DIR__ . '/config.php';
 
 $themeColor = $themeColor ?? '#fbf3e9';
 $colorScheme = 'light';
-$cssVersion = '2026-10-28-footer';
+$cssVersion = '2026-10-28-home3';
 $extraHead = ($extraHead ?? '') . '
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

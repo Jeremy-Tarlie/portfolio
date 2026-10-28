@@ -112,32 +112,61 @@ function getHeuristicTier() {
     const memory = navigator.deviceMemory || 8;
     const software = isSoftwareRenderer();
     const coarsePointer = window.matchMedia('(hover: none) and (pointer: coarse)').matches;
-    const smallViewport = Math.min(window.innerWidth, window.innerHeight) < 700;
 
     if (reducedMotion || saveData || software || cores <= 2 || memory <= 2) {
         return 'low';
     }
     // Tablettes / tactile : medium max (canvas portail + particules trop lourds sinon)
-    if (coarsePointer || (cores <= 4 && memory <= 4) || (cores <= 6 && smallViewport)) {
+    if (coarsePointer || (cores <= 4 && memory <= 4)) {
         return 'medium';
     }
     return 'high';
 }
 
-function sampleFrameBudget(sampleFrames = 40) {
+function median(values) {
+    const sorted = [...values].sort((a, b) => a - b);
+    return sorted[Math.floor(sorted.length / 2)];
+}
+
+// Attend que la page soit chargée et le thread principal au repos avant de mesurer
+function whenSettled() {
     return new Promise((resolve) => {
-        let frameCount = 0;
-        const start = performance.now();
+        const idle = () => {
+            if ('requestIdleCallback' in window) requestIdleCallback(() => resolve(), { timeout: 2000 });
+            else setTimeout(resolve, 500);
+        };
+        if (document.readyState === 'complete') idle();
+        else window.addEventListener('load', idle, { once: true });
+    });
+}
+
+function sampleFrameBudget(sampleFrames = 60) {
+    return new Promise((resolve) => {
+        const deltas = [];
+        let last = null;
 
         function sample(now) {
-            frameCount++;
-            if (frameCount < sampleFrames) {
+            // Onglet caché : rAF en pause, mesure invalide → on recommence au retour
+            if (document.hidden) {
+                last = null;
+                deltas.length = 0;
                 requestAnimationFrame(sample);
                 return;
             }
-            const avgFrameMs = (now - start) / frameCount;
-            if (avgFrameMs > 22) resolve('low');
-            else if (avgFrameMs > 14) resolve('medium');
+            if (last !== null) {
+                const dt = now - last;
+                if (dt < 200) deltas.push(dt);
+            }
+            last = now;
+
+            if (deltas.length < sampleFrames) {
+                requestAnimationFrame(sample);
+                return;
+            }
+            // Médiane : insensible aux pics ponctuels. 60 Hz ≈ 16.7 ms = high
+            const frameMs = median(deltas);
+            if (frameMs > 33) resolve('low');
+            else if (frameMs > 22) resolve('medium');
             else resolve('high');
         }
 
@@ -146,27 +175,33 @@ function sampleFrameBudget(sampleFrames = 40) {
 }
 
 function startFpsWatchdog() {
+    const windowSize = 90;
     let last = performance.now();
-    let badStreak = 0;
+    let deltas = [];
+    let badWindows = 0;
 
     function tick(now) {
         const dt = now - last;
         last = now;
 
-        if (document.hidden) {
-            badStreak = 0;
+        if (document.hidden || dt >= 200) {
+            // ignore tab resume / long pauses
             requestAnimationFrame(tick);
             return;
         }
 
-        // >33ms ≈ under 30fps ; ignore huge spikes (tab resume)
-        if (dt > 33 && dt < 200) badStreak++;
-        else badStreak = Math.max(0, badStreak - 1);
+        deltas.push(dt);
+        if (deltas.length >= windowSize) {
+            // Fenêtre lente si la majorité des frames passe sous ~30 fps
+            const slow = deltas.filter((d) => d > 34).length / deltas.length;
+            badWindows = slow > 0.5 ? badWindows + 1 : 0;
+            deltas = [];
 
-        if (badStreak >= 20 && window.PERF_TIER !== 'low') {
-            const next = window.PERF_TIER === 'high' ? 'medium' : 'low';
-            setPerfTier(next, { notify: true });
-            badStreak = 0;
+            if (badWindows >= 3 && window.PERF_TIER !== 'low') {
+                const next = window.PERF_TIER === 'high' ? 'medium' : 'low';
+                setPerfTier(next, { notify: true });
+                badWindows = 0;
+            }
         }
 
         if (window.PERF_TIER !== 'low') {
@@ -184,13 +219,15 @@ function detectPerformanceTier() {
 
     if (heuristic === 'low') return;
 
-    sampleFrameBudget(40).then((measured) => {
-        const rank = { high: 3, medium: 2, low: 1 };
-        if (rank[measured] < rank[window.PERF_TIER]) {
-            setPerfTier(measured, { notify: true });
-        }
-        startFpsWatchdog();
-    });
+    whenSettled()
+        .then(() => sampleFrameBudget(60))
+        .then((measured) => {
+            const rank = { high: 3, medium: 2, low: 1 };
+            if (rank[measured] < rank[window.PERF_TIER]) {
+                setPerfTier(measured, { notify: true });
+            }
+            startFpsWatchdog();
+        });
 }
 
 detectPerformanceTier();

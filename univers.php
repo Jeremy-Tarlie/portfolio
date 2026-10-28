@@ -9,9 +9,26 @@ $canonical = 'https://tarlie.fr/univers';
 $themeColor = '#0a0a0f';
 $colorScheme = 'dark';
 $bodyClass = 'portal-void';
-$perfHint = true;
 
+// Indice de perf avant le premier rendu (affiné ensuite par utils.js)
 $extraHead = '
+<script>
+(function () {
+    try {
+        var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+        var cores = navigator.hardwareConcurrency || 4;
+        var mem = navigator.deviceMemory || 8;
+        var saveData = navigator.connection && navigator.connection.saveData;
+        var coarse = window.matchMedia("(hover: none) and (pointer: coarse)").matches;
+        var tier = "high";
+        if (reduced || saveData || cores <= 2 || mem <= 2) tier = "low";
+        else if (coarse || (cores <= 4 && mem <= 4)) tier = "medium";
+        document.documentElement.classList.add(tier + "-perf");
+    } catch (e) {
+        document.documentElement.classList.add("low-perf");
+    }
+})();
+</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="dns-prefetch" href="https://fonts.googleapis.com">
@@ -22,7 +39,7 @@ $extraHead = '
 <link rel="stylesheet" href="' . asset('assets/css/navigation.css') . '?v=vol-4">
 <link rel="stylesheet" href="' . asset('assets/css/components.css') . '">
 <link rel="stylesheet" href="' . asset('assets/css/hero.css') . '">
-<link rel="stylesheet" href="' . asset('assets/css/sections.css') . '">
+<link rel="stylesheet" href="' . asset('assets/css/sections.css') . '?v=reveal-300">
 <link rel="stylesheet" href="' . asset('assets/css/about.css') . '">
 <link rel="stylesheet" href="' . asset('assets/css/projects.css') . '">
 <link rel="stylesheet" href="' . asset('assets/css/skills.css') . '">
@@ -45,7 +62,7 @@ $jsonLd = json_encode([
 ], JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_HEX_TAG | JSON_HEX_AMP);
 
 $scripts = [
-    asset('assets/js/utils.js') . '?v=2026-10-27',
+    asset('assets/js/utils.js') . '?v=2026-10-28-perf',
     asset('assets/js/cursor.js') . '?v=2026-10-27',
     asset('assets/js/particles.js') . '?v=2026-10-27',
     asset('assets/js/navigation.js') . '?v=2026-10-27',

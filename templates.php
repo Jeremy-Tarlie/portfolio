@@ -14,12 +14,12 @@ require __DIR__ . '/includes/home-nav.php';
 <main>
   <div class="wrap">
     <div class="page-hero">
-      <h1>Templates</h1>
-      <p class="lead">Des modèles de sites et d’interfaces prêts à adapter.</p>
+      <h1 class="anim-fade-up">Templates</h1>
+      <p class="lead anim-fade-up" style="--anim-delay:.1s">Des modèles de sites et d’interfaces prêts à adapter.</p>
     </div>
-    <div class="coming-soon">
+    <div class="coming-soon anim-fade-up" style="--anim-delay:.15s">
       <strong>Bientôt</strong>
-      <p>Cette page accueillera mes templates. Revenez un peu plus tard — ou écrivez-moi si vous avez un besoin précis.</p>
+      <p>Cette page accueillera mes templates. Revenez un peu plus tard ou écrivez-moi.</p>
       <p style="margin-top:1.2rem">
         <a class="btn pri" href="/contact">Me contacter</a>
       </p>

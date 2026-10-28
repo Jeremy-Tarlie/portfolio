@@ -122,7 +122,7 @@ section {
 .reveal-up {
     opacity: 0;
     transform: translateY(50px);
-    transition: all 0.8s var(--ease-out-expo);
+    transition: opacity 0.3s var(--ease-out-expo), transform 0.3s var(--ease-out-expo);
     transition-delay: var(--delay, 0s);
 }
 
@@ -134,7 +134,7 @@ section {
 .reveal-left {
     opacity: 0;
     transform: translateX(-50px);
-    transition: all 0.8s var(--ease-out-expo);
+    transition: opacity 0.3s var(--ease-out-expo), transform 0.3s var(--ease-out-expo);
 }
 
 .reveal-left.active {
@@ -145,7 +145,7 @@ section {
 .reveal-right {
     opacity: 0;
     transform: translateX(50px);
-    transition: all 0.8s var(--ease-out-expo);
+    transition: opacity 0.3s var(--ease-out-expo), transform 0.3s var(--ease-out-expo);
 }
 
 .reveal-right.active {

@@ -17,10 +17,6 @@ function escapeHtml(str) {
         .replace(/"/g, '&quot;');
 }
 
-function prefersReducedMotion() {
-    return window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-}
-
 function initHomeSkills() {
     const root = document.getElementById('skills');
     if (!root) return;
@@ -52,9 +48,7 @@ function playLogoPop(logo) {
     logo.classList.add('pop');
     window.setTimeout(() => {
         logo.classList.remove('pop');
-        if (!prefersReducedMotion()) {
-            logo.classList.add('logo-ready');
-        }
+        logo.classList.add('logo-ready');
     }, 520);
 }
 
@@ -62,25 +56,21 @@ function initHomeLogo() {
     const logo = document.getElementById('logo');
     if (!logo) return;
 
-    if (!prefersReducedMotion()) {
-        logo.classList.add('logo-enter');
-        const onEnterEnd = (event) => {
-            if (event.animationName !== 'logo-enter') return;
-            logo.classList.remove('logo-enter');
-            logo.classList.add('logo-ready');
-            logo.removeEventListener('animationend', onEnterEnd);
-        };
-        logo.addEventListener('animationend', onEnterEnd);
-    } else {
+    logo.classList.add('logo-enter');
+    const onEnterEnd = (event) => {
+        if (event.animationName !== 'logo-enter') return;
+        logo.classList.remove('logo-enter');
         logo.classList.add('logo-ready');
-    }
+        logo.removeEventListener('animationend', onEnterEnd);
+    };
+    logo.addEventListener('animationend', onEnterEnd);
 
     logo.addEventListener('click', (e) => {
         const onHome = window.location.pathname === '/' || window.location.pathname.endsWith('/index.php');
         if (onHome) {
             e.preventDefault();
             playLogoPop(logo);
-            window.scrollTo({ top: 0, behavior: prefersReducedMotion() ? 'auto' : 'smooth' });
+            window.scrollTo({ top: 0, behavior: 'smooth' });
             return;
         }
         playLogoPop(logo);
@@ -103,11 +93,22 @@ function initPortalLeave() {
         document.body.classList.add('portal-leaving');
         portal.setAttribute('aria-busy', 'true');
 
-        const delay = prefersReducedMotion() ? 120 : 720;
+        const delay = 720;
         window.setTimeout(() => {
             window.location.href = href;
         }, delay);
     });
+}
+
+function initPageAnimations() {
+    const els = document.querySelectorAll('.anim-fade-up');
+    if (!els.length) return;
+    const obs = new IntersectionObserver((entries) => {
+        entries.forEach(e => {
+            if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); }
+        });
+    }, { rootMargin: '0px 0px -40px 0px', threshold: 0.08 });
+    els.forEach(el => obs.observe(el));
 }
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -117,4 +118,5 @@ document.addEventListener('DOMContentLoaded', () => {
     if (typeof initContactForm === 'function') {
         initContactForm();
     }
+    initPageAnimations();
 });
